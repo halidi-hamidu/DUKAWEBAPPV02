@@ -1,0 +1,99 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %} Emergences {% endblock %}
+{% block content %}
+
+<div class="container-fluid" id="container-wrapper">
+
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Manage Emergence </h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="./">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Emergence</li>
+    </ol>
+  </div>
+  </div>
+<div class="emergence_section">
+  <div class="container">
+    <div class="row">
+      {% if update == True %}
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <form method="post" action="">
+              {% csrf_token %}
+              {{form}}
+              <div class="button_section mt-3">
+              <button type="submit" class="btn btn-primary" name="update_emergence" value="update_emergence">Update emergence info </button>
+
+              </div>
+            </form>
+            </div>
+          </div>
+      </div>
+      {% endif %}
+      {% if update == False %}
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <form method="post" action="">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-12">
+                 <div class="form-group">
+                   <label for="quantity" >What emergence?</label>
+                   <input type="text" name="what_emergence" class="form-control">
+                 </div>
+                 <div class="form-group">
+                  <label for="quantity" >Spending cost</label>
+                  <input type="number" name="spending_cost" class="form-control">
+                </div>
+                 <div class="form-group">
+                  <label for="quantity" >Date</label>
+                  <input type="date" name="spending_date" class="form-control">
+                </div>
+                 <button type="submit" class="btn btn-primary" name="add_emergence" value="add_emergence">Submit</button>
+    
+                 </div>
+    
+                </div>
+             </form>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if get_all_emergence %}
+      <div class="col-md-6">
+        <div class="emergence">
+          {% for emergence in get_all_emergence %}
+          <div class="card mt-1">
+            <div class="card-body">
+              <!-- <h6>Order number : <span> <mark class=" badge bg-primary">{{forloop.counter}}</mark></span> </h6> -->
+              <h6>Order date : <span > <mark class="badge bg-info">{{ emergence.created_at}}</mark></span></h6>
+              <h6>emergence : <code>{{ emergence.what_emergence}}</code></h6>
+              <h6>Spednig cost : <code>{{ emergence.spending_cost}}</code></h6>
+              <h6>Spednig date : <code> <span><mark class=" badge bg-info pl-1">{{ emergence.spending_date}}</mark> </span></code></h6>
+              <div class="button_section mt-4">
+                <a href="{% url 'storeApp:updateEmergence' emergence.id %}" class="update">Update</a>
+                <a href="{% url 'storeApp:deleteEmergence' emergence.id %}" class="delete">Delete</a>
+              </div>
+            </div>
+            </div>
+         
+          {% endfor %}
+        </div>
+       </div>
+       {% else %}
+       <div class="col-md-6">
+        <div class="empty_content">
+          <!-- =========== no orders yet ============ -->
+          <p>NO EMMERGENCE ADDED YET</p>
+        </div>
+       </div>
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

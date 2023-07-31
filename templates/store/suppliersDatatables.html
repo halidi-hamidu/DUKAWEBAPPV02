@@ -1,0 +1,56 @@
+<div class="tabe_section">
+{% include './supplierModal.html' %}
+ 
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 mb-4">
+        <div class="card">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-dark">My Suppliers</h6>
+            <button type="button" class="btn  btn-outline-dark" data-toggle="modal" data-target="#supplierModal"
+            id="#supplierModal"><i class="fas fa-plus p-1 text-dark"></i>Supplier</button>
+          </div>
+          <div class="table-responsive pl-2">
+            <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+              <thead class="" style="background-color: #000;color:#fff;">
+                <tr>
+                 
+                  <th>Supplier Name</th>
+                  <th>phone no</th>
+                  <th>Gender</th>
+                  <th>products</th>
+                  <th>Since </th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              {% if get_all_suppliers %}
+              <tbody>
+                {% for suppliers in get_all_suppliers %}
+                <tr style="background-color: #000;color:#fff;">
+                  <td style="background-color: #000;color:#fff;">{{suppliers.supplier_full_name}} </td>
+                  <td>{{suppliers.supplier_phone_number}} </td>
+                  <td>{{suppliers.gender}} </td>
+                  <td>{{suppliers.product_name}} </td>
+                  <td>{{suppliers.updated_at}} </td>
+                  <td>
+                    <a data-toggle="modal" data-target="#suppliersDetailViewModal{{suppliers.id}}" class="btn btn-sm btn-outline-primary text-primary"><i class="fas fas fa-eye"></i></a>
+                    <a  data-toggle="modal" data-target="#updateSuppliersModal{{suppliers.id}}"
+                    class="btn btn-sm btn-outline-warning"  ><i class="fas fas fas fa-pen"></i></a>
+                    <a  data-toggle="modal" data-target="#deleteSuppliersModal" class="btn btn-sm btn-outline-danger"><i class="fas fas fas far fa-trash-alt"></i></a>
+                  </td>
+                </tr>
+                {% include './deleteSuppliersModal.html' %}
+               {% include './suppliersDetailViewModal.html' %}
+               {% include './updateSuppliersModal.html' %}
+              {% endfor %}
+          
+              </tbody>
+              {% endif %}
+            </table>
+          </div>
+          <div class="card-footer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

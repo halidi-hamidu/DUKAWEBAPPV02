@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Halidy-coder">
+  <link href="{% static 'img/logo/logo.jpg' %}" rel="icon"> 
+  <title>dukani- {% block title %} {% endblock %}</title>
+  <script src="{% static './js/demo/chart.js' %}"></script>
+  <link href="{% static './vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static './vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static './css/ruang-admin.min.css' %}" rel="stylesheet">
+  <link href="{% static './css/chart.css' %}" rel="stylesheet">
+  <link href="{% static './vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+  <!-- Select2 -->
+  <link href="{% static './vendor/select2/dist/css/select2.min.css'%}" rel="stylesheet" type="text/css">
+  <!-- Bootstrap DatePicker -->  
+  <link href="{% static './vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css' %}" rel="stylesheet" >
+  <!-- Bootstrap Touchspin -->
+  <link href="{% static './vendor/bootstrap-touchspin/css/jquery.bootstrap-touchspin.css' %} " rel="stylesheet" >
+  <!-- ClockPicker -->
+  <link href="{% static './vendor/clock-picker/clockpicker.css' %}" rel="stylesheet">
+  <link href="{% static './css/ruang-admin.css' %}" rel="stylesheet">
+  
+ 
+</head>
+<!-- onload="myFunction()"  -->
+<body id="page-top" >
+
+  <div id="loader">
+    
+  </div>
+
+<div style="display:none;" id="myDiv" class="animate-bottom" >
+
+</div>
+<div id="wrapper" >
+  <!-- Sidebar -->
+  <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar" style="background-color: #000;">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="homePage">
+      {% comment %} <div class="sidebar-brand-icon">
+        <!-- <img src="{% static 'img/logo/logo2.png' %}"> -->
+        <span>RA</span>
+      </div> {% endcomment %}
+      <div class="sidebar-brand-text mx">JEMAD AUTO SPARE</div>
+    </a>
+    <hr class="sidebar-divider my-0">
+    {% if get_all_user_authorizations.view_dashboard %}
+    <li class="nav-item active ">
+      <a class="nav-link" href="{% url 'storeApp:homepage' %}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span></a>
+      </li>
+    <hr class="sidebar-divider">
+    {% endif %}
+
+    {% if get_all_user_authorizations.manage_employees %}
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'storeApp:employeePage' %}">
+        <i class="fas fa-users fa-2x text-success"></i>
+        <span>Manage Employees</span></a>
+    </li>
+  <hr class="sidebar-divider">
+  {% endif %}
+
+  {% if get_all_user_authorizations.manage_authorizations %}
+
+  <li class="nav-item active">
+    <a class="nav-link" href="{% url 'storeApp:authorizationPage' %}">
+      <i class="fas far far fas fa-user-shield fa-2x text-success"></i>
+      <span>User Authorization</span></a>
+  </li>
+  <hr class="sidebar-divider">
+  {% endif %}
+   
+    {% if get_all_user_authorizations.manage_shop %}
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'storeApp:shopPage' %}">
+        <i class="fas fas fas fa-store-alt fa-2x text-success"></i>
+        <span>Manage Shops</span></a>
+    </li>
+    <hr class="sidebar-divider">
+    {% endif %}
+    {% if get_all_user_authorizations.manage_product %}
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'storeApp:productPage' %}">
+        <i class="fas fas fab fa-shopping-bag fa-2x text-success"></i>
+        <span>Manage Products</span></a>
+    </li>
+    <hr class="sidebar-divider">
+    {% endif %}
+    {% comment %} {% if get_all_user_authorizations.manage_supplier %}
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'storeApp:suppliersPage' %}">
+        <i class="fas fas fa-user-friends fa-2x text-success"></i>
+        <span>Manage Suppliers</span></a>
+    </li>
+    <hr class="sidebar-divider">
+    {% endif %} {% endcomment %}
+    {% if get_all_user_authorizations.manage_store %}
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'storeApp:storePage' %}">
+        <i class="fas fas fa-store-alt fa-2x text-success"></i>
+        <span>Manage Store</span></a>
+    </li>
+    <hr class="sidebar-divider">
+    {% endif %}
+
+    {% if get_all_user_authorizations.manage_sales %}
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'storeApp:salesPage' %}">
+        <i class="fas far fa-money-bill-alt fa-2x text-success"></i>
+        <span>Manage Sales</span></a>
+    </li>
+    <hr class="sidebar-divider">
+    {% endif %}
+    <!-- {% comment %} invoice section {% endcomment %}
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'storeApp:salesPage' %}">
+        <i class="fas far fa-money-bill-alt fa-2x text-success"></i>
+        <span>Manage Invoice</span></a>
+    </li>
+    <hr class="sidebar-divider">
+
+
+    {% comment %} endinvooice section {% endcomment %} -->
+    <!-- {% comment %} <li class="nav-item active">
+      <a class="nav-link" href="{% url 'storeApp:salesPage' %}">
+        <i class="fas far fa-money-bill-alt fa-2x text-success"></i>
+        <span>Manage Sales</span></a>
+    </li>
+    <hr class="sidebar-divider"> {% endcomment %} -->
+    {% if get_all_user_authorizations.manage_orders %}
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'storeApp:ordersPage' %}">
+        <i class="fas far fas fa-cart-arrow-down fa-2x text-success"></i>
+        <span>Manage Orders</span></a>
+    </li>
+    <hr class="sidebar-divider">
+    {% endif %}
+
+    {% if get_all_user_authorizations.manage_emergence %}
+
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'storeApp:emergencePage' %}">
+        <i class="fas far far fa-comments fa-2x text-success"></i>
+        <span>Manage Emergence</span></a>
+    </li>
+    <hr class="sidebar-divider">
+    {% endif %}
+    {% if get_all_user_authorizations.manage_company_stock_or_assets %}
+
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'storeApp:companyStockPage' %}">
+        <i class="fas far far fa-store-alt fa-2x text-success"></i>
+        <span>Manage Assets</span></a>
+    </li>
+    <hr class="sidebar-divider">
+    {% endif %}
+
+    
+
+
+    
+    
+  
+ 
+  
+  </ul>
+  <!-- Sidebar -->
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <!-- TopBar -->
+      <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+        <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+          <i class="fa fa-bars"></i>
+        </button>
+        <ul class="navbar-nav ml-auto">
+          <!-- <div class="topbar-divider d-none d-sm-block"></div> -->
+          {% if request.user.is_authenticated %}
+          <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              <img class="img-profile rounded-circle" src="{% static 'img/logo/logo.jpg' %}" style="max-width: 60px">
+              <span class="ml-2 d-none d-lg-inline text-white small">{{request.user.username}}</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+              <a class="dropdown-item" href="#">
+                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                Profile
+              </a>
+              <!-- <a class="dropdown-item" href="#">
+                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                Settings
+              </a> -->
+              <a class="dropdown-item" href="#">
+                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                Activity Log
+              </a>
+              <div class="dropdown-divider"></div>
+              <!-- {% url 'storeApp:logoutPage'%} -->
+              <a class="dropdown-item"  data-toggle="modal" data-target="#logoutModal">
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+          {% endif %}
+        </ul>
+      
+      </nav>
+      {% include './logoutModal.html' %}
+      <!-- Topbar -->
+
+      <!-- Container Fluid-->
+      {% block content %} 
+      {% endblock %}
+      <!---Container Fluid-->
+    </div>
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>copyright &copy; <script> document.write(new Date().getFullYear()); </script> - developed & maintained by
+            <b><a href="https://halidy-coder.gitlab.io/" target="_blank">halidy-coder</a></b>
+          </span>
+        </div>
+      </div>
+
+     
+    </footer>
+    <!-- Footer -->
+  </div>
+</div>
+
+<!-- Scroll to top -->
+<a class="scroll-to-top rounded" href="#page-top">
+  <i class="fas fa-angle-up"></i>
+</a>
+
+  
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'js/ruang-admin.min.js' %}"></script>
+  <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>  
+  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+  <script src="{% static './vendor/select2/dist/js/select2.min.js' %}"></script>
+  <script src="{% static './vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static './vendor/bootstrap-touchspin/js/jquery.bootstrap-touchspin.js' %}"></script>
+  <script src="{% static './vendor/clock-picker/clockpicker.js' %}"></script>
+  <script src="{% static './vendor/clock-picker/clockpicker.js' %}"></script>
+  <script src="{% static './js/demo/swetealert.js' %}"></script>
+
+  
+    <script>
+      $(document).ready(function () {
+        $('#dataTable').DataTable(); 
+        $('#dataTableHover').DataTable(); 
+        // $('#userdataTable').DataTable(); 
+      });
+    </script>
+  <script>
+    $(document).ready(function () {
+
+
+      $('.select2-single').select2();
+      $('#id_select_user').select2({
+        placeholder: "Select User",
+        allowClear: true
+      })
+      // Select2 Single  with Placeholder
+      $('#select2SinglePlaceholderShopSupervisors').select2({
+        placeholder: "Select",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderShopSupervisors12').select2({
+        placeholder: "Select",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderOrderSupervisors').select2({
+        placeholder: "Select",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderSupplier').select2({
+        placeholder: "Select a gender",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderSuppliers').select2({
+        placeholder: "Select a gender",
+        allowClear: true
+      });      
+      $('.select2-single-placeholder-level').select2({
+        placeholder: "Select a level",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderproduct').select2({
+        placeholder: "Select product",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderproducts').select2({
+        placeholder: "Select product",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderEmployeeGender').select2({
+        placeholder: "Select gender",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderEmployeeGender_1').select2({
+        placeholder: "Select gender",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderReceiver').select2({
+        placeholder: "Select product receiver",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderproduct1').select2({
+        placeholder: "Select product",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderproduct12').select2({
+        placeholder: "Select product",
+        allowClear: true
+      });      
+      $('#customerModalId').select2({
+        placeholder: "Select Customer",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderduka').select2({
+        placeholder: "Select shop",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderduka12').select2({
+        placeholder: "Select shop",
+        allowClear: true
+      });      
+      $('.select2-single-placeholder-supplier').select2({
+        placeholder: "Select supplier",
+        allowClear: true
+      });      
+      $('#get_all_product_in_store').select2({
+        placeholder: "Select supplier",
+        allowClear: true
+      });      
+      $('#id_custoomer_full_name').select2({
+        placeholder: "Select Customers",
+        allowClear: true
+      });      
+
+      // Select2 Multiple
+      $('.select2-multiple').select2();
+
+      // Bootstrap Date Picker
+      $('#simple-date1 .input-group.date').datepicker({
+        format: 'dd/mm/yyyy',
+        todayBtn: 'linked',
+        todayHighlight: true,
+        autoclose: true,        
+      });
+
+      $('#simple-date2 .input-group.date').datepicker({
+        startView: 1,
+        format: 'dd/mm/yyyy',        
+        autoclose: true,     
+        todayHighlight: true,   
+        todayBtn: 'linked',
+      });
+
+      $('#simple-date3 .input-group.date').datepicker({
+        startView: 2,
+        format: 'dd/mm/yyyy',        
+        autoclose: true,     
+        todayHighlight: true,   
+        todayBtn: 'linked',
+      });
+
+      $('#simple-date4 .input-daterange').datepicker({        
+        format: 'dd/mm/yyyy',        
+        autoclose: true,     
+        todayHighlight: true,   
+        todayBtn: 'linked',
+      });    
+
+      // TouchSpin
+
+      $('#touchSpin1').TouchSpin({
+        min: 0,
+        max: 100,                
+        boostat: 5,
+        maxboostedstep: 10,        
+        initval: 0
+      });
+
+      $('#touchSpin2').TouchSpin({
+        min:0,
+        max: 100,
+        decimals: 2,
+        step: 0.1,
+        postfix: '%',
+        initval: 0,
+        boostat: 5,
+        maxboostedstep: 10
+      });
+
+      $('#touchSpin3').TouchSpin({
+        min: 0,
+        max: 100,
+        initval: 0,
+        boostat: 5,
+        maxboostedstep: 10,
+        verticalbuttons: true,
+      });
+
+      $('#clockPicker1').clockpicker({
+        donetext: 'Done'
+      });
+
+      $('#clockPicker2').clockpicker({
+        autoclose: true
+      });
+
+      let input = $('#clockPicker3').clockpicker({
+        autoclose: true,
+        'default': 'now',
+        placement: 'top',
+        align: 'left',
+      });
+
+      $('#check-minutes').click(function(e){        
+        e.stopPropagation();
+        input.clockpicker('show').clockpicker('toggleView', 'minutes');
+      });
+
+    });
+  </script>
+    <!-- sweete messages alert -->
+    {% for message in messages %}
+    {% if message.tags == 'success' %}
+      <script src="{% static './asset/js/swetealert.js' %}"></script>
+      <script>
+        var m = "{{message}}";
+        // swal({
+        //   position: 'top-end',
+        //   title :"success",
+        //   text: m,
+        //   icon: "success",
+        //   showConfirmButton: false,
+        //   timer: 1500
+        // });
+        swal({
+        position: 'top-right',
+        icon: 'success',
+        title:"success",
+        text:m,
+        showConfirmButton: true,
+      });
+      $(document).load();
+      </script>
+    {% endif %}
+    {% if message.tags == 'info' %}
+      <script src="{% static './asset/js/swetealert.js' %}"></script>
+      <script>
+        var m = "{{message}}";
+        swal({
+          position: 'top-right',
+          title :"info",
+          text: m,
+          icon: "info",
+          showConfirmButton: true,
+        });
+        $(document).load();
+      </script>
+    {% endif %}
+    {% if message.tags == 'error' %}
+      <script src="{% static './asset/js/swetealert.js' %}"></script>
+      <script>
+        var m = "{{message}}";
+        swal({
+          position: 'top-right',
+          title :"Error",
+          text: m,
+          icon: "error",
+          showConfirmButton: true,
+        });
+        $(document).load();
+      </script>
+    {% endif %}
+    {% endfor %}
+  
+
+  
+  
+  </body>
+
+</html>

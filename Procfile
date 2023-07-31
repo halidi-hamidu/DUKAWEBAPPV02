@@ -1,0 +1,1 @@
+web: gunicorn duka.wsgi --log-file -

@@ -1,0 +1,36 @@
+<div class="modal  fade w3-animate-zoom" id="employeeDetailViewModal{{employee.id}}">
+  <div class="modal-dialog  modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title"><strong> information about  <code>{{employee.employee_Full_name}}</code> </strong></h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5><span>full name</span> : <code>{{employee.employee_Full_name}} </code></h5>
+            <h5><span>gender</span> : <code>{{employee.employee_gender}} </code></h5>
+            <h5> <span>email addres</span> : <code>{{employee.employee_email_address}} </code></h5>
+            <h5> <span>registered since </span> : <code>{{employee.employee_start_date}} </code></h5>
+            <h5> <span>phone number 1</span> : <code>{{employee.employee_phone_number1}} </code></h5>
+            <h5> <span>phone number 2</span> : <code>{{employee.employee_phone_number2}} </code></h5>
+            <h5> <span>residence area </span> : <code>{{employee.employee_residence_area}} </code></h5>
+            <h5> <span>*** </span> : <code>{{employee.employee_username}} </code></h5>
+            <h5> <span>***</span> : <code>{{employee.employee_password}} </code></h5>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+

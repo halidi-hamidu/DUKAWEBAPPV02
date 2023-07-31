@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="Halidy-coder">
+  <link href="{% static 'img/logo/logo.jpg' %}" rel="icon"> 
+  <!-- <link href="{% static 'img/logo/logo.png' %}" rel="icon"> -->
+  <title>dukani- {% block title %} {% endblock %}</title>
+  <script src="{% static './js/demo/chart.js' %}"></script>
+  <link href="{% static './vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static './vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static './css/ruang-admin.min.css' %}" rel="stylesheet">
+  <link href="{% static './css/chart.css' %}" rel="stylesheet">
+  <link href="{% static './vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+  <!-- Select2 -->
+  <link href="{% static './vendor/select2/dist/css/select2.min.css'%}" rel="stylesheet" type="text/css">
+  <!-- Bootstrap DatePicker -->  
+  <link href="{% static './vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css' %}" rel="stylesheet" >
+  <!-- Bootstrap Touchspin -->
+  <link href="{% static './vendor/bootstrap-touchspin/css/jquery.bootstrap-touchspin.css' %} " rel="stylesheet" >
+  <!-- ClockPicker -->
+  <link href="{% static './vendor/clock-picker/clockpicker.css' %}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+ {% block content %}
+ {% endblock %}
+ <script src="{% static './js/demo/chart.js' %}"></script>  
+ <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+ <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+ <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+ <script src="{% static 'js/ruang-admin.min.js' %}"></script>
+ <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+ <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>  
+ <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+ <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+ <script src="{% static './vendor/select2/dist/js/select2.min.js' %}"></script>
+ <script src="{% static './vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js' %}"></script>
+ <script src="{% static './vendor/bootstrap-touchspin/js/jquery.bootstrap-touchspin.js' %}"></script>
+ <script src="{% static './vendor/clock-picker/clockpicker.js' %}"></script>
+ <script src="{% static './vendor/clock-picker/clockpicker.js' %}"></script>
+ <script src="{% static 'js/demo/swetealert.js' %}"></script>
+  <!-- sweete messages alert -->
+  {% for message in messages %}
+  {% if message.tags == 'success' %}
+    <script src="{% static './asset/js/swetealert.js' %}"></script>
+    <script>
+      var m = "{{message}}";
+      // swal({
+      //   position: 'top-end',
+      //   title :"success",
+      //   text: m,
+      //   icon: "success",
+      //   showConfirmButton: false,
+      //   timer: 1500
+      // });
+      swal({
+      position: 'top-right',
+      icon: 'success',
+      title:"success",
+      text:m,
+      showConfirmButton: true,
+    });
+    </script>
+  {% endif %}
+  {% if message.tags == 'info' %}
+    <script src="{% static './asset/js/swetealert.js' %}"></script>
+    <script>
+      var m = "{{message}}";
+      var width = 10;
+      swal({
+        position: 'top-right',
+        title :"info",
+        text: m,
+        icon: "info",
+        width: width,
+        showConfirmButton: true,
+      });
+    </script>
+  {% endif %}
+  {% endfor %}
+</body>
+
+</html>

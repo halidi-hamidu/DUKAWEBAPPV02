@@ -1,0 +1,97 @@
+<div class="container-fluid" id="container-wrapper">
+
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Sales Dashboard</h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="./">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Sales</li>
+    </ol>
+  </div>
+  
+  <div class="row mb-3">
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body" style="background-color: #000;color:#fff;">
+          <div class="row align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1"><code><mark class="bg-white">{{today}}</mark></code> Cash sales</div>
+              <div class="h5 mb-0 font-weight-bold text-white-800">{{today_sales_sum}} Tsh/=</div>
+              <div class="mt-2 mb-0 text-white text-xs">
+               
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fas fas fa-money-check fa-2x text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Earnings (Annual) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body" style="background-color: #000;color:#fff;">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1"><code><mark class="bg-white px-1">{{today}}</mark></code> Expenditures</div>
+              <div class="h5 mb-0 font-weight-bold text-white-800">{{today_emergence_cost_sum}}Tsh/=</div>
+              <div class="mt-2 mb-0 text-white text-xs">
+                <!-- {% if get_emergence_info %}
+                {% for emergence in get_emergence_info %}
+                <span class="text-success mr-2"><i class="fas fas fa-exclamation-triangle"></i> {{emergence.what_emergence}}</span>
+                
+                <span>, <i class="fas fas far fa-calendar-check fa-1x"></i> {{emergence.spending_date}}</span> <br>
+                {% endfor %}
+                {% endif %} -->
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fas fas fa-money-bill-alt fa-2x text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- New User Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body" style="background-color: #000;color:#fff;">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1"><code><mark class="bg-white px-1">{{today}}</mark></code> net sales </div>
+              <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">{{amount_remain_after_deducting_emergence_cost}} Tsh/=</div>
+              <div class="mt-2 mb-0 text-white text-xs">
+                <!-- <span><i class="fas fas far fa-calendar-check fa-1x"></i> {{get_all_product_sold_today.date_product_sold}}</span> -->
+
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fas fas fa-money-check-alt fa-2x text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body" style="background-color: #000;color:#fff;">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1"> <code><mark class="bg-white px-1">{{today}}</mark></code> ORDERS to deliver </div>
+              <div class="h5 mb-0 font-weight-bold text-white-800">{{number_of_order_received_tody}}</div>
+              <div class="mt-2 mb-0 text-muted text-xs">
+                <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                <span>Since yesterday</span> -->
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fas fas fa-cart-arrow-down fa-2x text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

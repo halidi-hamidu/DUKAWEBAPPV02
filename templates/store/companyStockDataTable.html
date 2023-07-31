@@ -1,0 +1,67 @@
+<div class="table_section mb-5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 mb-4">
+          <div class="card">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-dark">Assets</h6>
+              <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#companyAssetstModal"
+              id="#companyAssetstModal"><i class="fas fa-plus p-1"></i>Assets</button>
+              </div>
+                {% if get_all_company_stock %}
+                <div class="table-responsive p-4">
+                <table class="table table-md align-items-center table-flush table-hover" id="dataTableHover">
+                    <thead class="" style="background-color: #000;color:#fff;">
+                        <tr>
+                        <th>#</th>
+                        <th>Stock Name</th>
+                        <th>Stock number</th>
+                        <th>Stock color </th>
+                        <th>Stock size </th>
+                        <th>Date recorded </th>
+                        <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for stock in get_all_company_stock %}
+                        <tr style="background-color: #000;color:#fff;">
+                        <td>{{forloop.counter}}</td>
+                        <td><a href="#" style="background-color: #000;color:#fff;">{{stock.stock_name}}</a></td>
+                                            
+                        <td>{{stock.stock_number}}</td>
+                        <td>{{stock.stock_color}}</td>
+                        <td>{{stock.stock_size}}</td> 
+                        <td>{{stock.updated_at}}</td> 
+                        
+                        <td>
+                            <a data-toggle="modal" data-target="#productDetailViewModal{{stock.id}}" class="btn btn-sm btn-outline-primary text-primary"><i class="fas fas fa-eye"></i></a>
+                            <a  data-toggle="modal" data-target="#updateproductModal{{stock.id}}"
+                            class="btn btn-sm btn-outline-warning"  ><i class="fas fas fas fa-pen"></i></a>
+                            <a  data-toggle="modal" data-target="#deleteProductModal" class="btn btn-sm btn-outline-danger"><i class="fas fas fas far fa-trash-alt"></i></a>
+                        </td>
+                        </tr>
+                        {% include './deleteCompanyStockModal.html' %}
+                        
+                        {% endfor %}
+                    </tbody>
+                    </table>
+                
+                </div>
+                {% else %}
+                <div class="table-responsive pl-2">
+                <div class="empty_content">
+                    <p> No Assets or Stock  added yet! </p>
+                </div>
+                </div>
+                {% endif %}
+            <div class="card-footer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include './companyAssetstModal.html' %}
+
+
+  <!-- ========================= -->
+  

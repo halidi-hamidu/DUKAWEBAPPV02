@@ -1,0 +1,11 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %} Company stocks {% endblock %}
+{% block content %}
+{% if get_all_user_authorizations.view_dashboard  and get_all_user_authorizations.manage_product %}
+
+
+{% include './companyStockStatusBar.html' %}
+{% include './companyStockDataTable.html' %}
+{% endif %}
+{% endblock %}

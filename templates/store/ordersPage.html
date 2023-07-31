@@ -1,0 +1,121 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %} Orders {% endblock %}
+{% block content %}
+<div class="container-fluid" id="container-wrapper">
+
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Customers Orders </h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="./">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">customer orders </li>
+    </ol>
+  </div>
+  </div>
+<div class="order_sections">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form_section">
+        <div class="card">
+          <div class="card-body">
+            {% if  update %}
+            <form  action="" method="POST">
+              {% csrf_token %}
+             <div class="row">
+              <div class="col-md-12">
+                {{form}}
+              </div>
+              <button type="submit" class="btn btn-primary ml-3" name="update_order" value="update_order">Update orders</button>
+             </div>
+            
+            </form>
+            {% endif %}
+            {% if update ==   False %}
+            <form  action="" method="POST">
+              {% csrf_token %}
+             <div class="row">
+               <div class="col-md-12">
+                {{form}}
+               </div>
+              <button type="submit" class="btn btn-primary ml-3 pl-3 pr-3" name="add_order" value="add_order">Submit</button>
+             </div>
+            </form>
+            {% endif %}
+            
+          </div>
+        </div>
+        </div>
+      </div>
+      {% if get_all_customers_orders %}
+      {% if get_all_user_authorizations.view_dashboard == True %}
+     <div class="col-md-6">
+      <div class="all_customer_orders">
+        {% for order in get_all_customers_orders %}
+        <div class="card mt-1">
+          <div class="card-body">
+            <!-- <h6>Order number : <span> <mark class=" badge bg-primary">{{forloop.counter}}</mark></span> </h6> -->
+            <h6>Order date : <span > <mark class="badge bg-info">{{ order.created_at}}</mark>, <code>{{order.order_status}} </code></span></h6>
+            <h6>Order from : <code>{{ order.customer_Full_name}}</code></h6>
+            <h6>Phone number : <code>{{ order.customer_phone_number}}</code></h6>
+            <h6>Order : <code> <span><mark class=" badge bg-info pl-1">{{ order.customer_order}}</mark> </span></code></h6>
+            <h6>Quantity : <code><span> <mark class="badge bg-info pl-1">{{ order.customer_quantity_nedeed}}</mark></span> </code></h6>
+            <h6>Delivery date exepected : <span><mark  class=" badge bg-info pl-1">{{ order.delivery_date_expected}}</mark></span></h6>
+            <h6>Shop supervisor  : <code>{{ order.supervisor}}</code></h6>
+            <div class="button_section mt-1">
+              {% if order.order_status == "Pending" %}
+              <a class="complete" href="{% url 'storeApp:changeOrderStatus' order.id %}">Complete order</a>
+              {% endif %}
+              <a href="{% url 'storeApp:updateOrder' order.id %}" class="update">Update</a>
+              <a href="{% url 'storeApp:deleteOrder' order.id %}" class="delete">Delete</a>
+            </div>
+          </div>
+          </div>
+       
+        {% endfor %}
+      </div>
+     </div>
+     {% endif %}
+      {% if get_all_user_authorizations.view_dashboard == False %}
+     <div class="col-md-6">
+      <div class="all_customer_orders">
+        {% for order in get_all_customers_orders_registered_by_me %}
+        <div class="card mt-1">
+          <div class="card-body">
+            <!-- <h6>Order number : <span> <mark class=" badge bg-primary">{{forloop.counter}}</mark></span> </h6> -->
+            <h6>Order date : <span > <mark class="badge bg-info">{{ order.created_at}} </mark> , <code>{{order.order_status}} </code></span></h6>
+            <h6>Order from : <code>{{ order.customer_Full_name}}</code></h6>
+            <h6>Phone number : <code>{{ order.customer_phone_number}}</code></h6>
+            <h6>Order : <code> <span><mark class=" badge bg-info pl-1">{{ order.customer_order}}</mark> </span></code></h6>
+            <h6>Quantity : <code><span> <mark class="badge bg-info pl-1">{{ order.customer_quantity_nedeed}}</mark></span> </code></h6>
+            <h6>Delivery date exepected : <span><mark  class=" badge bg-info pl-1">{{ order.delivery_date_expected}}</mark></span></h6>
+            <h6>Shop supervisor  : <code>{{ order.supervisor}}</code></h6>
+            <div class="button_section mt-1">
+              {% if order.order_status == "Pending" %}
+              <a href="{% url 'storeApp:changeOrderStatus' order.id %}">Complete order</a>
+              {% endif %}
+              <a href="{% url 'storeApp:updateOrder' order.id %}" class="update">Update</a>
+              <a href="{% url 'storeApp:deleteOrder' order.id %}" class="delete">Delete</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      
+     </div>
+     {% endif %}
+     
+     {% else %}
+     <div class="col-md-6">
+      <div class="empty_content">
+        <!-- =========== no orders yet ============ -->
+        <p>NO ORDER ADDED YET</p>
+      </div>
+     </div>
+     {% endif %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

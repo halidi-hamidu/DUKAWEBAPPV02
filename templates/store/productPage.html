@@ -1,0 +1,11 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %} Products {% endblock %}
+{% block content %}
+{% if get_all_user_authorizations.view_dashboard  and get_all_user_authorizations.manage_product %}
+
+
+{% include './productsStatusBar.html' %}
+{% include './productDataTables.html' %}
+{% endif %}
+{% endblock %}

@@ -1,0 +1,122 @@
+<div class="bar_graph">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div style="width:100%;">
+          <canvas id="chart1"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% for product in all_product %}
+<script>
+// var chart = new Chart(ctx).Line(data, options);
+var canvas = document.getElementById('chart1');
+
+new Chart(canvas, {
+  type: 'bar',
+  data: {
+    // labels: ['sembe', 'unga wa ngano', 'biscuti nice g10', 'azam juice ml-100', 'maji ya uhai lita 10', 'sembe kg50', 'unga wa ngano kg 50', 'biscuti nice g50', 'azam juice ml-300', 'maji ya uhai lita 20'],
+    labels: ['{{product}}',],
+    // labels: {{all_product}},
+    datasets: [{
+      label: 'Initial quantity in store recorded',
+      yAxisID: 'A',
+      data: ['{{product.product_cost}}', ],
+      borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+      ],
+      backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderWidth: 0.1
+    }, {
+      label: 'Current quantity in store(remains)',
+      yAxisID: 'B',
+      data: ['{{product.product_quantity}}', ],
+      backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 0.1
+    }]
+  },
+  options: {
+    scaleUse2Y: true,
+    scales: {
+      yAxes: [{
+        id: 'A',
+        type: 'linear',
+        position: 'left',
+       
+      }, 
+      {
+        id: 'B',
+        type: 'linear',
+        position: 'right',
+        // ticks: {
+        //   max: 1,
+        //   min: 0
+        // }
+      }],
+      xAxes: [{
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 80,
+                    minRotation: 20
+                }
+            }]
+
+      
+    }
+  }
+});
+</script>
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

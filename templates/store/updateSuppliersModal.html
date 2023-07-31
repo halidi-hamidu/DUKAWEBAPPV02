@@ -1,0 +1,66 @@
+<!-- The Modal -->
+<div class="modal  fade w3-animate-zoom" id="updateSuppliersModal{{suppliers.id}}">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><strong>update  supplier : </strong> <code>{{suppliers.supplier_full_name}}</code></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="card mb-4">
+          <!-- <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Form Basic</h6>
+          </div> -->
+          <div class="card-body">
+            <form action ="" method="POST" >
+              {% csrf_token %}
+             <div class="row">
+               <div class="col-md-12">
+                <div class="form-group">
+                  <label for="supplier full name">fulname name</label>
+                  <input type="text" name= "supplier_id"  value = "{{suppliers.id}}" class="form-control"  style="display: none;">
+                  <input type="text" name= "supplier_full_name"  value = "{{suppliers.supplier_full_name}}" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="Supplier phone number">phone number</label>
+                  <input type="number" name= "supplier_phone_number" value="{{suppliers.supplier_phone_number}}" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="select2SinglePlaceholder" class="d-block"> Select gender</label>
+                  <select class="select2-single-placeholder form-control" name="gender" id="select2SinglePlaceholderSuppliers" style="width: 100%;padding:10px">
+                    <option value="{{suppliers.gender}}">{{suppliers.gender}}</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+                {% if get_all_products %}
+                <div class="form-group">
+                  <label for="select2SinglePlaceholder" class="d-block"> which product?</label>
+                  <select class="select2-single-placeholder-product form-control" name="product_name" id="select2SinglePlaceholderproducts" style="width: 100%;padding:10px">
+                    <option value="{{suppliers.product_name}}">{{suppliers.product_name}}</option>
+                    {% for product in get_all_products %}
+                    <option value="{{product.id}}">{{product}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                {% endif %}
+              <button type="submit" class="btn btn-outline-primary ml-1" name="update_supplier" value="update_supplier">update supplier info</button>
+  
+             </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

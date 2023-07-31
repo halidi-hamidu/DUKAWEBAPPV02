@@ -1,0 +1,64 @@
+<div class="modal fade" id="productQuantityInStoreModal" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalCenterTitle">Add product Quantity in store</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="card mb-4">
+        <!-- <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Form Basic</h6>
+        </div> -->
+        <div class="card-body">
+          <form action ="" method="POST">
+            {% csrf_token %}
+           <div class="row">
+             <div class="col-md-12">
+          
+              {% if get_all_product_in_store %}
+              <div class="form-group">
+                <label for="select2SinglePlaceholder" class="d-block"> select product</label>
+                <select class="select2-single-placeholder-product form-control" name="product_name" id="get_all_product_in_store" style="width: 100%;padding:10px">
+                  <option value="not selected">Select</option>
+                  {% for products in get_all_product_in_store %}
+                  <option value="{{ products.id }}">{{products}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              {% endif %}
+              <div class="form-group">
+                <label for="validationServer01">how much @</label>
+                <input type="number" class="form-control " name="how_much_each"
+                 placeholder="Tsh/="  required>      
+              </div>
+              <div class="form-group">
+                <label for="validationServer01">quantity received</label>
+                <input type="number" class="form-control " name="quantity_received"
+                 placeholder="Tsh/="  required>      
+              </div>
+              <div class="form-group">
+                <label for="validationServer01">price to sell @</label>
+                <input type="number" class="form-control " name="price_to_sell_each"
+                 placeholder="Tsh/="  required>      
+              </div>
+           
+           
+            <button type="submit" class="btn btn-outline-primary ml-1" name="add_product_Quantity_in_store" value="receiver">Submit</button>
+          
+           </div>
+          </form>   
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+   
+    </div>
+  </div>
+</div>
+</div>
+</div>
