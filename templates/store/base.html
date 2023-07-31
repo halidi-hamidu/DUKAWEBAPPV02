@@ -24,8 +24,7 @@
   <!-- ClockPicker -->
   <link href="{% static './vendor/clock-picker/clockpicker.css' %}" rel="stylesheet">
   <link href="{% static './css/ruang-admin.css' %}" rel="stylesheet">
-  
- 
+
 </head>
 <!-- onload="myFunction()"  -->
 <body id="page-top" >
@@ -61,7 +60,7 @@
     <li class="nav-item active">
       <a class="nav-link" href="{% url 'storeApp:employeePage' %}">
         <i class="fas fa-users fa-2x text-success"></i>
-        <span>Manage Employees</span></a>
+        <span> Employees</span></a>
     </li>
   <hr class="sidebar-divider">
   {% endif %}
@@ -80,7 +79,7 @@
     <li class="nav-item active">
       <a class="nav-link" href="{% url 'storeApp:shopPage' %}">
         <i class="fas fas fas fa-store-alt fa-2x text-success"></i>
-        <span>Manage Shops</span></a>
+        <span> Shops</span></a>
     </li>
     <hr class="sidebar-divider">
     {% endif %}
@@ -88,7 +87,7 @@
     <li class="nav-item active">
       <a class="nav-link" href="{% url 'storeApp:productPage' %}">
         <i class="fas fas fab fa-shopping-bag fa-2x text-success"></i>
-        <span>Manage Products</span></a>
+        <span> Products</span></a>
     </li>
     <hr class="sidebar-divider">
     {% endif %}
@@ -96,7 +95,7 @@
     <li class="nav-item active">
       <a class="nav-link" href="{% url 'storeApp:suppliersPage' %}">
         <i class="fas fas fa-user-friends fa-2x text-success"></i>
-        <span>Manage Suppliers</span></a>
+        <span> Suppliers</span></a>
     </li>
     <hr class="sidebar-divider">
     {% endif %} {% endcomment %}
@@ -104,7 +103,7 @@
     <li class="nav-item active">
       <a class="nav-link" href="{% url 'storeApp:storePage' %}">
         <i class="fas fas fa-store-alt fa-2x text-success"></i>
-        <span>Manage Store</span></a>
+        <span> Store</span></a>
     </li>
     <hr class="sidebar-divider">
     {% endif %}
@@ -113,15 +112,34 @@
     <li class="nav-item active">
       <a class="nav-link" href="{% url 'storeApp:salesPage' %}">
         <i class="fas far fa-money-bill-alt fa-2x text-success"></i>
-        <span>Manage Sales</span></a>
+        <span> Sales</span></a>
     </li>
     <hr class="sidebar-divider">
     {% endif %}
+
+    <li class="nav-item">
+      <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+        aria-expanded="true" aria-controls="collapseBootstrap">
+        <i class="far fa-fw fa-window-maximize text-success"></i>
+        <span>Manage Invoices</span>
+      </a>
+      <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="alerts.html">Proforma Invoice</a>
+          <a class="collapse-item" href="buttons.html">Unpaid Invoice</a>
+          <a class="collapse-item" href="dropdowns.html">Paid Invoice</a>
+          <a class="collapse-item" href="modals.html">Cancelled Invoice</a>
+          <a class="collapse-item" href="popovers.html">Customer Unpaid Invoices</a>
+          <a class="collapse-item" href="progress-bar.html">All Invoice</a>
+        </div>
+      </div>
+    </li>
+    <hr class="sidebar-divider">
     <!-- {% comment %} invoice section {% endcomment %}
     <li class="nav-item active">
       <a class="nav-link" href="{% url 'storeApp:salesPage' %}">
         <i class="fas far fa-money-bill-alt fa-2x text-success"></i>
-        <span>Manage Invoice</span></a>
+        <span>Invoice</span></a>
     </li>
     <hr class="sidebar-divider">
 
@@ -130,14 +148,14 @@
     <!-- {% comment %} <li class="nav-item active">
       <a class="nav-link" href="{% url 'storeApp:salesPage' %}">
         <i class="fas far fa-money-bill-alt fa-2x text-success"></i>
-        <span>Manage Sales</span></a>
+        <span> Sales</span></a>
     </li>
     <hr class="sidebar-divider"> {% endcomment %} -->
     {% if get_all_user_authorizations.manage_orders %}
     <li class="nav-item active">
       <a class="nav-link" href="{% url 'storeApp:ordersPage' %}">
         <i class="fas far fas fa-cart-arrow-down fa-2x text-success"></i>
-        <span>Manage Orders</span></a>
+        <span> Orders</span></a>
     </li>
     <hr class="sidebar-divider">
     {% endif %}
@@ -147,7 +165,7 @@
     <li class="nav-item active">
       <a class="nav-link" href="{% url 'storeApp:emergencePage' %}">
         <i class="fas far far fa-comments fa-2x text-success"></i>
-        <span>Manage Emergence</span></a>
+        <span>Emergence</span></a>
     </li>
     <hr class="sidebar-divider">
     {% endif %}
@@ -156,7 +174,7 @@
     <li class="nav-item active">
       <a class="nav-link" href="{% url 'storeApp:companyStockPage' %}">
         <i class="fas far far fa-store-alt fa-2x text-success"></i>
-        <span>Manage Assets</span></a>
+        <span>Assets</span></a>
     </li>
     <hr class="sidebar-divider">
     {% endif %}

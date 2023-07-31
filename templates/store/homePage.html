@@ -18,9 +18,35 @@
 
   <div class="row mb-3">
     <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-2 col-md-6 mb-4">
+      <span>Filter for  31/7/2023</span>
+    </div>
+    <div class="col-xl-2 col-md-6 mb-4">
+      
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+      <input type="date" name="" id="" class="form-control">
+    </div>
+    <div class="col-xl-3 col-md-6 mb-4">
+      <input type="date" name="" id="" class="form-control">
+      
+      
+    </div>
+    <div class="col-xl-2 col-md-6 mb-4">
+      <input type="submit" name="" id=""  name="Apply_filter" class="form-control btn-outline-dark" value="Apply filter">
+    </div>
+    <!-- Earnings (Annual) Card Example -->
+  
+   
+ 
+
+   
+  </div>
+  <div class="row mb-3">
+    <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card h-100">
-        <div class="card-body" style="background-color: #000;color:#fff;">
+        <div class="card-body" style="background-color: #808080;color:#fff;">
           <div class="row align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-uppercase mb-1"><code><mark class="bg-white px-2">{{today}}</mark></code>  Sales</div>
@@ -40,7 +66,7 @@
     <!-- Earnings (Annual) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card h-100">
-        <div class="card-body" style="background-color: #000;color:#fff;">
+        <div class="card-body" style="background-color: #808080;color:#fff;">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-uppercase mb-1"><code><mark class="bg-white px-2">{{today}}</mark></code>  Expenditures </div>
@@ -60,7 +86,7 @@
     <!-- New User Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card h-100">
-        <div class="card-body" style="background-color: #000;color:#fff;"> 
+        <div class="card-body" style="background-color: #808080;color:#fff;"> 
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-uppercase mb-1"><code><mark class="bg-white px-2">{{current_month}}</mark></code> Sales</div>
@@ -80,7 +106,7 @@
     <!-- Pending Requests Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
       <div class="card h-100">
-        <div class="card-body" style="background-color: #000;color:#fff;">
+        <div class="card-body" style="background-color: #808080;color:#fff;">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-uppercase mb-1"><code><mark class="bg-white px-2">{{current_year}}</mark></code> Sales</div>
@@ -104,136 +130,236 @@
   </div>
 
   <!--Row-->
-  <div class="container mt-4 mb-5">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <h4 class="text-center">monthly sales within a year <script> document.write(new Date().getFullYear()); </script></h4>
-          <div class="card-body">
-            <div>
-              <canvas id="myChart"></canvas>
+  <div class="status_section">
+    <div class="row mb-3">
+      <!-- Earnings (Monthly) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body" style="background-color: #808080;color:#fff;">
+            <div class="row align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-uppercase mb-1"><code><mark class="bg-white px-2">Profit Before Income Tax </mark> </code></div>
+                <div class="h5 mb-0 font-weight-bold text-white-800">{{today_sales_sum}} Tsh/=</div>
+                <!-- <div class="mt-2 mb-0 text-muted text-xs">
+                  <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                  <span>Ago</span>
+                </div> -->
+              </div>
+              <div class="col-auto">
+                <i class="fas fas fa-wallet fa-2x text-wite"></i>
+              </div>
             </div>
           </div>
         </div>
-        
-        <script>
-          const labels = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
-          ];
-          
+      </div>
+      <!-- Earnings (Annual) Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body" style="background-color: #808080;color:#fff;">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-uppercase mb-1"><code><mark class="bg-white px-2">Sales Taxed Revenue </mark></code></div>
+                <div class="h5 mb-0 font-weight-bold text-white-800">{{today_emergence_cost_sum}} Tsh/=</div>
+                <!-- <div class="mt-2 mb-0 text-muted text-xs">
+                  <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                  <span>Since last years</span>
+                </div> -->
+              </div>
+              <div class="col-auto">
+                <i class="fas fas fa-wallet fa-2x text-white"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- New User Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body" style="background-color: #808080;color:#fff;"> 
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-uppercase mb-1"><code><mark class="bg-white px-2">Unpaid Invoices </mark></code></div>
+                <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">{{current_month_current_year_sales_sum }}  Tsh/=</div>
+                <!-- <div class="mt-2 mb-0 text-muted text-xs">
+                  <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 20.4%</span>
+                  <span>Since last month</span>
+                </div> -->
+              </div>
+              <div class="col-auto">
+                <i class="fas fas fa-wallet fa-2x text-white"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Pending Requests Card Example -->
+      <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <div class="card-body" style="background-color: #808080;color:#fff;">
+            <div class="row no-gutters align-items-center">
+              <div class="col mr-2">
+                <div class="text-xs font-weight-bold text-uppercase mb-1"><code><mark class="bg-white px-2">{{current_year}}</mark></code> Paid Invoices</div>
+                <div class="h5 mb-0 font-weight-bold text-white-800">{{current_year_sales_sum}} Tsh/=</div>
+                <!-- <div class="mt-2 mb-0 text-muted text-xs">
+                  <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                  <span>ago</span>
+                </div> -->
+              </div>
+              <div class="col-auto">
+                <i class="fas fas fa-wallet fa-2x text-white"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+   
+  
+     
+    </div>
+  </div>
+
+  <div class="graph_section" style="margin-bottom: 50px;">
+    <div class="container-fluid" style="margin: 0px;padding: 0px;">
+      <div class="row" >
+        <div class="col-xl-6" style="margin: 0px;padding: 0px;">
+          <div class="inner-section">
+            <div class="card" style="margin: 30px;padding: 0px;">
+              <h4 class="text-left p-2">Profit Trends <script> document.write(new Date().getFullYear()); </script></h4>
+              <hr>
+              <div class="card-body"style="margin: 0px;padding: 0px;" >
+                <div>
+                  <canvas id="myChart"></canvas>
+                </div>
+              </div>
+            </div>
+            
+            <script>
+              const labels = [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December'
+              ];
+              
+    
+    
+              const data = {
+                labels: labels,
+                datasets: [{
+                  // label: 'Profit Trends',
+                  backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderWidth: 1.1,
+                  data: ['{{january_sales_sum}}', '{{february_sales_sum}}', '{{march_sales_sum}}', '{{april_sales_sum}}', '{{may_sales_sum}}', '{{june_sales_sum}}', '{{july_sales_sum}}', '{{august_sales_sum}}', '{{september_sales_sum}}', '{{november_sales_sum}}','{{december_sales_sum}}' ],
+                }]
+              };
+            
+              const config = {
+                type: 'bar',
+                data: data,
+                options: {
+                  borderColor:'rgb(255, 209, 132)',
+                }
+              };
+            </script>
+            <script>
+              const myChart = new Chart(
+                document.getElementById('myChart'),
+                config
+              );
+            </script>
+          </div>
+        </div>
 
 
-          const data = {
-            labels: labels,
-            datasets: [{
-              label: 'Monthly sales',
-              backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderWidth: 1.1,
-              data: ['{{january_sales_sum}}', '{{february_sales_sum}}', '{{march_sales_sum}}', '{{april_sales_sum}}', '{{may_sales_sum}}', '{{june_sales_sum}}', '{{july_sales_sum}}', '{{august_sales_sum}}', '{{september_sales_sum}}', '{{november_sales_sum}}','{{december_sales_sum}}' ],
-            }]
-          };
-        
-          const config = {
-            type: 'bar',
-            data: data,
-            options: {
-              borderColor:'rgb(255, 209, 132)',
-            }
-          };
-        </script>
-        <script>
-          const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-          );
-        </script>
+
+
+        <div class="col-xl-6" style="margin: 0px;padding: 0px;">
+          <div class="inner-section">
+            <div class="card" style="margin: 30px;padding: 0px;">
+              <h4 class="text-left p-2">Revenue And Expenditure <script> document.write(new Date().getFullYear()); </script></h4>
+              <hr>
+              <div class="card-body"style="margin: 0px;padding: 0px;" >
+                <div>
+                  <canvas id="myChart2"></canvas>
+                </div>
+              </div>
+            </div>
+            
+            <script>
+              const labels2 = [
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December'
+              ];
+              
+    
+    
+              const data2 = {
+                labels: labels2,
+                datasets: [{
+                  label: '',
+                  backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderWidth: 1.1,
+                  data: ['{{january_sales_sum}}', '{{february_sales_sum}}', '{{march_sales_sum}}', '{{april_sales_sum}}', '{{may_sales_sum}}', '{{june_sales_sum}}', '{{july_sales_sum}}', '{{august_sales_sum}}', '{{september_sales_sum}}', '{{november_sales_sum}}','{{december_sales_sum}}' ],
+                }]
+              };
+            
+              const config2 = {
+                type: 'bar',
+                data: data2,
+                options: {
+                  borderColor:'rgb(255, 209, 132)',
+                }
+              };
+            </script>
+            <script>
+              const myChart2 = new Chart(
+                document.getElementById('myChart2'),
+                config
+              );
+            </script>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  
   <!-- lineGraph -->
   {% include './productRemainInStore.html' %}
-  <div class="container mt-4 mb-5">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <h4 class="text-center">monthly sales within a year <script> document.write(new Date().getFullYear()); </script></h4>
-          <div class="card-body">
-            <div>
-              <canvas id="myChart"></canvas>
-            </div>
-          </div>
-        </div>
-        
-        <script>
-          const labels = [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
-            'August',
-            'September',
-            'October',
-            'November',
-            'December'
-          ];
-          
 
-
-          const data = {
-            labels: labels,
-            datasets: [{
-              label: 'Monthly sales',
-              backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderWidth: 1.1,
-              data: ['{{january_sales_sum}}', '{{february_sales_sum}}', '{{march_sales_sum}}', '{{april_sales_sum}}', '{{may_sales_sum}}', '{{june_sales_sum}}', '{{july_sales_sum}}', '{{august_sales_sum}}', '{{september_sales_sum}}', '{{november_sales_sum}}','{{december_sales_sum}}' ],
-            }]
-          };
-        
-          const config = {
-            type: 'bar',
-            data: data,
-            options: {
-              borderColor:'rgb(255, 209, 132)',
-            }
-          };
-        </script>
-        <script>
-          const myChart = new Chart(
-            document.getElementById('myChart'),
-            config
-          );
-        </script>
-      </div>
-    </div>
-  </div>
   
 
   <!-- Modal Logout -->

@@ -19,19 +19,7 @@
             <form method="post" action="">
               {% csrf_token %}
               <div class="row">
-                <div class="col-md-12">
-                  {% if get_all_products %}
-                  <div class="form-group">
-                    <label for="select2SinglePlaceholder" class="d-block"> Select product</label>
-                    <select class="select2-single-placeholder-product form-control" name="product_name" id="select2SinglePlaceholderproduct12" style="width: 100%;padding:10px">
-                      <option value="not selected">Select</option>
-                      {% for products in get_all_products %}
-                      <option value="{{ products.id }}">{{products}}</option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                  {% endif %}
-                </div>
+
                 <div class="col-md-12">
                   {% if get_all_customers %}
                   <label for="ProductName">Customer Full name</label>
@@ -44,12 +32,35 @@
                   {% endif %}
                 </div>
 
-                <div class="col-md-6 my-3">
-                 <div class="form-group">
-                   <label for="quantity" >Number of products nedeed</label>
-                   <input type="number" name="number_of_product_nedeed" class="form-control">
-                 </div>
-                 </div>
+
+
+              
+                  <div class="col-md-12" >
+                    {% if get_all_products %}
+                    <div class="form-group" id="formfield">
+                      <label for="select2SinglePlaceholder" class="d-block"> Select product</label>
+                      <select class="select2-single-placeholder-product form-control" name="product_name" id="select2SinglePlaceholderproduct12" style="width: 100%;padding:10px">
+                        <option value="not selected">Select</option>
+                        {% for products in get_all_products %}
+                        <option value="{{ products.id }}">{{products}}</option>
+                        {% endfor %}
+                      </select>
+                     
+                    </div>
+                    {% endif %}
+                    
+                    
+                  </div>
+                
+  
+                  <div class="col-md-6 my-3">
+                   <div class="form-group">
+                     <label for="quantity" >Number of products nedeed</label>
+                     <input type="number" name="number_of_product_nedeed" class="form-control">
+                   </div>
+                   </div>
+            
+
                  <div class="col-md-6 my-3">
                   <!-- <div class="form-group">
                     <label for="Supplier" >today  date</label>
@@ -67,7 +78,7 @@
                     </select>
                   </div>
                   {% endif %}
-                   </div>
+                </div>
           
               
             
@@ -80,97 +91,14 @@
                 </div>
               </div>
 
-
+              
               <button type="submit" class="btn btn-primary mt-1" name="sell_product" value="sell_product">sell product</button>
              </form>
           </div>
         </div>
       </div>
 
-
-      {% comment %} ================================= {% endcomment %}
-      <div style="width:40%;">
-
-        <form>
       
-            <div class="">
-      
-                <div class="col-lg-12">
-      
-                    <div id="row">
-      
-                        <div class="input-group m-3">
-      
-                            <div class="input-group-prepend">
-      
-                                <button class="btn btn-danger"
-      
-                                        id="DeleteRow"
-      
-                                        type="button">
-      
-                                    <i class="bi bi-trash"></i>
-      
-                                    Delete
-      
-                                </button>
-      
-                            </div>
-      
-                            <input type="text" class="form-control m-input">
-      
-                        </div>
-      
-                    </div>
-      
-      
-      
-                    <div id="newinput"></div>
-      
-                    <button id="rowAdder" type="button" class="btn btn-dark">
-      
-                        <span class="bi bi-plus-square-dotted">
-      
-                        </span> ADD
-      
-                    </button>
-      
-                </div>
-      
-            </div>
-      
-        </form>
-      
-      </div>
-      <script type="text/javascript">
-
-        $("#rowAdder").click(function () {
-      
-            newRowAdd =
-      
-                '<div id="row"> <div class="input-group m-3">' +
-      
-                '<div class="input-group-prepend">' +
-      
-                '<button class="btn btn-danger" id="DeleteRow" type="button">' +
-      
-                '<i class="bi bi-trash"></i> Delete</button> </div>' +
-      
-                '<input type="text" class="form-control m-input"> </div> </div>';
-      
-      
-      
-            $('#newinput').append(newRowAdd);
-      
-        });
-      
-        $("body").on("click", "#DeleteRow", function () {
-      
-            $(this).parents("#row").remove();
-      
-        })
-      
-      </script>
       <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>

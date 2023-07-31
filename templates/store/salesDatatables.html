@@ -17,9 +17,10 @@
           {% if get_all_product_sold %}
           <div class="table-responsive pl-2">
             <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-              <thead class="" style="background-color: #000;color:#fff;">
+              <thead class="" style="background-color: #808080;color:#fff;">
                 <tr>
                   <th>#</th>
+                  <th>Customer </th>
                   <th>Product </th>
                   <th>@ product cost</th>
                   <th>quantity sold</th>
@@ -35,9 +36,10 @@
               </thead>
               <tbody>
                 {% for product_sold in get_all_product_sold %}
-                <tr style="background-color: #000;color:#fff;">
+                <tr style="background-color: #808080;color:#fff;">
                   <td>{{forloop.counter}}</td>
-                  <td><a href="#" style="background-color: #000;color:#fff;">{{product_sold.product_name}}</a></td>
+                  <td><a href="#" style="background-color: #808080;color:#fff;">{{product_sold.customer_full_name}}</a></td>
+                  <td><a href="#" style="background-color: #808080;color:#fff;">{{product_sold.product_name}}</a></td>
                   
                   <td>{{product_sold.product_name.sales_price}}</td>
 

@@ -11,7 +11,7 @@
           {% if get_number_of_shops >= 0 %}
           <div class="table-responsive pl-2">
             <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-              <thead class="" style="background-color: #000;color:#fff;">
+              <thead class="" style="background-color: #808080;color:#fff;">
                 <tr>
                   <th>#</th>
                   <th>Shop name</th>
@@ -28,9 +28,9 @@
               </thead>
               <tbody>
                 {% for shops in get_all_shops %}
-                <tr style="background-color: #000;color:#fff;">
-                  <td ><a href="#" style="background-color: #000;color:#fff;">{{forloop.counter}}</a></td>
-                  <td><a href="#" style="background-color: #000;color:#fff;">{{shops.shop_name}}</a></td>
+                <tr style="background-color: #808080;color:#fff;">
+                  <td ><a href="#" style="background-color: #808080;color:#fff;">{{forloop.counter}}</a></td>
+                  <td><a href="#" style="background-color: #808080;color:#fff;">{{shops.shop_name}}</a></td>
                   <!-- <td>{{shops.shop_street}}</td> -->
                   <td>{{shops.shop_district}}</td>
                   <td>{{shops.shop_region}}</td>
