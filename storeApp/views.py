@@ -97,8 +97,6 @@ def generatePdf(request, id ):
     messages.info(request, "Data inconsistent, please upload Logo")
     return redirect('storeApp:salesPage')
 
-
-
       
       
 def customerDetails(request):
@@ -1298,3 +1296,20 @@ def deactivateUserAuthorizations(request, id):
   )
   messages.success(request, f"{get_user_auth.select_user} account deactivated")
   return redirect('storeApp:authorizationPage')
+
+
+
+
+def partialForm(request):
+  template_name = 'store/partialForm/form.html'
+  get_all_employee = EmployeeDetailInformations.objects.all()
+  get_all_products = ProductTable.objects.all().order_by('-id')
+  get_all_shops = ShopsTable.objects.all().order_by('-updated_at')
+  context ={
+
+    'get_all_products':get_all_products,
+    'get_all_employee':get_all_employee,
+    'get_all_shops':get_all_shops
+  }
+
+  return render (request, template_name, context)

@@ -24,10 +24,11 @@
   <!-- ClockPicker -->
   <link href="{% static './vendor/clock-picker/clockpicker.css' %}" rel="stylesheet">
   <link href="{% static './css/ruang-admin.css' %}" rel="stylesheet">
+  <script src="https://unpkg.com/htmx.org@1.9.4"></script>
 
 </head>
 <!-- onload="myFunction()"  -->
-<body id="page-top" >
+<body id="page-top"  hx-headers='{"X-CSRFToken" : "{{ csrf_token }}"}'>
 
   <div id="loader">
     

@@ -36,5 +36,6 @@ urlpatterns = [
       path('pdf/<str:id>/', views.generatePdf, name ="generatePdf"),
     path('company-Stock', views.companyStockPage, name="companyStockPage"),
     path('customer-details', views.customerDetails, name="customerDetails"),
+    path('form', views.partialForm, name="partialForm"),
     
 ]
