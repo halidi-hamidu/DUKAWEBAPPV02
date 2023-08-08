@@ -23,7 +23,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf.global_settings import LOGIN_URL
 from django.utils import timezone
 from io import BytesIO
-from msilib.schema import File
+# from msilib.schema import File
 from re import template
 from unittest import result
 from django.template.loader import get_template
