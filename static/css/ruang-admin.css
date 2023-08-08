@@ -713,7 +713,7 @@ select{
   padding: .5rem 1rem;
   margin: 0 .5rem;
   display: block;
-  color: #3a3b45;
+  color: #fff !important;
   text-decoration: none;
   border-radius: .35rem;
   white-space: nowrap;
@@ -722,7 +722,7 @@ select{
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item:hover,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover {
-  background-color: #808080;
+  background-color: #9b0707;
   transition: all .3s ease-in-out;
   -webkit-transition: all .3s ease-in-out
 }
@@ -734,7 +734,7 @@ select{
 
 .sidebar .nav-item .collapse .collapse-inner .collapse-item.active,
 .sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
-  color: #3a3b45;
+  color: #fff !important;
   font-weight: 800
 }
 

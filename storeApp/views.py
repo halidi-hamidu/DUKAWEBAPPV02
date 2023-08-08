@@ -35,6 +35,12 @@ from xhtml2pdf import pisa
 #i mport library for csv file importation
 from tablib import Dataset
 from .resources import ProductTableResource
+
+
+from django.views.generic.edit import FormView
+from django.http import JsonResponse
+import json
+# from .forms import Formset 
 #  Create your views here.
 #Creating a class based view
 
@@ -204,6 +210,7 @@ def logoutPage(request):
 def homepage(request):
   try:
     get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
+    print("------------------------", get_all_user_authorizations)
     x = datetime.datetime.now()
     today_date = datetime.datetime.today().date()
     get_all_today_orders = CustomersOrders.objects.filter(updated_at=today_date )
@@ -233,79 +240,79 @@ def homepage(request):
     x = datetime.datetime.now()
     current_month = (x.strftime("%B"))
     print(current_month)
-    get_all_product_sold_this_month_this_year = productSoldInCash.objects.filter(updated_at__month=curent_month, updated_at__year = curent_year)
+    get_all_product_sold_this_month_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=curent_month, date_for_issues_invoice__year = curent_year)
     current_month_current_year_sales_sum = 0
     for sales in get_all_product_sold_this_month_this_year:
-      current_month_current_year_sales_sum += sales.total_product_cost
+      current_month_current_year_sales_sum += int(sales.total_product_cost)
     
     # 'January',
-    get_all_product_sold_january_this_year = productSoldInCash.objects.filter(updated_at__month=1, updated_at__year = curent_year)
+    get_all_product_sold_january_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=1, date_for_issues_invoice__year = curent_year)
     january_sales_sum = 0
     for sales in get_all_product_sold_january_this_year:
-      january_sales_sum += sales.total_product_cost
+      january_sales_sum += int(sales.total_product_cost)
     # 'February',
-    get_all_product_sold_february_this_year = productSoldInCash.objects.filter(updated_at__month=2, updated_at__year = curent_year)
+    get_all_product_sold_february_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=2, date_for_issues_invoice__year = curent_year)
     february_sales_sum = 0
     for sales in get_all_product_sold_february_this_year:
-      february_sales_sum += sales.total_product_cost
+      february_sales_sum += int(sales.total_product_cost)
     # 'March',
-    get_all_product_sold_march_this_year = productSoldInCash.objects.filter(updated_at__month=3, updated_at__year = curent_year)
+    get_all_product_sold_march_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=3, date_for_issues_invoice__year = curent_year)
     march_sales_sum = 0
     for sales in get_all_product_sold_march_this_year:
-      march_sales_sum += sales.total_product_cost
+      march_sales_sum += int(sales.total_product_cost)
     # 'April',
-    get_all_product_sold_april_this_year = productSoldInCash.objects.filter(updated_at__month=4, updated_at__year = curent_year)
+    get_all_product_sold_april_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=4, date_for_issues_invoice__year = curent_year)
     april_sales_sum = 0
     for sales in get_all_product_sold_april_this_year:
-      april_sales_sum += sales.total_product_cost
+      april_sales_sum += int(sales.total_product_cost)
     # 'May',
-    get_all_product_sold_may_this_year = productSoldInCash.objects.filter(updated_at__month=5, updated_at__year = curent_year)
+    get_all_product_sold_may_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=5, date_for_issues_invoice__year = curent_year)
     may_sales_sum = 0
     for sales in get_all_product_sold_may_this_year:
-      may_sales_sum += sales.total_product_cost
+      may_sales_sum += int(sales.total_product_cost)
     # 'June',
-    get_all_product_sold_june_this_year = productSoldInCash.objects.filter(updated_at__month=6, updated_at__year = curent_year)
+    get_all_product_sold_june_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=6, date_for_issues_invoice__year = curent_year)
     june_sales_sum = 0
     for sales in get_all_product_sold_june_this_year:
-      june_sales_sum += sales.total_product_cost
+      june_sales_sum += int(sales.total_product_cost)
     # 'July',
-    get_all_product_sold_july_this_year = productSoldInCash.objects.filter(updated_at__month=7, updated_at__year = curent_year)
+    get_all_product_sold_july_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=7, date_for_issues_invoice__year = curent_year)
     july_sales_sum = 0
     for sales in get_all_product_sold_july_this_year:
-      july_sales_sum += sales.total_product_cost
+      july_sales_sum += int(sales.total_product_cost)
     # 'August',
-    get_all_product_sold_august_this_year = productSoldInCash.objects.filter(updated_at__month=8, updated_at__year = curent_year)
+    get_all_product_sold_august_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=8, date_for_issues_invoice__year = curent_year)
     august_sales_sum = 0
     for sales in get_all_product_sold_august_this_year:
-      august_sales_sum += sales.total_product_cost
+      august_sales_sum += int(sales.total_product_cost)
     # 'September',
-    get_all_product_sold_september_this_year = productSoldInCash.objects.filter(updated_at__month=9, updated_at__year = curent_year)
+    get_all_product_sold_september_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=9, date_for_issues_invoice__year = curent_year)
     september_sales_sum = 0
     for sales in get_all_product_sold_september_this_year:
-      september_sales_sum += sales.total_product_cost
+      september_sales_sum += int(sales.total_product_cost)
     # 'October',
-    get_all_product_sold_october_this_year = productSoldInCash.objects.filter(updated_at__month=10, updated_at__year = curent_year)
+    get_all_product_sold_october_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=10, date_for_issues_invoice__year = curent_year)
     october_sales_sum = 0
     for sales in get_all_product_sold_october_this_year:
-      october_sales_sum += sales.total_product_cost
+      october_sales_sum += int(sales.total_product_cost)
     # 'November',
-    get_all_product_sold_november_this_year = productSoldInCash.objects.filter(updated_at__month=11, updated_at__year = curent_year)
+    get_all_product_sold_november_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=11, date_for_issues_invoice__year = curent_year)
     november_sales_sum = 0
     for sales in get_all_product_sold_november_this_year:
-      november_sales_sum += sales.total_product_cost
+      november_sales_sum += int(sales.total_product_cost)
     # 'December'
-    get_all_product_sold_december_this_year = productSoldInCash.objects.filter(updated_at__month=12, updated_at__year = curent_year)
+    get_all_product_sold_december_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=12, date_for_issues_invoice__year = curent_year)
     december_sales_sum = 0
     for sales in get_all_product_sold_december_this_year:
-      december_sales_sum += sales.total_product_cost
+      december_sales_sum += int(sales.total_product_cost)
 
     # curent_year_sales
-    get_all_product_sold_this_year = productSoldInCash.objects.filter(updated_at__year = curent_year)
+    get_all_product_sold_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__year = curent_year)
     current_year_sales_sum = 0
     current_year = (x.strftime("%Y"))
 
     for sales in get_all_product_sold_this_year:
-      current_year_sales_sum += sales.total_product_cost
+      current_year_sales_sum += int(sales.total_product_cost)
     
     today_emergence_cost_sum = 0
     # get_emergence_info
@@ -326,6 +333,7 @@ def homepage(request):
     print(current_month)
     print(all_product)
     get_all_product_sold = ProductAndSupplierAndReceiverTable.objects.all().order_by('-updated_at')
+    print("******************", get_all_product_sold_august_this_year)
     template_name = 'store/homePage.html'
     context = {
       'get_all_user_authorizations':get_all_user_authorizations,
@@ -760,54 +768,123 @@ def employeePage(request):
 @login_required(login_url=LOGIN_URL)
 # salesPage
 def salesPage(request):
-  if request.method == "POST" and request.POST.get('sell_product'):
-    get_product_sold = request.POST.get('product_name')
-    get_customer_full_name = request.POST.get('customer_full_name')
-    get_customer_full_name = request.POST.get('customer_full_name')
-    get_number_of_product_nedeed = request.POST.get('number_of_product_nedeed')
-    get_number_of_product_nedeed = int(get_number_of_product_nedeed)
-    get_shop_name = request.POST.get('shop_name')
-    get_date_for_issues_invoice = request.POST.get('date_for_issues_invoice')
-    print("PRODUCT SOLD ", get_product_sold)
-    get_product_from_the_store_in_database = ProductTable.objects.get(id =get_product_sold )
-    get_number_available = int(get_product_from_the_store_in_database.available)
-   
+  # get_button_status = 
+  if request.method == "POST":
+    get_product_sold = request.POST.getlist('product_name[]')
+    number_of_product_sold = len(get_product_sold)
+     
+      
+    form = productSoldInCashForm(request.POST)
+    if (number_of_product_sold == 1):
+      get_product_sold = get_product_sold[0]
+      print('::::::::::::::::::',get_product_sold )
+      # if (len (get_product_sold) == 1):
+      #   data = productSoldInCashForm
+      # get_customer_full_name = request.POST.get('customer_full_name')
+      get_customer_full_name = request.POST.getlist('customer_full_name[]')
+      get_number_of_product_nedeed = request.POST.getlist('number_of_product_nedeed[]')
+      get_number_of_product_nedeed = int(get_number_of_product_nedeed[0])
+      get_shop_name = request.POST.get('shop_name[]')
+      get_date_for_issues_invoice = request.POST.get('date_for_issues_invoice[]')
+      print("PRODUCT SOLD @", get_date_for_issues_invoice[0])
+      get_product_from_the_store_in_database = ProductTable.objects.get(id =get_product_sold )
+      print('information obtianed is ', get_product_from_the_store_in_database)
+      get_number_available = int(get_product_from_the_store_in_database.available)
+      get_sales_price = int(get_product_from_the_store_in_database.sales_price)
+      
+      total_cost = get_number_of_product_nedeed * get_sales_price
+      
+      
+      store_remain = get_number_available - get_number_of_product_nedeed
+      
+      get_current_user_login = User.objects.get(id =request.user.id )
+      get_customer_full_name = get_customer_full_name[0]
+      get_customer_information = CustomerDetails.objects.get( id =get_customer_full_name )
+      get_shop_information = ShopsTable.objects.get( id =get_shop_name )
+      get_date_for_issues_invoice = get_date_for_issues_invoice
+      print("Date for issues the invoice is ", get_date_for_issues_invoice)
+      product_sold_in_cash_object = productSoldInCash(
+        product_name = get_product_from_the_store_in_database,
+        customer_full_name = get_customer_information,
+        number_of_product_nedeed = get_number_of_product_nedeed,
+        
+        total_product_cost= total_cost,
+        
+        supervisor = get_current_user_login,
+        
+        shop_name = get_shop_information,
+        
+        store_remain = store_remain,
+        date_for_issues_invoice = get_date_for_issues_invoice
+        
+      )
+      
+      product_sold_in_cash_object.save()
+      ProductTable.objects.filter(id = get_product_sold ).update(
+        available =store_remain
+      )
     
-    if get_number_of_product_nedeed > get_number_available:
-      messages.info(request, "Quantity Needed is larger than available ")
+      messages.success(request, "Product Succesfully Sold")
       return redirect ("storeApp:salesPage")
     else:
-      # 'supervisor',
-      # 'date_product_sold',
-      # 'total_product_cost',
-      # 'amount_to_sold',
-      # 'created_at',
-      # 'updated_at'
+      get_form_data = json.loads(request.POST.get('formData'))
       
-      print(request.POST)
-      form = productSoldInCashForm(request.POST)
-      if form.is_valid():
-        print('==============')
-        get_sales_price = int(get_product_from_the_store_in_database.sales_price)
-        total_cost = get_number_of_product_nedeed * get_sales_price
-        store_remain = get_number_available - get_number_of_product_nedeed
-        instance = form.save(commit = False)
-        instance.total_product_cost = total_cost
-        instance.store_remain = store_remain
-        instance.date_product_sold = get_date_for_issues_invoice
-        get_current_user_login = User.objects.get(id =request.user.id )
-        instance.supervisor =get_current_user_login
+      for data in get_form_data:
+        print("The customer full name is ", data['customer_full_name'])
+        print("The List of Product is ", data['product_name'])
+        print("The Numbers of Product nedded is ", data['number_of_product_nedeed'])
+        print("The Shop Name is  ", data['shop_name'])
+        print("The Date for issues The Invoices is  ", data['date_for_issues_invoice'])
+        # for multiple form data submited
+      
+        customer_full_name = data['customer_full_name']
+        get_customer_information = CustomerDetails.objects.get( id =customer_full_name )
         
-        instance.save()
-        ProductTable.objects.filter(id = get_product_sold ).update(
-          available =store_remain
-        )
+        product_name = data['product_name']
+        number_to_loop = len(product_name)
+        print("The total number of product sent is ", number_to_loop)
+        print("The total number of product sent is ", product_name)
+        shop_name = data['shop_name']
+        number_of_product_nedeed = data['number_of_product_nedeed']
+        date_for_issues_invoice = data['date_for_issues_invoice']
+        get_current_user_login = User.objects.get(id =request.user.id )
+        get_shop_information = ShopsTable.objects.get( id =shop_name )
+        for item  in range(number_to_loop):
+          print("=========", item, product_name[item])
+          get_product_from_the_store_in_database = ProductTable.objects.get(id =product_name[item] )
+          get_number_available = int(get_product_from_the_store_in_database.available)
+          get_sales_price = int(get_product_from_the_store_in_database.sales_price)
+          total_cost = int(number_of_product_nedeed[item]) * get_sales_price
+          store_remain = get_number_available - int(number_of_product_nedeed[item])
+          
+          product_sold_in_cash_object = productSoldInCash.objects.create(
+          product_name = get_product_from_the_store_in_database,
+          customer_full_name = get_customer_information,
+          number_of_product_nedeed = number_of_product_nedeed[item],
+          
+          total_product_cost= total_cost,
+          
+          supervisor = get_current_user_login,
+          
+          shop_name = get_shop_information,
+          
+          store_remain = store_remain,
+          date_for_issues_invoice = date_for_issues_invoice
+          
+          )
       
+          product_sold_in_cash_object.save()   
+          ProductTable.objects.filter(id = product_name[item] ).update(
+            available =store_remain
+          ) 
+          messages.success(request, "Product Succesfully Sold")
+        
         messages.success(request, "Product Succesfully Sold")
         return redirect ("storeApp:salesPage")
-      else:
-        message.info(request, "Product not Sold  Please try again")
-        return redirect ("storeApp:salesPage")
+      return redirect ("storeApp:salesPage")
+     
+      
+      
   # add_emergence
   elif request.method == "POST" and request.POST.get("add_emergence"):
     form = EmergenceInformationsForm(request.POST)
@@ -870,8 +947,8 @@ def salesPage(request):
       
       
       for product in get_all_product_sold_today:
-        pass
-        # today_sales_sum +=int(product.total_product_cost)
+        
+        today_sales_sum +=int(product.total_product_cost)
       
       
       
@@ -1298,3 +1375,15 @@ def deactivateUserAuthorizations(request, id):
   )
   messages.success(request, f"{get_user_auth.select_user} account deactivated")
   return redirect('storeApp:authorizationPage')
+
+
+def manageInvoice(request):
+  get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
+  template_name = 'manageInvoice/manageInvoice.html'
+  context = {
+    "get_all_user_authorizations":get_all_user_authorizations,
+  }
+  
+  return render(request, template_name, context)
+
+

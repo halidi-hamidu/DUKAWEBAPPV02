@@ -292,73 +292,71 @@
         <div class="col-xl-6" style="margin: 0px;padding: 0px;">
           <div class="inner-section">
             <div class="card" style="margin: 30px;padding: 0px;">
-              <h4 class="text-left p-2">Revenue And Expenditure <script> document.write(new Date().getFullYear()); </script></h4>
+              <h4 class="text-left p-2">Profit , Revenue And Expenditure <script> document.write(new Date().getFullYear()); </script></h4>
               <hr>
               <div class="card-body"style="margin: 0px;padding: 0px;" >
                 <div>
-                  <canvas id="myChart2"></canvas>
-                </div>
+                  <canvas id="mixedChartID"></canvas>
+                        
+          <script>
+            var mychart = document.getElementById(
+                "mixedChartID").getContext("2d");
+            
+           new Chart(mychart, {
+               type: 'bar',   
+               title: {
+                   text: "Monthly Sales Data"
+               },            
+               data: {
+                   datasets: [{
+                       label: 'Monthly Sales data in lakhs',
+                       data: [60, 30,20,45, 50, 40,35,77,  1, 20, 40, 90],
+                       type: 'bar',
+                       borderColor:"blue",                    
+                       borderWidth:2                    
+                       }, {
+                       label: 'Expected sales',
+                       data: [35, 15, 18, 38,45,35,27,65,  1, 20, 40, 90],
+                       type: 'line',    
+                       borderColor:"green"                                        
+                      },
+                      {
+                       type:'line',
+                       data:[20,8,12,29,35,30,20,50, 1, 20, 40, 90],
+                       label: 'Profit',
+                       borderColor: "red",
+                       fill:true,
+                       backgroundColor: "pink",
+                       lineTension:0.2      
+                        
+                      }
+                   ],//end data sets
+                   labels: ['January', 'February', 'March', 'April',
+                         'May','June','July','August', 'September',
+                         'October',
+                         'November',
+                         'December']
+               }//end data            
+           });
+              </script>
               </div>
-            </div>
-            
-            <script>
-              const labels2 = [
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'November',
-                'December'
-              ];
-              
-    
-    
-              const data2 = {
-                labels: labels2,
-                datasets: [{
-                  label: '',
-                  backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderWidth: 1.1,
-                  data: ['{{january_sales_sum}}', '{{february_sales_sum}}', '{{march_sales_sum}}', '{{april_sales_sum}}', '{{may_sales_sum}}', '{{june_sales_sum}}', '{{july_sales_sum}}', '{{august_sales_sum}}', '{{september_sales_sum}}', '{{november_sales_sum}}','{{december_sales_sum}}' ],
-                }]
-              };
-            
-              const config2 = {
-                type: 'bar',
-                data: data2,
-                options: {
-                  borderColor:'rgb(255, 209, 132)',
-                }
-              };
-            </script>
-            <script>
-              const myChart2 = new Chart(
-                document.getElementById('myChart2'),
-                config
-              );
-            </script>
+              </div>
+            </div>  
+          </div>
+          </div>
+
+       
           </div>
         </div>
       </div>
     </div>
   </div>
 
+
+
   
   <!-- lineGraph -->
-  {% include './productRemainInStore.html' %}
+
 
   
 
@@ -383,8 +381,9 @@
       </div>
     </div>
   </div>
+  
+  {% include './productRemainInStore.html' %}
 
-</div>
 
 {% else %}
 {% include './salesStatusBar.html' %}

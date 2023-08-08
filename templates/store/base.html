@@ -24,7 +24,9 @@
   <!-- ClockPicker -->
   <link href="{% static './vendor/clock-picker/clockpicker.css' %}" rel="stylesheet">
   <link href="{% static './css/ruang-admin.css' %}" rel="stylesheet">
-
+  <script src="{% static './js/jquery.min.js' %}"></script>
+  <script src="{% static './js/chart.umd.js' %}"></script>
+  
 </head>
 <!-- onload="myFunction()"  -->
 <body id="page-top" >
@@ -47,6 +49,7 @@
       <div class="sidebar-brand-text mx">JEMAD AUTO SPARE</div>
     </a>
     <hr class="sidebar-divider my-0">
+    
     {% if get_all_user_authorizations.view_dashboard %}
     <li class="nav-item active ">
       <a class="nav-link" href="{% url 'storeApp:homepage' %}">
@@ -117,24 +120,28 @@
     <hr class="sidebar-divider">
     {% endif %}
 
+    {% if get_all_user_authorizations.manage_sales %}
     <li class="nav-item">
-      <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+      <a class="nav-link collapsed text-white" data-toggle="collapse" data-target="#collapseBootstrap"
         aria-expanded="true" aria-controls="collapseBootstrap">
         <i class="far fa-fw fa-window-maximize text-success"></i>
         <span>Manage Invoices</span>
       </a>
       <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="alerts.html">Proforma Invoice</a>
-          <a class="collapse-item" href="buttons.html">Unpaid Invoice</a>
-          <a class="collapse-item" href="dropdowns.html">Paid Invoice</a>
-          <a class="collapse-item" href="modals.html">Cancelled Invoice</a>
-          <a class="collapse-item" href="popovers.html">Customer Unpaid Invoices</a>
-          <a class="collapse-item" href="progress-bar.html">All Invoice</a>
+        <div class="py-2 collapse-inner rounded">
+         
+          <a class="collapse-item" href="{% url 'storeApp:manageInvoice' %}" >Invoice Panel</a>
+          <a class="collapse-item" href="">Proforma Invoice</a>
+          <a class="collapse-item" href="">Unpaid Invoice</a>
+          <a class="collapse-item" href="">Paid Invoice</a>
+          <a class="collapse-item" href="">Cancelled Invoice</a>
+          <a class="collapse-item" href="">Customer Unpaid Invoices</a>
+          <a class="collapse-item" href="">All Invoice</a>
         </div>
       </div>
     </li>
     <hr class="sidebar-divider">
+    {% endif %}
     <!-- {% comment %} invoice section {% endcomment %}
     <li class="nav-item active">
       <a class="nav-link" href="{% url 'storeApp:salesPage' %}">
@@ -342,6 +349,10 @@
         allowClear: true
       });      
       $('#select2SinglePlaceholderproduct12').select2({
+        placeholder: "Select product",
+        allowClear: true
+      });      
+      $('#select2SinglePlaceholderproduct12addField').select2({
         placeholder: "Select product",
         allowClear: true
       });      

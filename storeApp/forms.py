@@ -4,6 +4,9 @@ from .models import *
 from django.forms import ModelForm
 from django import forms 
 
+# from django.forms import formset_factory
+# from .models import SupplyChainStops
+
 from django.contrib.auth.forms import UserCreationForm
 class ProductTableForm(forms.Form):
   class meta:
@@ -82,6 +85,20 @@ class productSoldInCashForm(ModelForm):
       'created_at',
       'updated_at'
     ]
+    
+#invoices
+class ManageInvoiceForm(ModelForm):
+  class Meta:
+    model = ManageInvoice
+    fields = '__all__'
+    exclude =[
+      'supervisor',
+      'date_product_sold',
+      'total_product_cost',
+      'amount_to_sold',
+      'created_at',
+      'updated_at'
+    ]
 
 # EmergenceInformations
 class EmergenceInformationsForm(ModelForm):
@@ -137,3 +154,14 @@ class customerDetailsForm(ModelForm):
       'created_at',
       'updated_at'
     ]
+    
+    
+    
+
+# Here we are creating a formset to handle the maniplations of our form to
+# have extra field by using the extra parameter to formset_factory
+# and also we can add a delete function to allow users to be able to delete 
+
+# Formset = formset_factory(SupplyChainStops, fields=[' stop_name',' stop_longitude','stop_latitude'], extra=4, can_delete=True)
+# I have set the formset to give us an extra field of four and enable users 
+# to delete 

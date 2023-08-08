@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 # from twilio.rest import Client
 import os
 from  django.utils.timezone import now
-
+from django.contrib.postgres.fields import ArrayField
 # Create your models here.
 class CustomerDetails(models.Model):
     id = models.UUIDField(
@@ -193,6 +193,39 @@ class productSoldInCash(models.Model):
 
     def __str__(self):
         return str(self.product_name)
+    
+class ManageInvoice(models.Model):
+    INVOICE_TYPE = (
+        ('', 'Select type of Invoices'),
+        ('profoma', 'Profoma'),
+        ('unPaidInvoice', 'unPaidInvoice'),
+        ('paidInvoice', 'paidInvoice'),
+        ('cancelledInvoice', 'cancelledInvoice'),
+    )
+    id = models.UUIDField(
+        primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    customer_full_name = models.ForeignKey(CustomerDetails, on_delete=models.CASCADE, blank=True, null=True)
+    product_name = models.ForeignKey(
+        ProductTable, on_delete=models.SET_NULL, null=True)
+    number_of_product_nedeed = models.IntegerField()
+    date_product_sold = models.DateTimeField(auto_now=True)
+    total_product_cost = models.PositiveIntegerField(null=True, blank=True)
+    supervisor = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True)
+    shop_name = models.ForeignKey(ShopsTable, on_delete=models.CASCADE, null=True, blank=True)
+    invoice_type = models.CharField(max_length= 100, choices = INVOICE_TYPE,null=True, blank=True)
+    
+    date_for_issues_invoice = models.DateField(("Date"), default=date.today)
+    # never change once the object is created
+    created_at = models.DateTimeField(auto_now_add=True)
+    # always change when object is updated
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name_plural = 'All Invoices'
+
+    def __str__(self):
+        return str(self.product_name) 
 
 
 # EmergenceInformations
@@ -279,3 +312,36 @@ class CompanyStockOrAssets(models.Model):
 
     def __str__(self):
         return str(self.stock_name)
+
+# class ManageInvoice(models.Model):
+#     INVOICE_TYPE = (
+#         ('', 'Select type of Invoices'),
+#         ('profoma', 'Profoma'),
+#         ('unPaidInvoice', 'unPaidInvoice'),
+#         ('paidInvoice', 'paidInvoice'),
+#         ('cancelledInvoice', 'cancelledInvoice'),
+#     )
+#     id = models.UUIDField(
+#         primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+#     customer_full_name = models.ForeignKey(CustomerDetails, on_delete=models.CASCADE, blank=True, null=True)
+#     product_name = models.ForeignKey(
+#         ProductTable, on_delete=models.SET_NULL, null=True)
+#     number_of_product_nedeed = models.IntegerField()
+#     date_product_sold = models.DateTimeField(auto_now=True)
+#     total_product_cost = models.PositiveIntegerField(null=True, blank=True)
+#     supervisor = models.ForeignKey(
+#         User, on_delete=models.SET_NULL, null=True, blank=True)
+#     shop_name = models.ForeignKey(ShopsTable, on_delete=models.CASCADE, null=True, blank=True)
+#     invoice_type = models.CharField(max_length= 100, choices = INVOICE_TYPE,null=True, blank=True)
+    
+#     date_for_issues_invoice = models.DateField(("Date"), default=date.today)
+#     # never change once the object is created
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     # always change when object is updated
+#     updated_at = models.DateTimeField(auto_now=True)
+
+#     class Meta:
+#         verbose_name_plural = 'All Invoices'
+
+#     def __str__(self):
+#         return str(self.product_name) 

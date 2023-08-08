@@ -1,0 +1,102 @@
+{% extends '../store/base.html' %}
+{% load static %}
+{% block title %} Sales{% endblock %}
+{% block content %}
+
+
+<div class="sales_status_bar">
+   <div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Invoice Reports</h1>
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="./">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Invoices</li>
+                </ol>
+              </div>
+            <hr class="sidebar-divider">
+
+        </div>
+    </div>
+   </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="inner_section p-3">
+                            <h4 class="text-info font-weight-bold ">Profoma Invoices</h4>
+                            <p>View all profoma invoices that have not been approved into commercial invoices</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="inner_section p-3">
+                            <h4 class="text-info font-weight-bold ">Unpaid Invoices</h4>
+                            <p>View all Invoices that have been approved but fully or partially unpaid (With outstanding balance) </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="inner_section p-3">
+                            <h4 class="text-info font-weight-bold ">Paid Invoices</h4>
+                            <p>View all Invoices that customer already paid in full with no outstanding payments </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+
+
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="inner_section p-3">
+                            <h4 class="text-info font-weight-bold ">Cancelled Invoices</h4>
+                            <p>View all  invoices that have  been voided and no longeer valid</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="inner_section px-3">
+                            <h4 class="text-info font-weight-bold ">Customer Unpaid Invoices</h4>
+                            <p>Unpaid or partially Paid Invoices aggregated by each customer </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="inner_section p-3">
+                            <h4 class="text-info font-weight-bold ">All Invoices</h4>
+                            <p>View all Invoices Draft, Unpaid, Paid, and Cancelled </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+{% endblock %}
