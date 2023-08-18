@@ -1377,12 +1377,197 @@ def deactivateUserAuthorizations(request, id):
 
 
 def manageInvoice(request):
-  get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
-  template_name = 'manageInvoice/manageInvoice.html'
-  context = {
-    "get_all_user_authorizations":get_all_user_authorizations,
-  }
   
-  return render(request, template_name, context)
+  if request.method == "POST":
+    
+    get_product_sold = request.POST.getlist('product_name[]')
+    number_of_product_sold = len(get_product_sold)
+    
+    
+    form = productSoldInCashForm(request.POST)
+    if (number_of_product_sold == 1):
+      
+      
+      get_product_sold = get_product_sold[0]
+      print('::::::::::::::::::',get_product_sold )
+      # if (len (get_product_sold) == 1):
+      #   data = productSoldInCashForm
+      # get_customer_full_name = request.POST.get('customer_full_name')
+      get_customer_full_name = request.POST.getlist('customer_full_name[]')
+      get_number_of_product_nedeed = request.POST.getlist('number_of_product_nedeed[]')
+      get_advance_paid = request.POST.get('advance_paid[]')
+      get_advance_paid= int(get_advance_paid)
+      get_number_of_product_nedeed = int(get_number_of_product_nedeed[0])
+      get_shop_name = request.POST.get('shop_name[]')
+      get_date_for_issues_invoice = request.POST.get('date_for_issues_invoice[]')
+      print("PRODUCT SOLD @", get_date_for_issues_invoice[0])
+      get_product_from_the_store_in_database = ProductTable.objects.get(id =get_product_sold )
+      print('information obtianed is ', get_product_from_the_store_in_database)
+      get_number_available = int(get_product_from_the_store_in_database.available)
+      get_sales_price = int(get_product_from_the_store_in_database.sales_price)
+      
+      total_cost = get_number_of_product_nedeed * get_sales_price
+      
+      amount_remain_to_be_paid = total_cost - get_advance_paid
+      
+      store_remain = get_number_available - get_number_of_product_nedeed
+      
+      get_current_user_login = User.objects.get(id =request.user.id )
+      get_customer_full_name = get_customer_full_name[0]
+      get_customer_information = CustomerDetails.objects.get( id =get_customer_full_name )
+      get_shop_information = ShopsTable.objects.get( id =get_shop_name )
+      get_date_for_issues_invoice = get_date_for_issues_invoice
+      print("Date for issues the invoice is ", get_date_for_issues_invoice)
+      product_sold_in_cash_object = ManageInvoice(
+        product_name = get_product_from_the_store_in_database,
+        customer_full_name = get_customer_information,
+        number_of_product_nedeed = get_number_of_product_nedeed,
+        
+        total_product_cost= total_cost,
+        advance_paid = get_advance_paid,
+        amount_remain_to_be_paid = amount_remain_to_be_paid,
+                
+        supervisor = get_current_user_login,
+        
+        shop_name = get_shop_information,
+        
+      
+        date_for_issues_invoice = get_date_for_issues_invoice
+        
+      )
+      
+      product_sold_in_cash_object.save()
+      # ProductTable.objects.filter(id = get_product_sold ).update(
+      #   available =store_remain
+      # )
+    
+      messages.success(request, "Invoice Succesfully Saved")
+      return redirect ("storeApp:salesPage")
+    else:
+      get_form_data = json.loads(request.POST.get('formData'))
+      
+      for data in get_form_data:
+        print("The customer full name is ", data['customer_full_name'])
+        print("The List of Product is ", data['product_name'])
+        print("The Numbers of Product nedded is ", data['number_of_product_nedeed'])
+        print("The Shop Name is  ", data['shop_name'])
+        print("The Date for issues The Invoices is  ", data['date_for_issues_invoice'])
+        print("The advance_paid ", data['advance_paid'])
+        # for multiple form data submited
+      
+        customer_full_name = data['customer_full_name']
+        get_customer_information = CustomerDetails.objects.get( id =customer_full_name )
+        
+        product_name = data['product_name']
+        number_to_loop = len(product_name)
+        print("The total number of product sent is ", number_to_loop)
+        print("The total number of product sent is ", product_name)
+        shop_name = data['shop_name']
+        number_of_product_nedeed = data['number_of_product_nedeed']
+        get_advance_paid = data['advance_paid']
+        date_for_issues_invoice = data['date_for_issues_invoice']
+        get_current_user_login = User.objects.get(id =request.user.id )
+        get_shop_information = ShopsTable.objects.get( id =shop_name )
+        for item  in range(number_to_loop):
+          print("=========", item, product_name[item])
+          get_product_from_the_store_in_database = ProductTable.objects.get(id =product_name[item] )
+          get_number_available = int(get_product_from_the_store_in_database.available)
+          get_sales_price = int(get_product_from_the_store_in_database.sales_price)
+          total_cost = int(number_of_product_nedeed[item]) * get_sales_price
+          # amount_remain_to_be_paid = total_cost - int(get_advance_paid)
+          
+          
+          store_remain = get_number_available - int(number_of_product_nedeed[item])
+          
+          product_sold_in_cash_object = ManageInvoice.objects.create(
+          product_name = get_product_from_the_store_in_database,
+          customer_full_name = get_customer_information,
+          number_of_product_nedeed = number_of_product_nedeed[item],
+          
+          total_product_cost= total_cost,
+          # advance_paid = get_advance_paid,
+          # amount_remain_to_be_paid = amount_remain_to_be_paid,
+          
+          supervisor = get_current_user_login,
+          
+          shop_name = get_shop_information,
+          
+      
+          date_for_issues_invoice = date_for_issues_invoice
+          
+          )
+      
+          # product_sold_in_cash_object.save()   
+          # ProductTable.objects.filter(id = product_name[item] ).update(
+          #   available =store_remain
+          # ) 
+          messages.success(request, "Invoice Succesfully Saved")
+      
+      messages.success(request, "Invoice Succesfully Saved")
+      return redirect ("storeApp:salesPage")
+    return redirect ("storeApp:salesPage")
+  else:
+    get_all_employee = EmployeeDetailInformations.objects.all()
+    get_all_products = ProductTable.objects.all().order_by('-id')
+    get_all_shops = ShopsTable.objects.all().order_by('-updated_at')
+    get_all_product_sold = productSoldInCash.objects.all().order_by('-updated_at')
+    get_all_product_in_store = ProductTable.objects.all().order_by('id')
+    
+    today_date = datetime.datetime.today().date()
+    
+    
+    # today_date = datetime.datetime.now()
+    print( "--------------------",today_date)
+    
+    get_all_today_orders = CustomersOrders.objects.filter(delivery_date_expected=today_date )
+    number_of_order_received_tody=get_all_today_orders.count()
+    # today sales start here
+    get_all_product_sold_today = productSoldInCash.objects.filter(date_for_issues_invoice = today_date)
+    # print(get_all_product_sold_today.total_product_cost)
+    today_sales_sum = 0
+    today_emergence_cost_sum = 0
+    # get_emergence_info
+    get_emergence_info = EmergenceInformations.objects.filter(spending_date = today_date)
+    if get_all_product_sold_today.count():
+      number_of_poduct_sold = get_all_product_sold_today.count()
+      print(number_of_poduct_sold)
+      
+      
+      for product in get_all_product_sold_today:
+        
+        today_sales_sum +=int(product.total_product_cost)
+      
+      
+      
+      for emergence in get_emergence_info:
+        today_emergence_cost_sum +=emergence.spending_cost
+
+    amount_remain_after_deducting_emergence_cost = today_sales_sum - today_emergence_cost_sum
+    x = datetime.datetime.now()
+    today = x.strftime("%x")
+    
+    get_all_customers = CustomerDetails.objects.all()
+    get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
+    template_name = 'manageInvoice/manageInvoice.html'
+    context = {
+      "get_all_user_authorizations":get_all_user_authorizations,
+      # 'form':form,
+      'today':today,
+      'get_all_products':get_all_products,
+      'get_all_shops':get_all_shops,
+      'get_all_employee':get_all_employee,
+      'get_all_product_sold':get_all_product_sold,
+      'get_all_product_in_store':get_all_product_in_store,
+      'get_all_product_sold_today':get_all_product_sold_today.first,
+      'today_sales_sum':today_sales_sum,
+      'get_emergence_info':get_emergence_info,
+      'today_emergence_cost_sum':today_emergence_cost_sum,
+      'amount_remain_after_deducting_emergence_cost':amount_remain_after_deducting_emergence_cost,
+      'number_of_order_received_tody':number_of_order_received_tody,
+      'get_all_user_authorizations':get_all_user_authorizations,
+      'get_all_customers':get_all_customers
+    }
+    
+    return render(request, template_name, context)
 
 

@@ -4,6 +4,7 @@
 {% block content %}
 
 
+
 <div class="sales_status_bar">
    <div class="container">
 
@@ -22,6 +23,30 @@
     </div>
    </div>
 
+
+   <div class="container-fluid ">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 mb-4">
+        <div class="card">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            {% comment %} <h6 class="m-0 font-weight-bold text-dark">My Sales</h6> {% endcomment %}
+            <button type="button" class="btn  btn-outline-dark" data-toggle="modal" data-target="#customerModal"
+            id="#customerModal"><i class="fas fa-plus p-1"></i>New Customer</button>
+            {% comment %} <button type="button" class="btn  btn-outline-dark" data-toggle="modal" data-target="#orderModal"
+            id="#orderModal"><i class="fas fa-plus p-1"></i>New Order</button>
+            <button type="button" class="btn  btn-outline-dark" data-toggle="modal" data-target="#emergenceModal"
+            id="#emergenceModal"><i class="fas fa-plus p-1"></i>Emergence</button> {% endcomment %}
+            <button type="button" class="btn  btn-outline-dark" data-toggle="modal" data-target="#salesModal"
+            id="#salesModal"><i class="fas fa-plus p-1"></i>New Invoice</button>
+          </div>
+
+        </div>
+    </div>
+</div>
+</div>
+
+{% include './orderModal.html' %}
+{% include './customerModal.html' %}
     <div class="container">
         <div class="row">
             <div class="col-md-4">

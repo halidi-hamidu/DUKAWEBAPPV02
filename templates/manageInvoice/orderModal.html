@@ -1,0 +1,384 @@
+<!-- The Modal -->
+<div class="modal  fade w3-animate-zoom" id="salesModal">
+    <div class="modal-dialog  modal-dialog-centered">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"><strong>sell product from store</strong></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="card mb-4">
+            <!-- <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-primary">Form Basic</h6>
+            </div> -->
+            <div class="card-body">
+              <form method="post" action="" id="myForm">
+                {% csrf_token %}
+                <div class="row">
+  
+                  <div class="col-md-12">
+                    {% if get_all_customers %}
+                    <label for="ProductName">Customer Full name</label>
+                    <select type="select" name= "customer_full_name" class="form-control"  id="customerModalId" style="width: 100%;padding:10px">
+                      <option>Select Customer </option>
+                      {% for customer in get_all_customers  %}
+                      <option value="{{ customer.id }}"> {{ customer.customer_full_name }} </option>
+                      {% endfor %}
+                    </select>
+                    {% endif %}
+                  </div>
+                 </div>
+  
+  
+                
+                    <div id="form_wrapper" class="row">
+                      <div class="col-md-12" >
+                        {% if get_all_products %}
+                        <div class="form-group" id="formfield">
+                          <label for="select2SinglePlaceholder" class="d-block"> Select product</label>
+                          <select class="select2-single-placeholder-product form-control" name="product_name" id="select2SinglePlaceholderproduct12" style="width: 100%;padding:10px">
+                            <option value="not selected">Select</option>
+                            {% for products in get_all_products %}
+                            <option value="{{ products.id }}">{{products}}</option>
+                            {% endfor %}
+                          </select>
+                         
+                        </div>
+                        {% endif %}
+                        
+                        
+                      </div>
+                    
+      
+                      <div class="col-md-12 my-3">
+                       <div class="form-group">
+                         <label for="quantity" >Number of products nedeed</label>
+                         <input type="number" name="number_of_product_nedeed" class="form-control">
+                       </div>
+                       </div>
+                    </div>
+                   
+
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="quantity" >Amount paid As Advance</label>
+                          <input type="number" name="advance_paid" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+  
+                  <div class="row">
+                    <div class="col-md-12 my-3">
+                      <!-- <div class="form-group">
+                        <label for="Supplier" >today  date</label>
+                        <input type="date" name="date_product_sold" class="form-control">
+                      </div> -->
+                     
+                       {% if get_all_shops %}
+                      <div class="form-group">
+                        <label for="select2SinglePlaceholder" class="d-block"> select Shop</label>
+                        <select class="select2-single-placeholder-duka form-control" name="shop_name" id="select2SinglePlaceholderduka12" style="width: 100%;padding:10px">
+                          <option value="not selected">Select</option>
+                          {% for shop in get_all_shops %}
+                          <option value="{{shop.id}}">{{shop}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      {% endif %}
+                    </div>
+                  </div>
+            
+                
+              
+                <div class="row">
+                  <div class="col-md-12 my-0">
+                    <label for="Supplier" >Pick date To issue Invoice</label>
+                    <input type="date" name="date_for_issues_invoice" class="form-control">
+                  
+                  </div>
+                </div>
+  
+                
+                <button  class="btn btn-primary mt-1" name="sell_product" value="sell_product" id="sell_product">sell product</button>
+                <button type="button" class="btn btn-primary mt-1" name="add_field" value="add_field" id="add_field">Add Field</button>
+               </form>
+            </div>
+          </div>
+        </div>
+  
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  <script type="text/javascript">
+  $(document).ready( function (){
+    var x = 0;
+    let counter = 0;
+   
+    $('#add_field').click(function (e){
+      e.preventDefault();
+      counter ++,
+      console.log('Button add field clicked ');
+      appendRow();
+      x++;
+    });
+    $('#sell_product').click(function (e){
+      e.preventDefault();
+      get_product = document.getElementsByTagName('form')
+      console.log(get_product)
+      
+      
+    });
+  
+    $('#form_wrapper').on('click', '.deleteBtn', function(e){
+      e.preventDefault();
+      var id = e.currentTarget.id;
+      $('div[id='+id+']').remove();
+      x--;
+  
+      if (x === 0){
+        console.log("==field deleted======");
+      }
+  
+    });
+    $('#sell_product').click(function(e){
+      e.preventDefault();
+      console.log('Save button clicked');
+      var formData = $('#myForm').serializeObject();
+      var obj;
+  
+      var customer_full_name_array = [];
+      var product_name_array = [];
+      var number_of_product_nedeed_array = [];
+      var advance_paid = [];
+      var shop_name_array = [];
+      var date_for_issues_invoice_array = [];
+  
+      var fData = []
+      //var button_status = document.getElementById('#sell_product').values;
+  
+      console.log('Data is ',formData )
+      
+  
+      if (Array.isArray(formData.product_name)){
+        console.log('There are More than One Product Added', formData.product_name.length);
+        fData.push(formData);
+        //window.location.reload();
+        console.log("the form Data is", fData)
+        obj = {};
+        //var formData =[];
+        //for (var i =0; i< formData.product_name.length; i++){
+        //  obj.customer_full_name = formData.customer_full_name[i];
+        //  obj.product_name = formData.product_name[i];
+        //  obj.number_of_product_nedeed = formData.number_of_product_nedeed[i];
+        //  obj.shop_name = formData.shop_name[i];
+        //  obj.date_for_issues_invoice = formData.date_for_issues_invoice[i];
+  //
+  //
+        //  customer_full_name_array.push(formData.customer_full_name[i]);
+        //  product_name_array.push(formData.product_name[i]);
+        //  number_of_product_nedeed_array.push(formData.number_of_product_nedeed[i]);
+        //  shop_name_array.push(formData.shop_name[i]);
+        //  date_for_issues_invoice_array.push(formData.date_for_issues_invoice[i]);
+    
+        //  console.log("The products ......... are ", obj)
+  
+        //};
+  
+        //  console.log("The product are ", product_name_array);
+        //  console.log("The customers  are ", customer_full_name_array);
+        //  console.log("The prodiuct nedded are ", number_of_product_nedeed_array);
+        //  console.log("The shop are ", shop_name_array);
+        //  console.log("The Date for Invoices are ", date_for_issues_invoice_array);
+      
+        
+        $.ajax({
+          type: 'POST',
+          url:"{% url 'storeApp:salesPage' %}",
+          headers: {'X-CSRFToken': '{{ csrf_token }}'},
+          //dataType : "json",
+          data: {
+  
+                   'formData':JSON.stringify(fData),
+                   
+                  //'customer_full_name':customer_full_name_array, 
+                  //'product_name': product_name_array,
+                  //'number_of_product_nedeed':number_of_product_nedeed_array,
+                  //'shop_name':shop_name_array,
+                  //'date_for_issues_invoice':date_for_issues_invoice_array,
+                  //'button_status':button_status, 
+  
+          },
+       
+            success : function(data){
+            x = data.status; 
+            $('#myForm')[0].reset();
+            location.reload(true);
+            //
+            alert("data sent")
+            var m = "Products Succesfully Sold";
+            swal({
+              position: 'top-right',
+              icon: 'success',
+              title:"success",
+              text:m,
+              showConfirmButton: true,
+            });
+            
+            location.reload(true);
+        }
+  
+        
+        
+        
+        
+        });
+        //window.location.reload(true);
+        
+       
+      }else{
+        console.log("There is One product added")
+        obj = {}
+        obj.customer_full_name = formData.customer_full_name;
+        obj.product_name = formData.product_name;
+        obj.number_of_product_nedeed = formData.number_of_product_nedeed;
+        obj.advance_paid = formData.advance_paid;
+        obj.shop_name = formData.shop_name;
+        obj.date_for_issues_invoice = formData.date_for_issues_invoice;
+        //obj.button_status = formData.sell_product;
+  
+        customer_full_name_array.push(formData.customer_full_name);
+        product_name_array.push(formData.product_name);
+        number_of_product_nedeed_array.push(formData.number_of_product_nedeed);
+        advance_paid.push(formData.advance_paid);
+        shop_name_array.push(formData.shop_name);
+        date_for_issues_invoice_array.push(formData.date_for_issues_invoice);
+  
+        console.log("Customer name ",customer_full_name_array );
+        console.log("Product name ",product_name_array );
+        console.log("Number of Product nedeed ",number_of_product_nedeed_array );
+        console.log("Advance Paid ",advance_paid );
+        console.log("Shop name ",shop_name_array );
+        console.log("Date for Issues the Invoices ",date_for_issues_invoice_array );
+        //console.log("Date for Issues the Invoices ",shop_name_array );
+  
+        $.ajax({
+          type: 'POST',
+          url:"{% url 'storeApp:manageInvoice' %}",
+          headers: {'X-CSRFToken': '{{ csrf_token }}'},
+          data: {
+                  'customer_full_name':customer_full_name_array, 
+                  'product_name': product_name_array,
+                  'number_of_product_nedeed':number_of_product_nedeed_array,
+                  'advance_paid':advance_paid,
+                  'shop_name':shop_name_array,
+                  'date_for_issues_invoice':date_for_issues_invoice_array,
+                  //'button_status':button_status, 
+  
+          },
+          success : function(data){
+            x = data.status;
+            $('#myForm')[0].reset();
+            location.reload(true)
+            var m = "Product Succesfully Sold";
+            swal({
+              position: 'top-right',
+              icon: 'success',
+              title:"success",
+              text:m,
+              showConfirmButton: true,
+            });
+            
+          
+        }
+        });
+      }
+  
+  
+    })
+    function appendRow(){
+    
+      $('#form_wrapper').append(
+       
+      '<div id ="'+x+'" ' +
+        '<div id ="'+x+'"  class="col-md-12" >' +
+          '{% if get_all_products %}' +
+         '<div id ="'+x+'"  class="form-group" id="formfield">' +
+            '<label id ="'+x+'"  for="select2SinglePlaceholder" class="d-block"> Select product</label>' +
+            '<select id ="'+x+'"  class="select2-single-placeholder-product form-control" name="product_name" id="product_name" style="width: 100%;padding:10px">' +
+              '<option id ="'+x+'"  value="not selected">Select</option>' +
+              '{% for products in get_all_products %}' +
+              '<option id ="'+x+'"  value="{{ products.id }}">{{products}}</option>' +
+              '{% endfor %}' +
+            '</select id ="'+x+'" >' +
+           
+          '</div id ="'+x+'" >' +
+          '{% endif %}' +
+      
+          
+          
+       ' </div id ="'+x+'" >' +
+      
+    
+        '<div id ="'+x+'"  class="col-md-12 my-3">'+
+        ' <div id ="'+x+'"  class="form-group">'+
+           '<label id ="'+x+'"  for="quantity" >Number of products nedeed</label>'+
+           '<input id ="'+x+'"  type="number" name="number_of_product_nedeed" class="form-control">'+
+         '</div id ="'+x+'" >'+
+         '<button class="btn btn-outline-danger deleteBtn" id ="'+x+'" > Delete Field</button>' +
+         '</div id ="'+x+'" >' +
+         
+        '</div id ="'+x+'" >' 
+        
+       
+  
+      );
+      //$("#product_name"counter).select2();
+         
+         
+    }
+  
+    $.fn.serializeObject = function(asString){
+      var o = {}
+      var a = this.serializeArray();
+      $.each(a, function(){
+        if ($('#' + this.name).hasClass('date')){
+          this.value = new Date (this.value).setHours(12);
+        }
+  
+        if (o[this.name] !== undefined ){
+          if (!o[this.name].push){
+            o[this.name] = [o[this.name]];
+  
+           }
+  
+           o[this.name].push(this.value ||  '');
+        }else{
+          o[this.name] = this.value || '';
+        }
+      });
+      if (asString){
+        return JSON.stringify(o);
+      }
+      return o;
+    };
+  });
+  
+  
+  </script>
+  
+  
+  
