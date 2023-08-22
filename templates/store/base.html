@@ -131,12 +131,12 @@
         <div class="py-2 collapse-inner rounded">
          
           <a class="collapse-item" href="{% url 'storeApp:manageInvoice' %}" >Invoice Panel</a>
-          <a class="collapse-item" href="">Proforma Invoice</a>
-          <a class="collapse-item" href="">Unpaid Invoice</a>
-          <a class="collapse-item" href="">Paid Invoice</a>
-          <a class="collapse-item" href="">Cancelled Invoice</a>
+          <a class="collapse-item" href="{% url 'storeApp:profomaInvoice' %}">Proforma Invoices</a>
+          <a class="collapse-item" href="{% url 'storeApp:partialPaidInvoices' %}">paid-partial Invoices</a>
+          <a class="collapse-item" href="{% url 'storeApp:fullPaidinvoices' %}">Paid Invoices</a>
+          <a class="collapse-item" href="{% url 'storeApp:cancelledInvoice' %}">Cancelled Invoice</a>
           <a class="collapse-item" href="">Customer Unpaid Invoices</a>
-          <a class="collapse-item" href="">All Invoice</a>
+          <a class="collapse-item" href="">All Invoices</a>
         </div>
       </div>
     </li>

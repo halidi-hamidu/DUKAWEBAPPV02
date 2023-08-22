@@ -1,0 +1,31 @@
+<!-- The Modal -->
+<div class="modal  fade w3-animate-zoom" id="cancelprofomaInvoiceModal{{profoma.id}}">
+    <div class="modal-dialog  modal-dialog-top">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"><strong>Cancel Profoma Invoice</strong></h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="card mb-4">
+  
+            <div class="card-body">
+                <p>Are you sure you want to Cancel this item ?</p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">No</button>
+            <a href="{% url 'storeApp:cancelProfomaInvoice' profoma.id %}" class="btn btn-outline-primary">Yes</a>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  

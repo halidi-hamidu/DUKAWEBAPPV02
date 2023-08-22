@@ -84,6 +84,7 @@ class productSoldInCashForm(ModelForm):
       'amount_to_sold',
       'created_at',
       'updated_at'
+      'total_profit_obtained',
     ]
     
 #invoices
@@ -97,7 +98,8 @@ class ManageInvoiceForm(ModelForm):
       'total_product_cost',
       'amount_to_sold',
       'created_at',
-      'updated_at'
+      'updated_at',
+      'invoice_status'
     ]
 
 # EmergenceInformations

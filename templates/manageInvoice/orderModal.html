@@ -60,17 +60,18 @@
                          <input type="number" name="number_of_product_nedeed" class="form-control">
                        </div>
                        </div>
-                    </div>
-                   
-
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label for="quantity" >Amount paid As Advance</label>
-                          <input type="number" name="advance_paid" class="form-control">
+                    
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label for="quantity" >Amount paid As Advance</label>
+                            <input type="number" name="advance_paid" class="form-control">
+        
                         </div>
                       </div>
-                    </div>
+                      </div>
+                   
+
+                   
   
                   <div class="row">
                     <div class="col-md-12 my-3">
@@ -207,7 +208,7 @@
         
         $.ajax({
           type: 'POST',
-          url:"{% url 'storeApp:salesPage' %}",
+          url:"{% url 'storeApp:profomaInvoice' %}",
           headers: {'X-CSRFToken': '{{ csrf_token }}'},
           //dataType : "json",
           data: {
@@ -277,7 +278,7 @@
   
         $.ajax({
           type: 'POST',
-          url:"{% url 'storeApp:manageInvoice' %}",
+          url:"{% url 'storeApp:profomaInvoice' %}",
           headers: {'X-CSRFToken': '{{ csrf_token }}'},
           data: {
                   'customer_full_name':customer_full_name_array, 
@@ -337,6 +338,14 @@
         ' <div id ="'+x+'"  class="form-group">'+
            '<label id ="'+x+'"  for="quantity" >Number of products nedeed</label>'+
            '<input id ="'+x+'"  type="number" name="number_of_product_nedeed" class="form-control">'+
+         '</div id ="'+x+'" >'+
+         
+         '</div id ="'+x+'" >' +
+
+        '<div id ="'+x+'"  class="col-md-12 my-3">'+
+        ' <div id ="'+x+'"  class="form-group">'+
+           '<label id ="'+x+'"  for="quantity" >Amount paid As Advance</label>'+
+           '<input id ="'+x+'"  type="number" name="advance_paid" class="form-control">'+
          '</div id ="'+x+'" >'+
          '<button class="btn btn-outline-danger deleteBtn" id ="'+x+'" > Delete Field</button>' +
          '</div id ="'+x+'" >' +

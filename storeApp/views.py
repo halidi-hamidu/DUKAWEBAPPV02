@@ -104,6 +104,7 @@ def generatePdf(request, id ):
 
 
 
+
       
       
 def customerDetails(request):
@@ -239,79 +240,125 @@ def homepage(request):
     x = datetime.datetime.now()
     current_month = (x.strftime("%B"))
     print(current_month)
+    # for the  cash
     get_all_product_sold_this_month_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=curent_month, date_for_issues_invoice__year = curent_year)
     current_month_current_year_sales_sum = 0
+    current_month_current_year_profit_sum_from_cash = 0
     for sales in get_all_product_sold_this_month_this_year:
       current_month_current_year_sales_sum += int(sales.total_product_cost)
+      current_month_current_year_profit_sum_from_cash += int(sales.total_profit_obtained)
     
+    # for the invoices
+    get_all_product_sold_this_month_this_year_from_full_paid_invoices = ManageInvoice.objects.filter(date_for_issues_invoice__month=curent_month, date_for_issues_invoice__year = curent_year)
+    
+    current_month_current_year_profit_sum_from_full_paid_invoices = 0
+    print('%%%%%%%%%%%%%%%%  ', get_all_product_sold_this_month_this_year_from_full_paid_invoices)
+    for sales in get_all_product_sold_this_month_this_year_from_full_paid_invoices:
+      current_month_current_year_profit_sum_from_full_paid_invoices += int(sales.total_profit_obtained)
+      
+    total_profit_obtained_current_month_current_year_from_both_cash_and_full_paid_invoices = current_month_current_year_profit_sum_from_full_paid_invoices + current_month_current_year_profit_sum_from_cash 
     # 'January',
     get_all_product_sold_january_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=1, date_for_issues_invoice__year = curent_year)
+    january_profit_sum = 0
     january_sales_sum = 0
-    for sales in get_all_product_sold_january_this_year:
-      january_sales_sum += int(sales.total_product_cost)
+    for profit in get_all_product_sold_january_this_year:
+      january_profit_sum += int(profit.total_profit_obtained)
+      january_sales_sum += int(profit.total_product_cost)
     # 'February',
     get_all_product_sold_february_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=2, date_for_issues_invoice__year = curent_year)
+    february_profit_sum = 0
     february_sales_sum = 0
-    for sales in get_all_product_sold_february_this_year:
-      february_sales_sum += int(sales.total_product_cost)
+    for profit in get_all_product_sold_february_this_year:
+      february_profit_sum += int(profit.total_profit_obtained)
+      february_sales_sum += int(profit.total_product_cost)
     # 'March',
     get_all_product_sold_march_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=3, date_for_issues_invoice__year = curent_year)
+    march_profit_sum = 0
     march_sales_sum = 0
-    for sales in get_all_product_sold_march_this_year:
-      march_sales_sum += int(sales.total_product_cost)
+    for profit in get_all_product_sold_march_this_year:
+      march_profit_sum += int(profit.total_profit_obtained)
+      march_sales_sum += int(profit.total_product_cost)
     # 'April',
     get_all_product_sold_april_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=4, date_for_issues_invoice__year = curent_year)
+    april_profit_sum = 0
     april_sales_sum = 0
-    for sales in get_all_product_sold_april_this_year:
-      april_sales_sum += int(sales.total_product_cost)
+    for profit in get_all_product_sold_april_this_year:
+      april_profit_sum += int(profit.total_profit_obtained)
+      april_sales_sum += int(profit.total_product_cost)
     # 'May',
     get_all_product_sold_may_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=5, date_for_issues_invoice__year = curent_year)
+    may_profit_sum = 0
     may_sales_sum = 0
-    for sales in get_all_product_sold_may_this_year:
-      may_sales_sum += int(sales.total_product_cost)
+    for profit in get_all_product_sold_may_this_year:
+      may_profit_sum += int(profit.total_profit_obtained)
+      may_sales_sum += int(profit.total_product_cost)
     # 'June',
     get_all_product_sold_june_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=6, date_for_issues_invoice__year = curent_year)
+    june_profit_sum = 0
     june_sales_sum = 0
-    for sales in get_all_product_sold_june_this_year:
-      june_sales_sum += int(sales.total_product_cost)
+    for profit in get_all_product_sold_june_this_year:
+      june_profit_sum += int(profit.total_profit_obtained)
+      june_sales_sum += int(profit.total_product_cost)
     # 'July',
     get_all_product_sold_july_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=7, date_for_issues_invoice__year = curent_year)
+    july_profit_sum = 0
     july_sales_sum = 0
-    for sales in get_all_product_sold_july_this_year:
-      july_sales_sum += int(sales.total_product_cost)
+    for profit in get_all_product_sold_july_this_year:
+      july_profit_sum += int(profit.total_profit_obtained)
+      july_sales_sum += int(profit.total_product_cost)
     # 'August',
     get_all_product_sold_august_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=8, date_for_issues_invoice__year = curent_year)
+    august_profit_sum = 0
     august_sales_sum = 0
-    for sales in get_all_product_sold_august_this_year:
-      august_sales_sum += int(sales.total_product_cost)
+    for profit in get_all_product_sold_august_this_year:
+      august_profit_sum += int(profit.total_profit_obtained)
+      august_sales_sum += int(profit.total_product_cost)
     # 'September',
     get_all_product_sold_september_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=9, date_for_issues_invoice__year = curent_year)
+    september_profit_sum = 0
     september_sales_sum = 0
-    for sales in get_all_product_sold_september_this_year:
-      september_sales_sum += int(sales.total_product_cost)
+    for profit in get_all_product_sold_september_this_year:
+      september_profit_sum += int(profit.total_profit_obtained)
+      september_sales_sum += int(profit.total_product_cost)
     # 'October',
     get_all_product_sold_october_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=10, date_for_issues_invoice__year = curent_year)
+    october_profit_sum = 0
     october_sales_sum = 0
-    for sales in get_all_product_sold_october_this_year:
-      october_sales_sum += int(sales.total_product_cost)
+    for profit in get_all_product_sold_october_this_year:
+      october_profit_sum += int(profit.total_profit_obtained)
+      october_sales_sum += int(profit.total_product_cost)
     # 'November',
     get_all_product_sold_november_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=11, date_for_issues_invoice__year = curent_year)
+    november_profit_sum = 0
     november_sales_sum = 0
-    for sales in get_all_product_sold_november_this_year:
-      november_sales_sum += int(sales.total_product_cost)
+    for profit in get_all_product_sold_november_this_year:
+      november_profit_sum += int(profit.total_profit_obtained)
+      november_sales_sum += int(profit.total_product_cost)
     # 'December'
     get_all_product_sold_december_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=12, date_for_issues_invoice__year = curent_year)
+    december_profit_sum = 0
     december_sales_sum = 0
-    for sales in get_all_product_sold_december_this_year:
-      december_sales_sum += int(sales.total_product_cost)
+    for profit in get_all_product_sold_december_this_year:
+      december_profit_sum += int(profit.total_profit_obtained)
+      december_sales_sum += int(profit.total_product_cost)
 
     # curent_year_sales
     get_all_product_sold_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__year = curent_year)
+    get_all_partial_invoices_this_year = ManageInvoice.objects.filter(date_for_issues_invoice__year = curent_year, invoice_status = 'PartialPaid' )
+    get_all_full_paid_invoices_this_year = ManageInvoice.objects.filter(date_for_issues_invoice__year = curent_year, invoice_status = 'FullPaid' )
     current_year_sales_sum = 0
+    current_year_partial_sales_sum_form_invoices = 0
+    current_year_full_paid_sales_sum_form_invoices = 0
     current_year = (x.strftime("%Y"))
 
     for sales in get_all_product_sold_this_year:
       current_year_sales_sum += int(sales.total_product_cost)
+      
+    for invoices in get_all_partial_invoices_this_year:
+      current_year_partial_sales_sum_form_invoices += int(invoices.total_product_cost)
+      
+    for invoices in get_all_full_paid_invoices_this_year:
+      current_year_full_paid_sales_sum_form_invoices += int(invoices.total_product_cost)
     
     today_emergence_cost_sum = 0
     # get_emergence_info
@@ -333,21 +380,43 @@ def homepage(request):
     print(all_product)
     get_all_product_sold = ProductAndSupplierAndReceiverTable.objects.all().order_by('-updated_at')
     print("******************", get_all_product_sold_august_this_year)
+    count_all_inprogress_invoices = ManageInvoice.objects.filter(invoice_status ='Inprogress').count()
+    count_all_partial_paid_invoices = ManageInvoice.objects.filter(invoice_status ='PartialPaid').count()
+    count_all_full_paid_invoices = ManageInvoice.objects.filter(invoice_status ='FullPaid').count()
+    count_all_cancelled_invoices = ManageInvoice.objects.filter(invoice_status ='Cancelled').count()
     template_name = 'store/homePage.html'
     context = {
       'get_all_user_authorizations':get_all_user_authorizations,
       'today_sales_sum':today_sales_sum,
       'current_month_current_year_sales_sum':current_month_current_year_sales_sum,
+      'total_profit_obtained_current_month_current_year_from_both_cash_and_full_paid_invoices':total_profit_obtained_current_month_current_year_from_both_cash_and_full_paid_invoices,
       'current_year_sales_sum':current_year_sales_sum,
+      'current_year_partial_sales_sum_form_invoices':current_year_partial_sales_sum_form_invoices,
+      'current_year_full_paid_sales_sum_form_invoices':current_year_full_paid_sales_sum_form_invoices,
       'current_month':current_month,
       'current_year':current_year,
       'today':today,
       'today_emergence_cost_sum':today_emergence_cost_sum,
       'get_all_products':get_all_products,
       'all_product':all_product,
+      # profits
+      'january_profit_sum':january_profit_sum,
+      'february_profit_sum':february_profit_sum,
+      'march_profit_sum':march_profit_sum,
+      'april_profit_sum': april_profit_sum,
+      'may_profit_sum' :may_profit_sum, 
+      'june_profit_sum' :june_profit_sum, 
+      'july_profit_sum' :july_profit_sum, 
+      'august_profit_sum' :august_profit_sum, 
+      'september_profit_sum': september_profit_sum, 
+      'october_profit_sum': october_profit_sum, 
+      'november_profit_sum' :november_profit_sum, 
+      'december_profit_sum': december_profit_sum,
+      #  sales
       'january_sales_sum':january_sales_sum,
       'february_sales_sum':february_sales_sum,
       'march_sales_sum':march_sales_sum,
+      'get_all_product_sold':get_all_product_sold,
       'april_sales_sum': april_sales_sum,
       'may_sales_sum' :may_sales_sum, 
       'june_sales_sum' :june_sales_sum, 
@@ -357,7 +426,11 @@ def homepage(request):
       'october_sales_sum': october_sales_sum, 
       'november_sales_sum' :november_sales_sum, 
       'december_sales_sum': december_sales_sum,
-      'get_all_product_sold':get_all_product_sold
+      # invoices status
+      'count_all_inprogress_invoices':count_all_inprogress_invoices,
+      'count_all_partial_paid_invoices':count_all_partial_paid_invoices,
+      'count_all_full_paid_invoices':count_all_full_paid_invoices,
+      'count_all_cancelled_invoices':count_all_cancelled_invoices
 
       }
     return render(request, template_name, context)
@@ -791,8 +864,10 @@ def salesPage(request):
       get_number_available = int(get_product_from_the_store_in_database.available)
       get_sales_price = int(get_product_from_the_store_in_database.sales_price)
       
+      get_purchase_price = int(get_product_from_the_store_in_database.purchase_price)
       total_cost = get_number_of_product_nedeed * get_sales_price
-      
+      total_profit_obtained=( get_sales_price -get_purchase_price ) * (get_number_of_product_nedeed)
+
       
       store_remain = get_number_available - get_number_of_product_nedeed
       
@@ -808,6 +883,7 @@ def salesPage(request):
         number_of_product_nedeed = get_number_of_product_nedeed,
         
         total_product_cost= total_cost,
+        total_profit_obtained = total_profit_obtained,
         
         supervisor = get_current_user_login,
         
@@ -826,6 +902,7 @@ def salesPage(request):
       messages.success(request, "Product Succesfully Sold")
       return redirect ("storeApp:salesPage")
     else:
+      # more than one item sold in cash 
       get_form_data = json.loads(request.POST.get('formData'))
       
       for data in get_form_data:
@@ -853,15 +930,18 @@ def salesPage(request):
           get_product_from_the_store_in_database = ProductTable.objects.get(id =product_name[item] )
           get_number_available = int(get_product_from_the_store_in_database.available)
           get_sales_price = int(get_product_from_the_store_in_database.sales_price)
+          get_purchase_price = int(get_product_from_the_store_in_database.purchase_price)
           total_cost = int(number_of_product_nedeed[item]) * get_sales_price
           store_remain = get_number_available - int(number_of_product_nedeed[item])
-          
+          get_purchase_price = int(get_product_from_the_store_in_database.purchase_price)
+          total_profit_obtained =(get_sales_price -get_purchase_price ) * int(number_of_product_nedeed[item])
           product_sold_in_cash_object = productSoldInCash.objects.create(
           product_name = get_product_from_the_store_in_database,
           customer_full_name = get_customer_information,
           number_of_product_nedeed = number_of_product_nedeed[item],
           
           total_product_cost= total_cost,
+          total_profit_obtained = total_profit_obtained,
           
           supervisor = get_current_user_login,
           
@@ -1376,13 +1456,99 @@ def deactivateUserAuthorizations(request, id):
   return redirect('storeApp:authorizationPage')
 
 
+
+def increment_invoice_number():
+    last_invoice = InvoiceNumbers.objects.all().order_by('id').last()
+    if not last_invoice:
+        return InvoiceNumbers.objects.create()
+    invoice_no = last_invoice.invoice_no
+    invoice_int = int(invoice_no.split('MAG')[-1])
+    width = 4
+    new_invoice_int = invoice_int + 1
+    formatted = (width - len(str(new_invoice_int))) * "0" + str(new_invoice_int)
+    new_invoice_no = 'MAG' + str(formatted)
+    InvoiceNumbers.objects.create(invoice_no = new_invoice_no)
+    return new_invoice_no 
+
 def manageInvoice(request):
+  
+  get_all_employee = EmployeeDetailInformations.objects.all()
+  get_all_products = ProductTable.objects.all().order_by('-id')
+  get_all_shops = ShopsTable.objects.all().order_by('-updated_at')
+  get_all_product_sold = productSoldInCash.objects.all().order_by('-updated_at')
+  get_all_product_in_store = ProductTable.objects.all().order_by('id')
+  
+  today_date = datetime.datetime.today().date()
+  
+  
+  # today_date = datetime.datetime.now()
+  print( "--------------------",today_date)
+  
+  get_all_today_orders = CustomersOrders.objects.filter(delivery_date_expected=today_date )
+  number_of_order_received_tody=get_all_today_orders.count()
+  # today sales start here
+  get_all_product_sold_today = productSoldInCash.objects.filter(date_for_issues_invoice = today_date)
+  # print(get_all_product_sold_today.total_product_cost)
+  today_sales_sum = 0
+  today_emergence_cost_sum = 0
+  # get_emergence_info
+  get_emergence_info = EmergenceInformations.objects.filter(spending_date = today_date)
+  if get_all_product_sold_today.count():
+    number_of_poduct_sold = get_all_product_sold_today.count()
+    print(number_of_poduct_sold)
+    
+    
+    for product in get_all_product_sold_today:
+      
+      today_sales_sum +=int(product.total_product_cost)
+    
+    
+    
+    for emergence in get_emergence_info:
+      today_emergence_cost_sum +=emergence.spending_cost
+
+  amount_remain_after_deducting_emergence_cost = today_sales_sum - today_emergence_cost_sum
+  x = datetime.datetime.now()
+  today = x.strftime("%x")
+  
+  get_all_customers = CustomerDetails.objects.all()
+  get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
+  template_name = 'manageInvoice/manageInvoice.html'
+  context = {
+    "get_all_user_authorizations":get_all_user_authorizations,
+    # 'form':form,
+    'today':today,
+    'get_all_products':get_all_products,
+    'get_all_shops':get_all_shops,
+    'get_all_employee':get_all_employee,
+    'get_all_product_sold':get_all_product_sold,
+    'get_all_product_in_store':get_all_product_in_store,
+    'get_all_product_sold_today':get_all_product_sold_today.first,
+    'today_sales_sum':today_sales_sum,
+    'get_emergence_info':get_emergence_info,
+    'today_emergence_cost_sum':today_emergence_cost_sum,
+    'amount_remain_after_deducting_emergence_cost':amount_remain_after_deducting_emergence_cost,
+    'number_of_order_received_tody':number_of_order_received_tody,
+    'get_all_user_authorizations':get_all_user_authorizations,
+    'get_all_customers':get_all_customers
+  }
+  
+  return render(request, template_name, context)
+    
+    
+
+
+def profomaInvoice(request):
   
   if request.method == "POST":
     
     get_product_sold = request.POST.getlist('product_name[]')
     number_of_product_sold = len(get_product_sold)
     
+    
+    invoice_number_gen =increment_invoice_number()
+    
+    print('===============>>>>>>>>', invoice_number_gen)
     
     form = productSoldInCashForm(request.POST)
     if (number_of_product_sold == 1):
@@ -1405,8 +1571,10 @@ def manageInvoice(request):
       print('information obtianed is ', get_product_from_the_store_in_database)
       get_number_available = int(get_product_from_the_store_in_database.available)
       get_sales_price = int(get_product_from_the_store_in_database.sales_price)
+      get_purchase_price = int(get_product_from_the_store_in_database.purchase_price)
       
       total_cost = get_number_of_product_nedeed * get_sales_price
+      total_profit_obtained = (get_sales_price - get_purchase_price )* get_number_of_product_nedeed
       
       amount_remain_to_be_paid = total_cost - get_advance_paid
       
@@ -1419,11 +1587,14 @@ def manageInvoice(request):
       get_date_for_issues_invoice = get_date_for_issues_invoice
       print("Date for issues the invoice is ", get_date_for_issues_invoice)
       product_sold_in_cash_object = ManageInvoice(
+        invoice_number = invoice_number_gen,
+        invoice_status = 'Inprogress',
         product_name = get_product_from_the_store_in_database,
         customer_full_name = get_customer_information,
         number_of_product_nedeed = get_number_of_product_nedeed,
         
         total_product_cost= total_cost,
+        total_profit_obtained= total_profit_obtained,
         advance_paid = get_advance_paid,
         amount_remain_to_be_paid = amount_remain_to_be_paid,
                 
@@ -1444,12 +1615,14 @@ def manageInvoice(request):
       messages.success(request, "Invoice Succesfully Saved")
       return redirect ("storeApp:salesPage")
     else:
+      print("**************Block for more than one item *********************")
       get_form_data = json.loads(request.POST.get('formData'))
       
       for data in get_form_data:
         print("The customer full name is ", data['customer_full_name'])
         print("The List of Product is ", data['product_name'])
         print("The Numbers of Product nedded is ", data['number_of_product_nedeed'])
+        print("advance_paid is  ", data['advance_paid'])
         print("The Shop Name is  ", data['shop_name'])
         print("The Date for issues The Invoices is  ", data['date_for_issues_invoice'])
         print("The advance_paid ", data['advance_paid'])
@@ -1460,7 +1633,7 @@ def manageInvoice(request):
         
         product_name = data['product_name']
         number_to_loop = len(product_name)
-        print("The total number of product sent is ", number_to_loop)
+        print("***The total number of product sent is ", number_to_loop)
         print("The total number of product sent is ", product_name)
         shop_name = data['shop_name']
         number_of_product_nedeed = data['number_of_product_nedeed']
@@ -1473,20 +1646,24 @@ def manageInvoice(request):
           get_product_from_the_store_in_database = ProductTable.objects.get(id =product_name[item] )
           get_number_available = int(get_product_from_the_store_in_database.available)
           get_sales_price = int(get_product_from_the_store_in_database.sales_price)
+          get_purchase_price = int(get_product_from_the_store_in_database.purchase_price)
           total_cost = int(number_of_product_nedeed[item]) * get_sales_price
-          # amount_remain_to_be_paid = total_cost - int(get_advance_paid)
+          total_profit_obtained = (get_sales_price - get_purchase_price) * int(number_of_product_nedeed[item])
+          amount_remain_to_be_paid = total_cost - int(get_advance_paid[item])
           
           
           store_remain = get_number_available - int(number_of_product_nedeed[item])
           
           product_sold_in_cash_object = ManageInvoice.objects.create(
+          invoice_number = invoice_number_gen,
+          invoice_status = 'Inprogress',
           product_name = get_product_from_the_store_in_database,
           customer_full_name = get_customer_information,
           number_of_product_nedeed = number_of_product_nedeed[item],
           
           total_product_cost= total_cost,
-          # advance_paid = get_advance_paid,
-          # amount_remain_to_be_paid = amount_remain_to_be_paid,
+          advance_paid = get_advance_paid[item],
+          amount_remain_to_be_paid = amount_remain_to_be_paid,
           
           supervisor = get_current_user_login,
           
@@ -1506,7 +1683,9 @@ def manageInvoice(request):
       messages.success(request, "Invoice Succesfully Saved")
       return redirect ("storeApp:salesPage")
     return redirect ("storeApp:salesPage")
+
   else:
+    
     get_all_employee = EmployeeDetailInformations.objects.all()
     get_all_products = ProductTable.objects.all().order_by('-id')
     get_all_shops = ShopsTable.objects.all().order_by('-updated_at')
@@ -1548,7 +1727,8 @@ def manageInvoice(request):
     
     get_all_customers = CustomerDetails.objects.all()
     get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
-    template_name = 'manageInvoice/manageInvoice.html'
+    get_all_profoma_invoice = ManageInvoice.objects.all().order_by('-created_at')
+    template_name = 'manageInvoice/profomaInvoice.html'
     context = {
       "get_all_user_authorizations":get_all_user_authorizations,
       # 'form':form,
@@ -1565,9 +1745,156 @@ def manageInvoice(request):
       'amount_remain_after_deducting_emergence_cost':amount_remain_after_deducting_emergence_cost,
       'number_of_order_received_tody':number_of_order_received_tody,
       'get_all_user_authorizations':get_all_user_authorizations,
-      'get_all_customers':get_all_customers
+      'get_all_customers':get_all_customers,
+      'get_all_profoma_invoice':get_all_profoma_invoice
     }
+      
+  
+    return render(request, template_name, context)
+  
+  
+  
+def generatePdfForInvoice(request, id ):
+
+  try:
+    get_logo = ShopBrandMainLogo.objects.all()[:1]
+    template_path = 'manageInvoice/profomaInPdf.html'
+    for brand in get_logo:
+      logo = brand.brand_image.path
+   
+   
+    get_profoma_for= get_object_or_404(ManageInvoice, id = id)
+    if get_profoma_for:
+      count_get_profoma_for = 1
+      
     
+  
+    customer_full_name =  get_profoma_for.customer_full_name
+    date_of_issues_invoice =  get_profoma_for.date_for_issues_invoice
+    
+    filter_list_of_product_purchased_by_customer_in__same_date = ManageInvoice.objects.filter(
+      invoice_number = get_profoma_for.invoice_number,
+      # date_for_issues_invoice = get_profoma_for.date_for_issues_invoice
+    )
+    get_subtotal = 0
+   
+    for product_sold in filter_list_of_product_purchased_by_customer_in__same_date:
+      get_subtotal += product_sold.total_product_cost
+      get_invoice_issued_by = product_sold.supervisor
+    
+    print(get_invoice_issued_by)
+    count_filter_list_of_product_purchased_by_customer_in__same_date =filter_list_of_product_purchased_by_customer_in__same_date.count()
+    print("-----", count_filter_list_of_product_purchased_by_customer_in__same_date)
+    context = {
+      'get_logo': logo,
+      'get_profoma_for':get_profoma_for,
+      'count_get_profoma_for':count_get_profoma_for,
+      'get_subtotal':get_subtotal,
+      'customer_full_name':customer_full_name,
+      'date_of_issues_invoice':date_of_issues_invoice,
+      'get_invoice_issued_by':get_invoice_issued_by,
+      'filter_list_of_product_purchased_by_customer_in__same_date':filter_list_of_product_purchased_by_customer_in__same_date,
+      'count_filter_list_of_product_purchased_by_customer_in__same_date':count_filter_list_of_product_purchased_by_customer_in__same_date
+      }
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f' filename="invoice{get_profoma_for.invoice_number}.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
+    html = template.render(context)
+
+    # create a pdf
+    pisa_status = pisa.CreatePDF(
+        html, dest=response)
+    # if error then show some funny view
+    if pisa_status.err:
+        return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
+  except :
+    messages.info(request, "Data inconsistent, please upload Logo")
+    return redirect('storeApp:profomaInvoice')
+
+
+# cancelProfomaInvoice
+def cancelProfomaInvoice(request, id):
+  get_profoma_to_cancel = ManageInvoice.objects.filter(id = id).update(
+    invoice_status = 'Cancelled'
+  )
+  template_name = 'manageInvoice/cancelprofomaInvoiceModal.html'
+  messages.success(request, 'Item Cancelled From Invoice ')
+  return redirect('storeApp:profomaInvoice')
+
+def cancelledInvoice(request):
+  get_profoma_to_cancel = ManageInvoice.objects.filter(invoice_status = 'Cancelled')
+  get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
+  template_name = 'manageInvoice/cancelledInvoice.html'
+  context = {
+    'get_profoma_to_cancel':get_profoma_to_cancel,
+    'get_all_user_authorizations':get_all_user_authorizations
+  }
+  return render(request, template_name, context)
+
+# partialPaidInvoices
+def partialPaidInvoices(request):
+  get_partial_paid_invoices = ManageInvoice.objects.filter(invoice_status = 'PartialPaid')
+  get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
+  template_name = 'manageInvoice/partialPaidInvoices.html'
+  context = {
+    'get_partial_paid_invoices':get_partial_paid_invoices,
+    'get_all_user_authorizations':get_all_user_authorizations
+  }
+  return render(request, template_name, context)
+
+
+# fullPaidinvoices
+def fullPaidinvoices(request):
+  get_full_paid_invoices = ManageInvoice.objects.filter(invoice_status = 'FullPaid')
+  get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
+  template_name = 'manageInvoice/fullPaidinvoices.html'
+  context = {
+    'get_full_paid_invoices':get_full_paid_invoices,
+    'get_all_user_authorizations':get_all_user_authorizations
+  }
+  return render(request, template_name, context)
+
+def addAmountToItemFromInvoice(request,id ):
+  if request.method == "POST" and request.POST.get('advance_paid'):
+    
+    get_invoice = get_object_or_404(ManageInvoice, id=id)
+    amount_contain = get_invoice.advance_paid
+    total_product_cost = int(get_invoice.total_product_cost)
+    get_amount_to_add = request.POST.get('amount_advance_paid')
+    print("The type is ", get_amount_to_add)
+    get_amount_to_add = int(get_amount_to_add)
+    
+    total_amount_paid = amount_contain + get_amount_to_add
+    amount_remain_to_be_paid = total_product_cost - total_amount_paid
+    
+    if amount_remain_to_be_paid  == 0:
+      
+      ManageInvoice.objects.filter(id = id ).update(
+        advance_paid = total_amount_paid,
+        amount_remain_to_be_paid= amount_remain_to_be_paid,
+        invoice_status = 'FullPaid'
+      )
+      messages.success(request, 'Amount added Successfull ')
+      return redirect('storeApp:profomaInvoice')
+    else:
+      ManageInvoice.objects.filter(id = id ).update(
+        advance_paid = total_amount_paid,
+        amount_remain_to_be_paid= amount_remain_to_be_paid,
+        invoice_status = 'PartialPaid'
+      )
+      messages.success(request, 'Some amount added Successfull ')
+      return redirect('storeApp:profomaInvoice')
+  else:
+    get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
+    get_all_profoma_invoice = ManageInvoice.objects.all().order_by('id')
+    template_name = 'manageInvoice/profomaInvoice.html'
+    context = {
+      "get_all_user_authorizations":get_all_user_authorizations,
+      'get_all_profoma_invoice':get_all_profoma_invoice
+    }
     return render(request, template_name, context)
 
-
+  

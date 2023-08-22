@@ -1,0 +1,129 @@
+{% extends '../store/base.html' %}
+{% load static %}
+{% block title %} partial-paid-invoices{% endblock %}
+{% block content %}
+
+<div class="container">
+ 
+  <div class="row">
+      <div class="col-md-12">
+          <div class="d-sm-flex align-items-center justify-content-between mb-4">
+              <h1 class="h3 mb-0 text-gray-800">Partial Paid Invoices (PPI) </h1>
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="./">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Partial Paid Invoices (PI)</li>
+              </ol>
+            </div>
+          <hr class="sidebar-divider">
+
+      </div>
+  </div>
+</div>
+
+
+<div class="tabe_section ">
+    <div class="container-fluid ">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 mb-4">
+          <div class="card">
+           
+            {% if get_profoma_to_cancel %}
+            <div class="table-responsive pl-2">
+              <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                <thead class="" style="background-color: #808080;color:#fff;">
+                  <tr>
+                    {% comment %} <th>#</th> {% endcomment %}
+                    <th>Customer </th>
+                    <th>Product </th>
+                    <th>@ cost</th>
+                    <th>QTY</th>
+                    <th>Total cost</th>
+                    <!-- <th>product remain in store</th> -->
+                    <th>Invoice #</th>
+                    <th>Status</th>
+                    <!-- <th>Sold by</th> -->
+                    <!-- <th>phone no1</th> -->
+                    <!-- <th>shop</th> -->
+                    <!-- <th>store remain</th> -->
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for profoma in get_profoma_to_cancel %}
+                  <tr style="background-color: #808080;color:#fff;">
+                    {% comment %} <td>{{forloop.counter}}</td> {% endcomment %}
+                    <td><a href="#" style="background-color: #808080;color:#fff;">{{profoma.customer_full_name}}</a></td>
+                    <td><a href="#" style="background-color: #808080;color:#fff;">{{profoma.product_name}}</a></td>
+                    
+                    <td>{{profoma.product_name.sales_price}}</td>
+  
+                    <!-- <td>{{profoma.total_product_cost }}</td> -->
+                    
+                    
+                    <td>{{profoma.number_of_product_nedeed}}</td>
+                    <td>{{profoma.total_product_cost}}</td>
+                    <td>{{profoma.invoice_number}}</td>
+                    <td>
+                      <code style="color:#000;background:#fff;padding:5px">{{profoma.invoice_status}} </code>  
+                    </td>
+                    <!-- <td>{{profoma.date_profoma | safe }}</td> -->
+                    <!-- <td>{{profoma.supervisor.employee_Full_name}}</td> -->
+                    <!-- <td>{{profoma.supervisor.employee_phone_number1}}</td> -->
+                    <!-- <td>{{profoma.shop_name.shop_name}}</td> -->
+                    <td>
+                      {% if profoma.invoice_status == 'Cancelled' %}
+                      <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-danger"><i class="fas fas fas far fa-trash-alt"></i></a>
+                      {% endif %}
+                      {% if profoma.invoice_status == 'Inprogress' %}
+                      <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-success"><i class="fas fas fas far "></i>Pay-PI</a>
+                      <a  data-toggle="modal" data-target="#cancelprofomaInvoiceModal{{profoma.id}}" class="btn btn-sm btn-outline-warning"><i class="fas fas fas far "></i>Cancel-PI</a>
+                      {% comment %} <a data-toggle="modal" data-target="#productSoldDetailViewModal{{profoma.id}}" class="btn btn-sm btn-outline-dark text-primary"><i class="fas fas fa-eye"></i></a> {% endcomment %}
+                      <a data-toggle="modal" data-target="#askToPrintprofoma{{profoma.id}}" class="btn btn-sm btn-outline-dark text-info"><i class="fas fas fa-print"></i></a>
+                      <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-danger"><i class="fas fas fas far fa-trash-alt"></i></a>
+                      {% endif %}
+                      {% if profoma.invoice_status == 'PartialPaid' %}
+                      <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-success"><i class="fas fas fas far "></i>Pay-PI</a>
+                      {% comment %} <a  data-toggle="modal" data-target="#cancelprofomaInvoiceModal{{profoma.id}}" class="btn btn-sm btn-outline-warning"><i class="fas fas fas far "></i>Cancel-PI</a> {% endcomment %}
+                      {% comment %} <a data-toggle="modal" data-target="#productSoldDetailViewModal{{profoma.id}}" class="btn btn-sm btn-outline-dark text-primary"><i class="fas fas fa-eye"></i></a> {% endcomment %}
+                      <a data-toggle="modal" data-target="#askToPrintprofoma{{profoma.id}}" class="btn btn-sm btn-outline-dark text-info"><i class="fas fas fa-print"></i></a>
+                      {% comment %} <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-danger"><i class="fas fas fas far fa-trash-alt"></i></a> {% endcomment %}
+                      {% endif %}
+                      {% if profoma.invoice_status == 'FullPaid' %}
+                      {% comment %} <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-success"><i class="fas fas fas far "></i>Pay-PI</a> {% endcomment %}
+                      {% comment %} <a  data-toggle="modal" data-target="#cancelprofomaInvoiceModal{{profoma.id}}" class="btn btn-sm btn-outline-warning"><i class="fas fas fas far "></i>Cancel-PI</a> {% endcomment %}
+                      {% comment %} <a data-toggle="modal" data-target="#productSoldDetailViewModal{{profoma.id}}" class="btn btn-sm btn-outline-dark text-primary"><i class="fas fas fa-eye"></i></a> {% endcomment %}
+                      <a data-toggle="modal" data-target="#askToPrintprofoma{{profoma.id}}" class="btn btn-sm btn-outline-dark text-info"><i class="fas fas fa-print"></i></a>
+                      {% comment %} <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-danger"><i class="fas fas fas far fa-trash-alt"></i></a> {% endcomment %}
+                      {% endif %}
+                      {% comment %} <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-success"><i class="fas fas fas far "></i>Pay-PI</a> {% endcomment %}
+                      {% comment %} <a  data-toggle="modal" data-target="#cancelprofomaInvoiceModal{{profoma.id}}" class="btn btn-sm btn-outline-warning"><i class="fas fas fas far "></i>Cancel-PI</a> {% endcomment %}
+                      {% comment %} <a data-toggle="modal" data-target="#productSoldDetailViewModal{{profoma.id}}" class="btn btn-sm btn-outline-dark text-primary"><i class="fas fas fa-eye"></i></a> {% endcomment %}
+                      {% comment %} <a data-toggle="modal" data-target="#askToPrintprofoma{{profoma.id}}" class="btn btn-sm btn-outline-dark text-info"><i class="fas fas fa-print"></i></a> {% endcomment %}
+                      <!-- update button is here  -->
+                      <!-- <a  data-toggle="modal" data-target="#updateproductSoldModal{{profoma.id}}"
+                      class="btn btn-sm btn-outline-warning"  ><i class="fas fas fas fa-pen"></i></a> -->
+                      
+  
+                    </td>
+                  </tr>
+                  {% include './cancelprofomaInvoiceModal.html' %}
+                  {% include './askToPrintprofoma.html' %}
+                  {% comment %} {% include './productSoldDetailViewModal.html' %} {% endcomment %}
+                  {% comment %} {% include './updateproductSoldModal.html' %} {% endcomment %}
+                 {% endfor %}
+            
+                </tbody>
+              </table>
+            </div>
+            {% else %}
+             <p style="padding:60px;100px;margin:10px 20px;text-align:center;border:1px dotted #000;">  No records for Item Paid partial From Invoices  </p>
+          
+            {% endif %}
+            <div class="card-footer"></div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

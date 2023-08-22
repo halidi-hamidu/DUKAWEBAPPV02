@@ -177,6 +177,7 @@ class productSoldInCash(models.Model):
     number_of_product_nedeed = models.IntegerField()
     date_product_sold = models.DateTimeField(auto_now=True)
     total_product_cost = models.PositiveIntegerField(null=True, blank=True)
+    total_profit_obtained = models.PositiveIntegerField(null=True, blank=True)
     supervisor = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, blank=True)
     shop_name = models.ForeignKey(ShopsTable, on_delete=models.CASCADE, null=True, blank=True)
@@ -194,38 +195,38 @@ class productSoldInCash(models.Model):
     def __str__(self):
         return str(self.product_name)
     
-class ManageInvoice(models.Model):
-    INVOICE_TYPE = (
-        ('', 'Select type of Invoices'),
-        ('profoma', 'Profoma'),
-        ('unPaidInvoice', 'unPaidInvoice'),
-        ('paidInvoice', 'paidInvoice'),
-        ('cancelledInvoice', 'cancelledInvoice'),
-    )
-    id = models.UUIDField(
-        primary_key=True, default=uuid.uuid4, editable=False, unique=True)
-    customer_full_name = models.ForeignKey(CustomerDetails, on_delete=models.CASCADE, blank=True, null=True)
-    product_name = models.ForeignKey(
-        ProductTable, on_delete=models.SET_NULL, null=True)
-    number_of_product_nedeed = models.IntegerField()
-    date_product_sold = models.DateTimeField(auto_now=True)
-    total_product_cost = models.PositiveIntegerField(null=True, blank=True)
-    supervisor = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, blank=True)
-    shop_name = models.ForeignKey(ShopsTable, on_delete=models.CASCADE, null=True, blank=True)
-    invoice_type = models.CharField(max_length= 100, choices = INVOICE_TYPE,null=True, blank=True)
+# class ManageInvoice(models.Model):
+#     INVOICE_TYPE = (
+#         ('', 'Select type of Invoices'),
+#         ('profoma', 'Profoma'),
+#         ('unPaidInvoice', 'unPaidInvoice'),
+#         ('paidInvoice', 'paidInvoice'),
+#         ('cancelledInvoice', 'cancelledInvoice'),
+#     )
+#     id = models.UUIDField(
+#         primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+#     customer_full_name = models.ForeignKey(CustomerDetails, on_delete=models.CASCADE, blank=True, null=True)
+#     product_name = models.ForeignKey(
+#         ProductTable, on_delete=models.SET_NULL, null=True)
+#     number_of_product_nedeed = models.IntegerField()
+#     date_product_sold = models.DateTimeField(auto_now=True)
+#     total_product_cost = models.PositiveIntegerField(null=True, blank=True)
+#     supervisor = models.ForeignKey(
+#         User, on_delete=models.SET_NULL, null=True, blank=True)
+#     shop_name = models.ForeignKey(ShopsTable, on_delete=models.CASCADE, null=True, blank=True)
+#     invoice_type = models.CharField(max_length= 100, choices = INVOICE_TYPE,null=True, blank=True)
     
-    date_for_issues_invoice = models.DateField(("Date"), default=date.today)
-    # never change once the object is created
-    created_at = models.DateTimeField(auto_now_add=True)
-    # always change when object is updated
-    updated_at = models.DateTimeField(auto_now=True)
+#     date_for_issues_invoice = models.DateField(("Date"), default=date.today)
+#     # never change once the object is created
+#     created_at = models.DateTimeField(auto_now_add=True)
+#     # always change when object is updated
+#     updated_at = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        verbose_name_plural = 'All Invoices'
+#     class Meta:
+#         verbose_name_plural = 'All Invoices'
 
-    def __str__(self):
-        return str(self.product_name) 
+#     def __str__(self):
+#         return str(self.product_name) 
 
 
 # EmergenceInformations
@@ -313,6 +314,9 @@ class CompanyStockOrAssets(models.Model):
     def __str__(self):
         return str(self.stock_name)
 
+
+
+
 class ManageInvoice(models.Model):
     INVOICE_TYPE = (
         ('', 'Select type of Invoices'),
@@ -323,12 +327,16 @@ class ManageInvoice(models.Model):
     )
     id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False, unique=True)
+    invoice_number = models.CharField(max_length =100, null =True, blank= True)
+    invoice_status = models.CharField(max_length =100, null =True, blank= True)
     customer_full_name = models.ForeignKey(CustomerDetails, on_delete=models.CASCADE, blank=True, null=True)
     product_name = models.ForeignKey(
         ProductTable, on_delete=models.SET_NULL, null=True)
     number_of_product_nedeed = models.IntegerField()
+    
     date_product_sold = models.DateTimeField(auto_now=True)
     total_product_cost = models.PositiveIntegerField(null=True, blank=True)
+    total_profit_obtained = models.PositiveIntegerField(null=True, blank=True, default= 0)
     advance_paid = models.PositiveIntegerField( default=0, null=True, blank=True)
     amount_remain_to_be_paid = models.PositiveIntegerField( default=0, null=True, blank=True)
     supervisor = models.ForeignKey(
@@ -337,6 +345,7 @@ class ManageInvoice(models.Model):
     
     
     date_for_issues_invoice = models.DateField(("Date"), default=date.today)
+    
     # never change once the object is created
     created_at = models.DateTimeField(auto_now_add=True)
     # always change when object is updated
@@ -347,3 +356,23 @@ class ManageInvoice(models.Model):
 
     def __str__(self):
         return str(self.product_name) 
+    
+    
+    
+def increment_invoice_number():
+    last_invoice = InvoiceNumbers.objects.all().order_by('id').last()
+    if not last_invoice:
+        return 'MAG0001'
+# invoice_no = last_invoice.invoice_no
+# invoice_int = int(invoice_no.split('MAG')[-1])
+# new_invoice_int = invoice_int + 1
+# new_invoice_no = 'MAG' + str(new_invoice_int)
+    return 0
+
+class InvoiceNumbers(models.Model):
+    invoice_no = models.CharField(max_length=500, default=increment_invoice_number, null=True, blank=True)
+    class Meta:
+        verbose_name_plural = 'Invoices Numbers '
+
+    def __str__(self):
+        return str(self.invoice_no)

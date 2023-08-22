@@ -1,0 +1,26 @@
+<div class="modal  fade w3-animate-zoom" id="askToPrintprofoma{{profoma.id}}">
+    <div class="modal-dialog  modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h5 class="modal-title"><strong> Print Profoma for  <code> {{profoma.product_name}}, {{profoma.number_of_product_nedeed}}@{{profoma.product_name.amount_to_sold}} = {{profoma.total_product_cost}}</code> </strong></h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+         <h5>Are you sure you want to print this Profoma ? </h5>
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <a href="{% url 'storeApp:generatePdfForInvoice' profoma.id %}" class="btn btn-outline-success">Yes</a>
+          <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  

@@ -34,8 +34,15 @@ urlpatterns = [
     path('activate-user/<str:id>/', views.activateUserAuthorizations, name="activateUserAuthorizations"),
     path('deactivate-user/<str:id>/', views.deactivateUserAuthorizations, name="deactivateUserAuthorizations"),
       path('pdf/<str:id>/', views.generatePdf, name ="generatePdf"),
+      path('print-profoma-pdf/<str:id>/', views.generatePdfForInvoice, name ="generatePdfForInvoice"),
     path('company-Stock', views.companyStockPage, name="companyStockPage"),
     path('customer-details', views.customerDetails, name="customerDetails"),
     path('manage-invoices', views.manageInvoice, name="manageInvoice"),
+    path('manage-profoma-invoice', views.profomaInvoice, name="profomaInvoice"),
+    path('cancel-profoma-invoice/<str:id>/', views.cancelProfomaInvoice, name="cancelProfomaInvoice"),
+    path('cancelled-profoma-invoice', views.cancelledInvoice, name="cancelledInvoice"),
+    path('add-amount-to-pay-invoice/<str:id>/', views.addAmountToItemFromInvoice, name="addAmountToItemFromInvoice"),
+    path('partial-paid-invoices', views.partialPaidInvoices, name="partialPaidInvoices"),
+    path('full-paid-invoices', views.fullPaidinvoices, name="fullPaidinvoices"),
     
 ]
