@@ -16,8 +16,8 @@
     </ol>
   </div>
 
-  <div class="row mb-3">
-    <!-- Earnings (Monthly) Card Example -->
+  <!-- <div class="row mb-3">
+  
     <div class="col-xl-2 col-md-6 mb-4">
       <span>Filter for  31/7/2023</span>
     </div>
@@ -35,13 +35,7 @@
     <div class="col-xl-2 col-md-6 mb-4">
       <input type="submit" name="" id=""  name="Apply_filter" class="form-control btn-outline-dark" value="Apply filter">
     </div>
-    <!-- Earnings (Annual) Card Example -->
-  
-   
- 
-
-   
-  </div>
+  </div> -->
   <div class="row mb-3">
     <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-6 mb-4">
@@ -332,16 +326,16 @@
                },            
                data: {
                    datasets: [{
-                       label: 'Revenue and Expenditures',
-                       data: [60, 30,20,45, 50, 40,35,77,  1, 20, 40, 90],
-                       type: 'bar',
+                       label: 'Expenditures',
+                       data: ['{{january_expenditures_sum}}', '{{february_expenditures_sum}}', '{{march_expenditures_sum}}', '{{april_expenditures_sum}}', '{{may_expenditures_sum}}', '{{june_expenditures_sum}}', '{{july_expenditures_sum}}', '{{august_expenditures_sum}}', '{{september_expenditures_sum}}', '{{november_expenditures_sum}}','{{december_expenditures_sum}}' ],
+                       type: 'line',
                        borderColor:"red",                    
                        borderWidth:1                    
                        }, {
                        label: 'Expected sales',
                        data: ['{{january_sales_sum}}', '{{february_sales_sum}}', '{{march_sales_sum}}', '{{april_sales_sum}}', '{{may_sales_sum}}', '{{june_sales_sum}}', '{{july_sales_sum}}', '{{august_sales_sum}}', '{{september_sales_sum}}', '{{november_sales_sum}}','{{december_sales_sum}}' ],
-                       type: 'bar',    
-                       borderColor:"blue"                                        
+                       type: 'line',    
+                       borderColor:"#000"                                        
                       },
                       {
                        type:'line',
@@ -404,8 +398,65 @@
       </div>
     </div>
   </div>
+  <div class="tabe_section" style="margin: -22px;padding:0px;">
+    <div class="container-fluid m-0">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 mb-4 col-md-12">
+          <div class="card" >
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+              <h6 class="m-0 font-weight-bold text-danger">Customers Trends</h6>
+              
+            </div>
+            {% if customers %}
+            <div class="table-responsive pl-2">
+              <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                <thead class="" style="background-color: #000;color:#fff;">
+                  <tr>
+                    <th>#</th>
+                    <th>Customer </th>
+                   
+                    
+                    <!-- <th>product remain in store</th> -->
+                    <th> contributed</th>
+                    <!-- <th>Sold by</th> -->
+                    <!-- <th>phone no1</th> -->
+                    <!-- <th>shop</th> -->
+                    <!-- <th>store remain</th> -->
+                   
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for cust in customers %}
+                  <tr style="background-color: #808080;color:#fff;"> 
+                    <td>{{forloop.counter}}</td>
+                    <td ><a href="#" style="color:#fff;">{{cust.customer_name}}</a></td>
+                    
+                  
   
-  {% include './productRemainInStore.html' %}
+                    <!-- <td>{{product_sold.total_product_cost }}</td> -->
+                    
+                    
+                    
+                    <td>{{cust.appeared_number}}</td>
+                    <!-- <td>{{product_sold.date_product_sold | safe }}</td> -->
+                    <!-- <td>{{product_sold.supervisor.employee_Full_name}}</td> -->
+                    <!-- <td>{{product_sold.supervisor.employee_phone_number1}}</td> -->
+                    <!-- <td>{{product_sold.shop_name.shop_name}}</td> -->
+                    
+                  </tr>
+                 
+                 {% endfor %}
+            
+                </tbody>
+              </table>
+            </div>
+            {% endif %}
+            <div class="card-footer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
 
 
 {% else %}

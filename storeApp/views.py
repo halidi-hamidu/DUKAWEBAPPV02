@@ -249,7 +249,7 @@ def homepage(request):
       current_month_current_year_profit_sum_from_cash += int(sales.total_profit_obtained)
     
     # for the invoices
-    get_all_product_sold_this_month_this_year_from_full_paid_invoices = ManageInvoice.objects.filter(date_for_issues_invoice__month=curent_month, date_for_issues_invoice__year = curent_year)
+    get_all_product_sold_this_month_this_year_from_full_paid_invoices = ManageInvoice.objects.filter(date_for_issues_invoice__month=curent_month, date_for_issues_invoice__year = curent_year,invoice_status ='FullPaid' )
     
     current_month_current_year_profit_sum_from_full_paid_invoices = 0
     print('%%%%%%%%%%%%%%%%  ', get_all_product_sold_this_month_this_year_from_full_paid_invoices)
@@ -261,9 +261,19 @@ def homepage(request):
     get_all_product_sold_january_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=1, date_for_issues_invoice__year = curent_year)
     january_profit_sum = 0
     january_sales_sum = 0
+    
     for profit in get_all_product_sold_january_this_year:
       january_profit_sum += int(profit.total_profit_obtained)
       january_sales_sum += int(profit.total_product_cost)
+      
+    january_expenditures_sum =0
+    get_all_expenditures_for_january = EmergenceInformations.objects.filter(spending_date__month =1, spending_date__year= curent_year )
+    for expenditures in get_all_expenditures_for_january:
+      january_expenditures_sum += int(expenditures.spending_cost)
+      
+    
+      
+      
     # 'February',
     get_all_product_sold_february_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=2, date_for_issues_invoice__year = curent_year)
     february_profit_sum = 0
@@ -271,6 +281,12 @@ def homepage(request):
     for profit in get_all_product_sold_february_this_year:
       february_profit_sum += int(profit.total_profit_obtained)
       february_sales_sum += int(profit.total_product_cost)
+      
+    february_expenditures_sum =0
+    get_all_expenditures_for_january = EmergenceInformations.objects.filter(spending_date__month =2, spending_date__year= curent_year )
+    for expenditures in get_all_expenditures_for_january:
+      february_expenditures_sum += int(expenditures.spending_cost)
+      
     # 'March',
     get_all_product_sold_march_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=3, date_for_issues_invoice__year = curent_year)
     march_profit_sum = 0
@@ -278,6 +294,12 @@ def homepage(request):
     for profit in get_all_product_sold_march_this_year:
       march_profit_sum += int(profit.total_profit_obtained)
       march_sales_sum += int(profit.total_product_cost)
+      
+    march_expenditures_sum =0
+    get_all_expenditures_for_march = EmergenceInformations.objects.filter(spending_date__month =3, spending_date__year= curent_year )
+    for expenditures in get_all_expenditures_for_march:
+      march_expenditures_sum += int(expenditures.spending_cost)
+      
     # 'April',
     get_all_product_sold_april_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=4, date_for_issues_invoice__year = curent_year)
     april_profit_sum = 0
@@ -285,6 +307,12 @@ def homepage(request):
     for profit in get_all_product_sold_april_this_year:
       april_profit_sum += int(profit.total_profit_obtained)
       april_sales_sum += int(profit.total_product_cost)
+      
+    april_expenditures_sum =0
+    get_all_expenditures_for_april = EmergenceInformations.objects.filter(spending_date__month =4, spending_date__year= curent_year )
+    for expenditures in get_all_expenditures_for_april:
+      april_expenditures_sum += int(expenditures.spending_cost)
+      
     # 'May',
     get_all_product_sold_may_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=5, date_for_issues_invoice__year = curent_year)
     may_profit_sum = 0
@@ -292,6 +320,12 @@ def homepage(request):
     for profit in get_all_product_sold_may_this_year:
       may_profit_sum += int(profit.total_profit_obtained)
       may_sales_sum += int(profit.total_product_cost)
+      
+    may_expenditures_sum =0
+    get_all_expenditures_for_may = EmergenceInformations.objects.filter(spending_date__month =5, spending_date__year= curent_year )
+    for expenditures in get_all_expenditures_for_may:
+      may_expenditures_sum += int(expenditures.spending_cost)
+      
     # 'June',
     get_all_product_sold_june_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=6, date_for_issues_invoice__year = curent_year)
     june_profit_sum = 0
@@ -299,6 +333,14 @@ def homepage(request):
     for profit in get_all_product_sold_june_this_year:
       june_profit_sum += int(profit.total_profit_obtained)
       june_sales_sum += int(profit.total_product_cost)
+      
+      
+    june_expenditures_sum =0
+    get_all_expenditures_for_june = EmergenceInformations.objects.filter(spending_date__month =6, spending_date__year= curent_year )
+    for expenditures in get_all_expenditures_for_june:
+      june_expenditures_sum += int(expenditures.spending_cost)
+      
+      
     # 'July',
     get_all_product_sold_july_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=7, date_for_issues_invoice__year = curent_year)
     july_profit_sum = 0
@@ -306,6 +348,12 @@ def homepage(request):
     for profit in get_all_product_sold_july_this_year:
       july_profit_sum += int(profit.total_profit_obtained)
       july_sales_sum += int(profit.total_product_cost)
+      
+    july_expenditures_sum =0
+    get_all_expenditures_for_july = EmergenceInformations.objects.filter(spending_date__month =7, spending_date__year= curent_year )
+    for expenditures in get_all_expenditures_for_july:
+      july_expenditures_sum += int(expenditures.spending_cost)
+      
     # 'August',
     get_all_product_sold_august_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=8, date_for_issues_invoice__year = curent_year)
     august_profit_sum = 0
@@ -313,6 +361,12 @@ def homepage(request):
     for profit in get_all_product_sold_august_this_year:
       august_profit_sum += int(profit.total_profit_obtained)
       august_sales_sum += int(profit.total_product_cost)
+      
+    august_expenditures_sum =0
+    get_all_expenditures_for_august = EmergenceInformations.objects.filter(spending_date__month =8, spending_date__year= curent_year )
+    for expenditures in get_all_expenditures_for_august:
+      august_expenditures_sum += int(expenditures.spending_cost)
+      
     # 'September',
     get_all_product_sold_september_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=9, date_for_issues_invoice__year = curent_year)
     september_profit_sum = 0
@@ -320,6 +374,12 @@ def homepage(request):
     for profit in get_all_product_sold_september_this_year:
       september_profit_sum += int(profit.total_profit_obtained)
       september_sales_sum += int(profit.total_product_cost)
+      
+    september_expenditures_sum =0
+    get_all_expenditures_for_september = EmergenceInformations.objects.filter(spending_date__month =9, spending_date__year= curent_year )
+    for expenditures in get_all_expenditures_for_september:
+      september_expenditures_sum += int(expenditures.spending_cost)
+    
     # 'October',
     get_all_product_sold_october_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=10, date_for_issues_invoice__year = curent_year)
     october_profit_sum = 0
@@ -327,6 +387,12 @@ def homepage(request):
     for profit in get_all_product_sold_october_this_year:
       october_profit_sum += int(profit.total_profit_obtained)
       october_sales_sum += int(profit.total_product_cost)
+      
+      
+    october_expenditures_sum =0
+    get_all_expenditures_for_october = EmergenceInformations.objects.filter(spending_date__month =10, spending_date__year= curent_year )
+    for expenditures in get_all_expenditures_for_october:
+      october_expenditures_sum += int(expenditures.spending_cost)
     # 'November',
     get_all_product_sold_november_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=11, date_for_issues_invoice__year = curent_year)
     november_profit_sum = 0
@@ -334,6 +400,11 @@ def homepage(request):
     for profit in get_all_product_sold_november_this_year:
       november_profit_sum += int(profit.total_profit_obtained)
       november_sales_sum += int(profit.total_product_cost)
+      
+    november_expenditures_sum =0
+    get_all_expenditures_for_november = EmergenceInformations.objects.filter(spending_date__month =11, spending_date__year= curent_year )
+    for expenditures in get_all_expenditures_for_november:
+      november_expenditures_sum += int(expenditures.spending_cost)
     # 'December'
     get_all_product_sold_december_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=12, date_for_issues_invoice__year = curent_year)
     december_profit_sum = 0
@@ -341,7 +412,12 @@ def homepage(request):
     for profit in get_all_product_sold_december_this_year:
       december_profit_sum += int(profit.total_profit_obtained)
       december_sales_sum += int(profit.total_product_cost)
-
+      
+      
+    december_expenditures_sum =0
+    get_all_expenditures_for_december = EmergenceInformations.objects.filter(spending_date__month =12, spending_date__year= curent_year )
+    for expenditures in get_all_expenditures_for_december:
+      december_expenditures_sum += int(expenditures.spending_cost)
     # curent_year_sales
     get_all_product_sold_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__year = curent_year)
     get_all_partial_invoices_this_year = ManageInvoice.objects.filter(date_for_issues_invoice__year = curent_year, invoice_status = 'PartialPaid' )
@@ -378,6 +454,13 @@ def homepage(request):
     current_month = (x.strftime("%B"))
     print(current_month)
     print(all_product)
+    customers = []
+    get_all_customers =CustomerDetails.objects.all().order_by('-created_at')
+    for cust in get_all_customers:
+      count_customer_from_inv = ManageInvoice.objects.filter(customer_full_name = cust.id).count()
+      count_customer_from_cash = productSoldInCash.objects.filter(customer_full_name = cust.id).count()
+      print("=================customer ",cust.customer_full_name, count_customer_from_inv +count_customer_from_cash )
+      customers.append({"customer_name": cust.customer_full_name, "appeared_number": count_customer_from_inv +count_customer_from_cash })
     get_all_product_sold = ProductAndSupplierAndReceiverTable.objects.all().order_by('-updated_at')
     print("******************", get_all_product_sold_august_this_year)
     count_all_inprogress_invoices = ManageInvoice.objects.filter(invoice_status ='Inprogress').count()
@@ -426,11 +509,29 @@ def homepage(request):
       'october_sales_sum': october_sales_sum, 
       'november_sales_sum' :november_sales_sum, 
       'december_sales_sum': december_sales_sum,
+      
+      # expenditure
+      'january_expenditures_sum':january_expenditures_sum,
+      'february_expenditures_sum':february_expenditures_sum,
+      'march_expenditures_sum':march_expenditures_sum,
+      'get_all_product_sold':get_all_product_sold,
+      'april_expenditures_sum': april_expenditures_sum,
+      'may_expenditures_sum' :may_expenditures_sum, 
+      'june_expenditures_sum' :june_expenditures_sum, 
+      'july_expenditures_sum' :july_expenditures_sum, 
+      'august_expenditures_sum' :august_expenditures_sum, 
+      'september_expenditures_sum': september_expenditures_sum, 
+      'october_expenditures_sum': october_expenditures_sum, 
+      'november_expenditures_sum' :november_expenditures_sum, 
+      'december_expenditures_sum': december_expenditures_sum,
+      'december_expenditures_sum':december_expenditures_sum,
       # invoices status
       'count_all_inprogress_invoices':count_all_inprogress_invoices,
       'count_all_partial_paid_invoices':count_all_partial_paid_invoices,
       'count_all_full_paid_invoices':count_all_full_paid_invoices,
-      'count_all_cancelled_invoices':count_all_cancelled_invoices
+      'count_all_cancelled_invoices':count_all_cancelled_invoices,
+      # customer appeared in database frequently
+      'customers':customers,
 
       }
     return render(request, template_name, context)
@@ -841,7 +942,9 @@ def employeePage(request):
 # salesPage
 def salesPage(request):
   # get_button_status = 
-  if request.method == "POST":
+  if request.method == "POST" and  request.POST.getlist('number_of_product_nedeed[]') or request.POST.get('formData'):
+    get_data =  request.POST.get('date_for_issues_invoice[]')
+    print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",get_data )
     get_product_sold = request.POST.getlist('product_name[]')
     number_of_product_sold = len(get_product_sold)
      
@@ -1031,8 +1134,8 @@ def salesPage(request):
       
       
       
-      for emergence in get_emergence_info:
-        today_emergence_cost_sum +=emergence.spending_cost
+    for emergence in get_emergence_info:
+      today_emergence_cost_sum +=emergence.spending_cost
 
     amount_remain_after_deducting_emergence_cost = today_sales_sum - today_emergence_cost_sum
     x = datetime.datetime.now()
@@ -1540,7 +1643,7 @@ def manageInvoice(request):
 
 def profomaInvoice(request):
   
-  if request.method == "POST":
+  if request.method == "POST" and  request.POST.getlist('number_of_product_nedeed[]') or request.POST.get('formData'):
     
     get_product_sold = request.POST.getlist('product_name[]')
     number_of_product_sold = len(get_product_sold)
@@ -1683,7 +1786,13 @@ def profomaInvoice(request):
       messages.success(request, "Invoice Succesfully Saved")
       return redirect ("storeApp:salesPage")
     return redirect ("storeApp:salesPage")
+  elif request.method == "POST" and request.POST.get('customer_info'):
+    form = customerDetailsForm(request.POST)
 
+    if form.is_valid():
+      form.save()
+      messages.success(request, "Customer information Saved ")
+      return redirect ("storeApp:profomaInvoice")
   else:
     
     get_all_employee = EmployeeDetailInformations.objects.all()
@@ -1879,6 +1988,10 @@ def addAmountToItemFromInvoice(request,id ):
       )
       messages.success(request, 'Amount added Successfull ')
       return redirect('storeApp:profomaInvoice')
+    elif amount_remain_to_be_paid < -1:
+      messages.info(request, 'Please check Amount You add! ')
+      return redirect('storeApp:profomaInvoice')
+      
     else:
       ManageInvoice.objects.filter(id = id ).update(
         advance_paid = total_amount_paid,

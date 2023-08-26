@@ -64,6 +64,7 @@
                   <th>Total cost</th>
                   <!-- <th>product remain in store</th> -->
                   <th>Invoice #</th>
+                  <th>RMN</th>
                   <th>Status</th>
                   <!-- <th>Sold by</th> -->
                   <!-- <th>phone no1</th> -->
@@ -87,13 +88,15 @@
                   <td>{{profoma.number_of_product_nedeed}}</td>
                   <td>{{profoma.total_product_cost}}</td>
                   <td>{{profoma.invoice_number}}</td>
+                  <td>{{profoma.amount_remain_to_be_paid}}</td>
                   <td>
                     <code style="color:#000;background:#fff;padding:5px">{{profoma.invoice_status}} </code>  
                   </td>
+                
                   <!-- <td>{{profoma.date_profoma | safe }}</td> -->
                   <!-- <td>{{profoma.supervisor.employee_Full_name}}</td> -->
                   <!-- <td>{{profoma.supervisor.employee_phone_number1}}</td> -->
-                  <!-- <td>{{profoma.shop_name.shop_name}}</td> -->
+                 
                   <td>
                     {% if profoma.invoice_status == 'Cancelled' %}
                     <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-danger"><i class="fas fas fas far fa-trash-alt"></i></a>
@@ -129,6 +132,7 @@
                     
 
                   </td>
+                  
                 </tr>
                 {% include './addAmountToItemFromInvoice.html' %}
                 {% include './cancelprofomaInvoiceModal.html' %}

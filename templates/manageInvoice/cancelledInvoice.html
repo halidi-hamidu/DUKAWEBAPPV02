@@ -26,7 +26,7 @@
                     <!-- <th>phone no1</th> -->
                     <!-- <th>shop</th> -->
                     <!-- <th>store remain</th> -->
-                    <th>Action</th>
+                 
                   </tr>
                 </thead>
                 <tbody>
@@ -51,41 +51,7 @@
                     <!-- <td>{{profoma.supervisor.employee_Full_name}}</td> -->
                     <!-- <td>{{profoma.supervisor.employee_phone_number1}}</td> -->
                     <!-- <td>{{profoma.shop_name.shop_name}}</td> -->
-                    <td>
-                      {% if profoma.invoice_status == 'Cancelled' %}
-                      <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-danger"><i class="fas fas fas far fa-trash-alt"></i></a>
-                      {% endif %}
-                      {% if profoma.invoice_status == 'Inprogress' %}
-                      <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-success"><i class="fas fas fas far "></i>Pay-PI</a>
-                      <a  data-toggle="modal" data-target="#cancelprofomaInvoiceModal{{profoma.id}}" class="btn btn-sm btn-outline-warning"><i class="fas fas fas far "></i>Cancel-PI</a>
-                      {% comment %} <a data-toggle="modal" data-target="#productSoldDetailViewModal{{profoma.id}}" class="btn btn-sm btn-outline-dark text-primary"><i class="fas fas fa-eye"></i></a> {% endcomment %}
-                      <a data-toggle="modal" data-target="#askToPrintprofoma{{profoma.id}}" class="btn btn-sm btn-outline-dark text-info"><i class="fas fas fa-print"></i></a>
-                      <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-danger"><i class="fas fas fas far fa-trash-alt"></i></a>
-                      {% endif %}
-                      {% if profoma.invoice_status == 'PartialPaid' %}
-                      <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-success"><i class="fas fas fas far "></i>Pay-PI</a>
-                      {% comment %} <a  data-toggle="modal" data-target="#cancelprofomaInvoiceModal{{profoma.id}}" class="btn btn-sm btn-outline-warning"><i class="fas fas fas far "></i>Cancel-PI</a> {% endcomment %}
-                      {% comment %} <a data-toggle="modal" data-target="#productSoldDetailViewModal{{profoma.id}}" class="btn btn-sm btn-outline-dark text-primary"><i class="fas fas fa-eye"></i></a> {% endcomment %}
-                      <a data-toggle="modal" data-target="#askToPrintprofoma{{profoma.id}}" class="btn btn-sm btn-outline-dark text-info"><i class="fas fas fa-print"></i></a>
-                      {% comment %} <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-danger"><i class="fas fas fas far fa-trash-alt"></i></a> {% endcomment %}
-                      {% endif %}
-                      {% if profoma.invoice_status == 'FullPaid' %}
-                      {% comment %} <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-success"><i class="fas fas fas far "></i>Pay-PI</a> {% endcomment %}
-                      {% comment %} <a  data-toggle="modal" data-target="#cancelprofomaInvoiceModal{{profoma.id}}" class="btn btn-sm btn-outline-warning"><i class="fas fas fas far "></i>Cancel-PI</a> {% endcomment %}
-                      {% comment %} <a data-toggle="modal" data-target="#productSoldDetailViewModal{{profoma.id}}" class="btn btn-sm btn-outline-dark text-primary"><i class="fas fas fa-eye"></i></a> {% endcomment %}
-                      <a data-toggle="modal" data-target="#askToPrintprofoma{{profoma.id}}" class="btn btn-sm btn-outline-dark text-info"><i class="fas fas fa-print"></i></a>
-                      {% comment %} <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-danger"><i class="fas fas fas far fa-trash-alt"></i></a> {% endcomment %}
-                      {% endif %}
-                      {% comment %} <a  data-toggle="modal" data-target="#deleteProductSoldModal" class="btn btn-sm btn-outline-success"><i class="fas fas fas far "></i>Pay-PI</a> {% endcomment %}
-                      {% comment %} <a  data-toggle="modal" data-target="#cancelprofomaInvoiceModal{{profoma.id}}" class="btn btn-sm btn-outline-warning"><i class="fas fas fas far "></i>Cancel-PI</a> {% endcomment %}
-                      {% comment %} <a data-toggle="modal" data-target="#productSoldDetailViewModal{{profoma.id}}" class="btn btn-sm btn-outline-dark text-primary"><i class="fas fas fa-eye"></i></a> {% endcomment %}
-                      {% comment %} <a data-toggle="modal" data-target="#askToPrintprofoma{{profoma.id}}" class="btn btn-sm btn-outline-dark text-info"><i class="fas fas fa-print"></i></a> {% endcomment %}
-                      <!-- update button is here  -->
-                      <!-- <a  data-toggle="modal" data-target="#updateproductSoldModal{{profoma.id}}"
-                      class="btn btn-sm btn-outline-warning"  ><i class="fas fas fas fa-pen"></i></a> -->
-                      
-  
-                    </td>
+               
                   </tr>
                   {% include './cancelprofomaInvoiceModal.html' %}
                   {% include './askToPrintprofoma.html' %}
