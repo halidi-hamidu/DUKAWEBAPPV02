@@ -28,7 +28,7 @@
           <div class="table-responsive pl-2">
            
             <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-              <thead class="" style="background-color: #000;color:#fff;">
+              <thead class="" style="background-color: #808080;color:#fff;">
                 <tr>
                   <th>PRODUCT</th>
                   <th>SALES PRICE</th>
@@ -45,9 +45,9 @@
               </thead>
               <tbody>
                 {% for product in get_all_products_received %}
-                <tr style="background-color: #000;color:#fff;">
-                  <td><a href="#" style="background-color: #000;color:#fff;">{{product.product_name}}</a></td>
-                  <td style="background-color: #000;color:#fff;">{{product.sales_price}}</td>
+                <tr style="background-color: #808080;color:#fff;">
+                  <td><a href="#" style="background-color: #808080;color:#fff;">{{product.product_name}}</a></td>
+                  <td style="background-color: #808080;color:#fff;">{{product.sales_price}}</td>
                   <td>{{product.available}}</td>
                   <td>{{product.sku_code}}</td>
                   <!-- <td>{{product.supplier_full_name.supplier_phone_number}}</td> -->

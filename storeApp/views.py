@@ -1836,7 +1836,7 @@ def profomaInvoice(request):
     
     get_all_customers = CustomerDetails.objects.all()
     get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
-    get_all_profoma_invoice = ManageInvoice.objects.all().order_by('-created_at')
+    get_all_profoma_invoice = ManageInvoice.objects.all().order_by('-date_for_issues_invoice')
     template_name = 'manageInvoice/profomaInvoice.html'
     context = {
       "get_all_user_authorizations":get_all_user_authorizations,

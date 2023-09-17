@@ -16,7 +16,7 @@
           <div class="table-responsive p-4">
            
             <table class="table table-md align-items-center table-flush table-hover" id="dataTableHover">
-              <thead class="" style="background-color: #000;color:#fff;">
+              <thead class="" style="background-color: #808080;color:#fff;">
                 <tr>
                   <th>#</th>
                   <th>Product Name</th>
@@ -26,9 +26,9 @@
               </thead>
               <tbody>
                 {% for product in get_products %}
-                <tr style="background-color: #000;color:#fff;">
+                <tr style="background-color: #808080;color:#fff;">
                   <td>{{forloop.counter}}</td>
-                  <td><a href="#" style="background-color: #000;color:#fff;">{{product.product_name}}</a></td>
+                  <td><a href="#" style="background-color: #808080;color:#fff;">{{product.product_name}}</a></td>
                                     
                   <td>{{product.sku_code}}</td>
                  

@@ -14,7 +14,7 @@
           {% if get_number__of_all_employee%}
           <div class="table-responsive pl-2">
             <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-              <thead class="" style="background-color: #000;color:#fff;">
+              <thead class="" style="background-color: #808080;color:#fff;">
                 <tr>
                   <th>#</th>
                   <th>Name</th>
@@ -31,9 +31,9 @@
               </thead>
               <tbody>
                 {% for employee in get_all_employee %}
-                <tr style="background-color: #000;color:#fff;">
+                <tr style="background-color: #808080;color:#fff;">
                   <td>{{forloop.counter}}</td>
-                  <td><a href="#" style="background-color: #000;color:#fff;">{{ employee.employee_Full_name}}</a></td>
+                  <td><a href="#" style="background-color: #808080;color:#fff;">{{ employee.employee_Full_name}}</a></td>
                   <td>{{employee.employee_gender}}</td>
                   <td>{{employee.employee_email_address}}</td>
                   <!-- <td>{{employee.employee_start_date}}</td> -->
