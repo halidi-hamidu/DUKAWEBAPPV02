@@ -1,13 +1,9 @@
 from calendar import month
 from http.client import HTTPResponse
-from imp import reload
 from importlib.abc import ResourceLoader
 from itertools import count
 from multiprocessing import context
 import re
-from select import select
-from time import strftime
-from turtle import update
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -70,9 +66,7 @@ def generatePdf(request, id ):
       get_subtotal += product_sold.total_product_cost
       get_invoice_issued_by = product_sold.supervisor
     
-    print(get_invoice_issued_by)
     count_filter_list_of_product_purchased_by_customer_in__same_date =filter_list_of_product_purchased_by_customer_in__same_date.count()
-    print("-----", count_filter_list_of_product_purchased_by_customer_in__same_date)
     context = {
       'get_logo': logo,
       'get_product_sold':get_product_sold,
@@ -110,7 +104,6 @@ def generatePdf(request, id ):
 def customerDetails(request):
   if request.method == "POST" and request.POST.get('customer_info'):
      form = customerDetailsForm(request.POST)
-     print("00000000000000000")
      if form.is_valid():
        form.save()
        messages.success(request, "Customer information Saved ")
@@ -172,7 +165,6 @@ def loginPage(request):
     user = authenticate(username = get_username, password=get_password)
     if user is not None:
       get_user = User.objects.get(id =user.id)
-      # print(get_user)
       # get_user_id = get_user.id
       try:
          get_user_authorization = AuthorizeUsers.objects.get(select_user = get_user)
@@ -210,36 +202,28 @@ def logoutPage(request):
 def homepage(request):
   try:
     get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
-    print("------------------------", get_all_user_authorizations)
     x = datetime.datetime.now()
     today_date = datetime.datetime.today().date()
     get_all_today_orders = CustomersOrders.objects.filter(updated_at=today_date )
-    print('= homepage=======')
     number_of_order_received_tody=get_all_today_orders.count()
     # today sales start here
     get_all_product_sold_today = productSoldInCash.objects.filter(date_for_issues_invoice = today_date)
-    # print(get_all_product_sold_today.total_product_cost)
     today_sales_sum = 0
     today_emergence_cost_sum = 0
     # get_emergence_info
     get_emergence_info = EmergenceInformations.objects.filter(spending_date = today_date)
     if get_all_product_sold_today.count():
       number_of_poduct_sold = get_all_product_sold_today.count()
-      print(number_of_poduct_sold)
-      # print(get_all_product_sold_today.total_product_cost)
       
       
       for product in get_all_product_sold_today:
-        print(product.total_product_cost)
         today_sales_sum +=product.total_product_cost
-        print(today_sales_sum)
     
     # current_monthly_sales
     curent_month = timezone.now().month
     curent_year = timezone.now().year
     x = datetime.datetime.now()
     current_month = (x.strftime("%B"))
-    print(current_month)
     # for the  cash
     get_all_product_sold_this_month_this_year = productSoldInCash.objects.filter(date_for_issues_invoice__month=curent_month, date_for_issues_invoice__year = curent_year)
     current_month_current_year_sales_sum = 0
@@ -252,7 +236,6 @@ def homepage(request):
     get_all_product_sold_this_month_this_year_from_full_paid_invoices = ManageInvoice.objects.filter(date_for_issues_invoice__month=curent_month, date_for_issues_invoice__year = curent_year,invoice_status ='FullPaid' )
     
     current_month_current_year_profit_sum_from_full_paid_invoices = 0
-    print('%%%%%%%%%%%%%%%%  ', get_all_product_sold_this_month_this_year_from_full_paid_invoices)
     for sales in get_all_product_sold_this_month_this_year_from_full_paid_invoices:
       current_month_current_year_profit_sum_from_full_paid_invoices += int(sales.total_profit_obtained)
       
@@ -447,22 +430,16 @@ def homepage(request):
     get_all_products = ProductAndSupplierAndReceiverTable.objects.all()
     for products in get_all_products:
       all_product.append(products)
-    print("=========", today_date.day)
     x = datetime.datetime.now()
     january = datetime.datetime(int(x.strftime('%Y')), int(1), int(x.strftime('%d')))
-    print(january)
     current_month = (x.strftime("%B"))
-    print(current_month)
-    print(all_product)
     customers = []
     get_all_customers =CustomerDetails.objects.all().order_by('-created_at')
     for cust in get_all_customers:
       count_customer_from_inv = ManageInvoice.objects.filter(customer_full_name = cust.id).count()
       count_customer_from_cash = productSoldInCash.objects.filter(customer_full_name = cust.id).count()
-      print("=================customer ",cust.customer_full_name, count_customer_from_inv +count_customer_from_cash )
       customers.append({"customer_name": cust.customer_full_name, "appeared_number": count_customer_from_inv +count_customer_from_cash })
     get_all_product_sold = ProductAndSupplierAndReceiverTable.objects.all().order_by('-updated_at')
-    print("******************", get_all_product_sold_august_this_year)
     count_all_inprogress_invoices = ManageInvoice.objects.filter(invoice_status ='Inprogress').count()
     count_all_partial_paid_invoices = ManageInvoice.objects.filter(invoice_status ='PartialPaid').count()
     count_all_full_paid_invoices = ManageInvoice.objects.filter(invoice_status ='FullPaid').count()
@@ -572,8 +549,6 @@ def storePage(request):
   # receiver
   elif request.method =="POST" and request.POST.get('receiver'):
     form = ProductAndSupplierAndReceiverTableForm(request.POST)
-    print(request.POST.get('product_receiver'))
-    print("==========================")
     if form.is_valid():
       product_instance = form.save(commit = False)
       product_instance.total_product_cost = int(request.POST.get('product_cost')) * int(request.POST.get('product_quantity'))
@@ -612,7 +587,6 @@ def storePage(request):
 
   # add_employee
   elif request.method == "POST" and request.POST.get('add_employee'):
-    print(request.POST.get('employee_Full_name'))
     form = EmployeeDetailInformationsForm(request.POST)
     if form.is_valid():
       form.save()
@@ -625,7 +599,6 @@ def storePage(request):
   
   # add_shop
   elif request.method == "POST" and request.POST.get('add_shop'):
-    print(request.POST.get('employee_Full_name'))
     form = ShopsTableForm(request.POST)
     if form.is_valid():
       form.save()
@@ -700,7 +673,6 @@ def storePage(request):
 def shopPage(request):
 
   if request.method == "POST" and request.POST.get('add_shop'):
-    print(request.POST.get('employee_Full_name'))
     form = ShopsTableForm(request.POST)
     if form.is_valid():
       form.save()
@@ -712,7 +684,6 @@ def shopPage(request):
       return redirect("storeApp:shopPage")
   elif request.method == "POST" and request.POST.get('update_shop'):
     get_shop_id = request.POST.get('shop_id')
-    print("==========++++++++++", get_shop_id)
     # get_shop = get_object_or_404(ShopsTable, id = get_shop_id)
     # get_shop_id = 
     get_shop_name = request.POST.get('shop_name')
@@ -810,7 +781,6 @@ def suppliersPage(request):
 # employeePage
 def employeePage(request):
   if request.method == "POST" and request.POST.get('add_employee'):
-    print(request.POST.get('employee_Full_name'))
     form = EmployeeDetailInformationsForm(request.POST)
     if form.is_valid():
       form.save()
@@ -824,7 +794,6 @@ def employeePage(request):
   elif request.method =="POST" and request.POST.get('update_employee'):
     # ==============update employee infomation============
     get_employeeId =request.POST.get('employeeId')
-    print('===========', get_employeeId)
     get_employee_Full_name = request.POST.get('employee_Full_name')
     get_employee_info = get_object_or_404(EmployeeDetailInformations, id = get_employeeId )
     get_employee_gender = request.POST.get('employee_gender')
@@ -836,7 +805,6 @@ def employeePage(request):
     get_username = request.POST.get('username')
     get_password1 = request.POST.get('password1')
     get_password2 = request.POST.get('password2')
-    print(request.POST)
     # get_password2 = request.POST.get('password2')
     csrf_token = request.POST.get('csrfmiddlewaretoken')
     # form = EmployeeDetailInformationsForm(
@@ -897,7 +865,6 @@ def employeePage(request):
     
 # add_employee_account
   elif request.method == "POST" and request.POST.get('add_employee_account'):
-    print(request.POST.get('first_name'))
     form = EmployeeAcountForm(request.POST)
     if form.is_valid():
       get_employee_id = request.POST.get('first_name')
@@ -907,7 +874,6 @@ def employeePage(request):
       get_employee.employee_username = get_employee_username
       get_employee.employee_password = get_employee_password
       get_employee.save()
-      print(get_employee.employee_username)
       form.save()
       employee_Full_name = request.POST.get('first_name')
       messages.success(request, f"{get_employee.employee_Full_name} added successFull by {request.user.username}")
@@ -944,7 +910,6 @@ def salesPage(request):
   # get_button_status = 
   if request.method == "POST" and  request.POST.getlist('number_of_product_nedeed[]') or request.POST.get('formData'):
     get_data =  request.POST.get('date_for_issues_invoice[]')
-    print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%",get_data )
     get_product_sold = request.POST.getlist('product_name[]')
     number_of_product_sold = len(get_product_sold)
      
@@ -952,7 +917,6 @@ def salesPage(request):
     form = productSoldInCashForm(request.POST)
     if (number_of_product_sold == 1):
       get_product_sold = get_product_sold[0]
-      print('::::::::::::::::::',get_product_sold )
       # if (len (get_product_sold) == 1):
       #   data = productSoldInCashForm
       # get_customer_full_name = request.POST.get('customer_full_name')
@@ -961,9 +925,7 @@ def salesPage(request):
       get_number_of_product_nedeed = int(get_number_of_product_nedeed[0])
       get_shop_name = request.POST.get('shop_name[]')
       get_date_for_issues_invoice = request.POST.get('date_for_issues_invoice[]')
-      print("PRODUCT SOLD @", get_date_for_issues_invoice[0])
       get_product_from_the_store_in_database = ProductTable.objects.get(id =get_product_sold )
-      print('information obtianed is ', get_product_from_the_store_in_database)
       get_number_available = int(get_product_from_the_store_in_database.available)
       get_sales_price = int(get_product_from_the_store_in_database.sales_price)
       
@@ -979,7 +941,6 @@ def salesPage(request):
       get_customer_information = CustomerDetails.objects.get( id =get_customer_full_name )
       get_shop_information = ShopsTable.objects.get( id =get_shop_name )
       get_date_for_issues_invoice = get_date_for_issues_invoice
-      print("Date for issues the invoice is ", get_date_for_issues_invoice)
       product_sold_in_cash_object = productSoldInCash(
         product_name = get_product_from_the_store_in_database,
         customer_full_name = get_customer_information,
@@ -1009,11 +970,6 @@ def salesPage(request):
       get_form_data = json.loads(request.POST.get('formData'))
       
       for data in get_form_data:
-        print("The customer full name is ", data['customer_full_name'])
-        print("The List of Product is ", data['product_name'])
-        print("The Numbers of Product nedded is ", data['number_of_product_nedeed'])
-        print("The Shop Name is  ", data['shop_name'])
-        print("The Date for issues The Invoices is  ", data['date_for_issues_invoice'])
         # for multiple form data submited
       
         customer_full_name = data['customer_full_name']
@@ -1021,15 +977,12 @@ def salesPage(request):
         
         product_name = data['product_name']
         number_to_loop = len(product_name)
-        print("The total number of product sent is ", number_to_loop)
-        print("The total number of product sent is ", product_name)
         shop_name = data['shop_name']
         number_of_product_nedeed = data['number_of_product_nedeed']
         date_for_issues_invoice = data['date_for_issues_invoice']
         get_current_user_login = User.objects.get(id =request.user.id )
         get_shop_information = ShopsTable.objects.get( id =shop_name )
         for item  in range(number_to_loop):
-          print("=========", item, product_name[item])
           get_product_from_the_store_in_database = ProductTable.objects.get(id =product_name[item] )
           get_number_available = int(get_product_from_the_store_in_database.available)
           get_sales_price = int(get_product_from_the_store_in_database.sales_price)
@@ -1112,20 +1065,17 @@ def salesPage(request):
     
     
     # today_date = datetime.datetime.now()
-    print( "--------------------",today_date)
     
     get_all_today_orders = CustomersOrders.objects.filter(delivery_date_expected=today_date )
     number_of_order_received_tody=get_all_today_orders.count()
     # today sales start here
     get_all_product_sold_today = productSoldInCash.objects.filter(date_for_issues_invoice = today_date)
-    # print(get_all_product_sold_today.total_product_cost)
     today_sales_sum = 0
     today_emergence_cost_sum = 0
     # get_emergence_info
     get_emergence_info = EmergenceInformations.objects.filter(spending_date = today_date)
     if get_all_product_sold_today.count():
       number_of_poduct_sold = get_all_product_sold_today.count()
-      print(number_of_poduct_sold)
       
       
       for product in get_all_product_sold_today:
@@ -1172,11 +1122,8 @@ def productPage(request):
     new_product = request.FILES['my_file']
     
     imported_data = dataset.load(new_product.read(), format='xlsx')
-    # print(imported_data)
     for x in imported_data:
       for y in imported_data:
-        print(y)
-        # print(data[:])
         value = ProductTable(
         
           product_name = y[0],
@@ -1234,7 +1181,6 @@ def ordersPage(request):
   if request.method == "POST" and request.POST.get("add_order"):
     form = CustomersOrdersForm(request.POST)
     if form.is_valid():
-      print('==========')
       instance = form.save(commit = False)
       # get_employee = EmployeeDetailInformations.objects.get(employee_username = request)
       instance.supervisor=request.user
@@ -1274,7 +1220,6 @@ def updateOrder(request, id):
   if request.method == "POST" and request.POST.get("update_order"):
     form = CustomersOrdersForm(request.POST, instance=get_order)
     if form.is_valid():
-      print('==========')
       instance = form.save(commit = False)
       # get_employee = EmployeeDetailInformations.objects.get(employee_username = request)
       instance.supervisor=request.user
@@ -1425,7 +1370,6 @@ def deleteUserAuthorizations(request, id):
 # updateEmployee
 def updateEmployeePage(request, id):
   get_employee_info_from_database = get_object_or_404(EmployeeDetailInformations, id= id)
-  print(get_employee_info_from_database)
   form1 = EmployeeDetailInformationsForm(instance= get_employee_info_from_database)
   try:
       get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
@@ -1585,20 +1529,17 @@ def manageInvoice(request):
   
   
   # today_date = datetime.datetime.now()
-  print( "--------------------",today_date)
   
   get_all_today_orders = CustomersOrders.objects.filter(delivery_date_expected=today_date )
   number_of_order_received_tody=get_all_today_orders.count()
   # today sales start here
   get_all_product_sold_today = productSoldInCash.objects.filter(date_for_issues_invoice = today_date)
-  # print(get_all_product_sold_today.total_product_cost)
   today_sales_sum = 0
   today_emergence_cost_sum = 0
   # get_emergence_info
   get_emergence_info = EmergenceInformations.objects.filter(spending_date = today_date)
   if get_all_product_sold_today.count():
     number_of_poduct_sold = get_all_product_sold_today.count()
-    print(number_of_poduct_sold)
     
     
     for product in get_all_product_sold_today:
@@ -1651,14 +1592,12 @@ def profomaInvoice(request):
     
     invoice_number_gen =increment_invoice_number()
     
-    print('===============>>>>>>>>', invoice_number_gen)
     
     form = productSoldInCashForm(request.POST)
     if (number_of_product_sold == 1):
       
       
       get_product_sold = get_product_sold[0]
-      print('::::::::::::::::::',get_product_sold )
       # if (len (get_product_sold) == 1):
       #   data = productSoldInCashForm
       # get_customer_full_name = request.POST.get('customer_full_name')
@@ -1669,9 +1608,7 @@ def profomaInvoice(request):
       get_number_of_product_nedeed = int(get_number_of_product_nedeed[0])
       get_shop_name = request.POST.get('shop_name[]')
       get_date_for_issues_invoice = request.POST.get('date_for_issues_invoice[]')
-      print("PRODUCT SOLD @", get_date_for_issues_invoice[0])
       get_product_from_the_store_in_database = ProductTable.objects.get(id =get_product_sold )
-      print('information obtianed is ', get_product_from_the_store_in_database)
       get_number_available = int(get_product_from_the_store_in_database.available)
       get_sales_price = int(get_product_from_the_store_in_database.sales_price)
       get_purchase_price = int(get_product_from_the_store_in_database.purchase_price)
@@ -1688,7 +1625,6 @@ def profomaInvoice(request):
       get_customer_information = CustomerDetails.objects.get( id =get_customer_full_name )
       get_shop_information = ShopsTable.objects.get( id =get_shop_name )
       get_date_for_issues_invoice = get_date_for_issues_invoice
-      print("Date for issues the invoice is ", get_date_for_issues_invoice)
       product_sold_in_cash_object = ManageInvoice(
         invoice_number = invoice_number_gen,
         invoice_status = 'Inprogress',
@@ -1718,17 +1654,9 @@ def profomaInvoice(request):
       messages.success(request, "Invoice Succesfully Saved")
       return redirect ("storeApp:salesPage")
     else:
-      print("**************Block for more than one item *********************")
       get_form_data = json.loads(request.POST.get('formData'))
       
       for data in get_form_data:
-        print("The customer full name is ", data['customer_full_name'])
-        print("The List of Product is ", data['product_name'])
-        print("The Numbers of Product nedded is ", data['number_of_product_nedeed'])
-        print("advance_paid is  ", data['advance_paid'])
-        print("The Shop Name is  ", data['shop_name'])
-        print("The Date for issues The Invoices is  ", data['date_for_issues_invoice'])
-        print("The advance_paid ", data['advance_paid'])
         # for multiple form data submited
       
         customer_full_name = data['customer_full_name']
@@ -1736,8 +1664,6 @@ def profomaInvoice(request):
         
         product_name = data['product_name']
         number_to_loop = len(product_name)
-        print("***The total number of product sent is ", number_to_loop)
-        print("The total number of product sent is ", product_name)
         shop_name = data['shop_name']
         number_of_product_nedeed = data['number_of_product_nedeed']
         get_advance_paid = data['advance_paid']
@@ -1745,7 +1671,6 @@ def profomaInvoice(request):
         get_current_user_login = User.objects.get(id =request.user.id )
         get_shop_information = ShopsTable.objects.get( id =shop_name )
         for item  in range(number_to_loop):
-          print("=========", item, product_name[item])
           get_product_from_the_store_in_database = ProductTable.objects.get(id =product_name[item] )
           get_number_available = int(get_product_from_the_store_in_database.available)
           get_sales_price = int(get_product_from_the_store_in_database.sales_price)
@@ -1805,20 +1730,17 @@ def profomaInvoice(request):
     
     
     # today_date = datetime.datetime.now()
-    print( "--------------------",today_date)
     
     get_all_today_orders = CustomersOrders.objects.filter(delivery_date_expected=today_date )
     number_of_order_received_tody=get_all_today_orders.count()
     # today sales start here
     get_all_product_sold_today = productSoldInCash.objects.filter(date_for_issues_invoice = today_date)
-    # print(get_all_product_sold_today.total_product_cost)
     today_sales_sum = 0
     today_emergence_cost_sum = 0
     # get_emergence_info
     get_emergence_info = EmergenceInformations.objects.filter(spending_date = today_date)
     if get_all_product_sold_today.count():
       number_of_poduct_sold = get_all_product_sold_today.count()
-      print(number_of_poduct_sold)
       
       
       for product in get_all_product_sold_today:
@@ -1891,9 +1813,7 @@ def generatePdfForInvoice(request, id ):
       get_subtotal += product_sold.total_product_cost
       get_invoice_issued_by = product_sold.supervisor
     
-    print(get_invoice_issued_by)
     count_filter_list_of_product_purchased_by_customer_in__same_date =filter_list_of_product_purchased_by_customer_in__same_date.count()
-    print("-----", count_filter_list_of_product_purchased_by_customer_in__same_date)
     context = {
       'get_logo': logo,
       'get_profoma_for':get_profoma_for,
@@ -1973,7 +1893,6 @@ def addAmountToItemFromInvoice(request,id ):
     amount_contain = get_invoice.advance_paid
     total_product_cost = int(get_invoice.total_product_cost)
     get_amount_to_add = request.POST.get('amount_advance_paid')
-    print("The type is ", get_amount_to_add)
     get_amount_to_add = int(get_amount_to_add)
     
     total_amount_paid = amount_contain + get_amount_to_add
