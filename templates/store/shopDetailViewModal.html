@@ -1,0 +1,36 @@
+<div class="modal  fade w3-animate-zoom" id="shopDetailViewModal{{shops.id}}">
+  <div class="modal-dialog  modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title"><strong> information about  <code>{{shops.shop_name}}</code> </strong></h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="card mb-4">
+          <div class="card-body">
+            <!-- <h5><span>shop id</span> : <code>{{shops.id}} </code></h5> -->
+            <h5><span>shop name</span> : <code>{{shops.shop_name}} </code></h5>
+            <h5><span>street located </span> : <code>{{shops.shop_street}} </code></h5>
+            <h5> <span>district located</span> : <code>{{shops.shop_district}} </code></h5>
+            <h5> <span>region located</span> : <code>{{shops.shop_region}} </code></h5>
+            <h5> <span>registered since </span> : <code>{{shops.shop_start_date}} </code></h5>
+            <h5> <span>phone number 2</span> : <code>{{shops.shops_phone_number2}} </code></h5>
+            <h5> <span>shop supervisor </span> : <code>{{shops.shop_supervisor}} </code></h5>
+           
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+

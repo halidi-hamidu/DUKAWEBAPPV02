@@ -1,0 +1,94 @@
+<div class="container-fluid" id="container-wrapper">
+
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Store Dashboard</h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="./">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Store Dashboard</li>
+    </ol>
+  </div>
+  
+  <div class="row mb-3">
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body" style="background-color: #000;color:#fff;">
+          <div class="row align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">last proudct added in store</div>
+              <div class="h5 mb-0 font-weight-bold text-white-800">{{get_last_products_received}}</div>
+              <div class="mt-2 mb-0 text-muted text-xs">
+                <span class="text-white mr-2"><i class="fas far fa-calendar-check"></i>{{get_last_products_received.created_at}}</span>
+                <!-- <span>ijumaa</span> -->
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fa-calendar fa-2x text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Earnings (Annual) Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body" style="background-color: #000;color:#fff;">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">product receiver </div>
+              <div class="h5 mb-0 font-weight-bold text-white-800">{{get_last_products_received.product_receiver}}</div>
+              <div class="mt-2 mb-0 text-muted text-xs">
+                <span class="text-white mr-2"><i class="fas far fa-calendar-check"></i> {{get_last_products_received.updated_at}}</span>
+               <br><span> <i class="fas far fas fa-phone"></i> {{get_last_products_received.product_receiver.employee_phone_number1}}</span>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fas fa-people-carry fa-2x text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- New User Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body" style="background-color: #000;color:#fff;">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">Store name</div>
+              <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">{{get_last_products_received.shop_info}}</div>
+              <div class="mt-2 mb-0 text-white text-xs">
+                <span class="text-success mr-2"><i class="fas far fa-calendar-check"></i>{{get_last_products_received.updated_at}} </span>
+                <!-- <span>friday</span> -->
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fas fa-store fa-2x text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body" style="background-color: #000;color:#fff;">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">supplier </div>
+              <div class="h5 mb-0 font-weight-bold text-white-800">{{get_last_products_received.supplier_full_name}}</div>
+              <div class="mt-2 mb-0 text-white text-xs">
+                <span class="text-success mr-2"><i class="fas far fa-calendar-check"></i> {{get_last_products_received.updated_at}}</span>
+                <br>
+               <span> <i class="fas far fas fa-phone"></i> {{get_last_products_received.supplier_full_name.supplier_phone_number}}</span>
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fas fa-people-carry fa-2x text-white"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>

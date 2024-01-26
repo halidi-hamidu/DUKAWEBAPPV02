@@ -1,0 +1,84 @@
+
+{% include './receiverModal.html' %}
+
+<div class="tabe_section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 mb-4">
+        <div class="card">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <!-- <h6 class="m-0 font-weight-bold text-primary">Store</h6> -->
+            <!-- <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#employeeModal"
+            id="#employeeModal"><i class="fas fa-plus p-1"></i>employee</button> -->
+            <!-- <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#employeeModal"
+            id="#employeeModal"><i class="fas fa-plus p-1"></i>acc</button> -->
+            <!-- <button type="button" class="btn  btn-outline-primary" data-toggle="modal" data-target="#shopModal"
+            id="#shopModal"><i class="fas fa-plus p-1"></i>Shop</button>
+            <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#productModal"
+            id="#productModal"><i class="fas fa-plus p-1"></i>Product</button>
+            <button type="button" class="btn  btn-outline-primary" data-toggle="modal" data-target="#supplierModal"
+            id="#supplierModal"><i class="fas fa-plus p-1"></i>Supplier</button> -->
+            <button type="button" class="btn mx-1 btn-outline-dark" data-toggle="modal" data-target="#productSupplierReceiverModal"
+            id="#productSupplierReceiverModal"><i class="fas fa-plus p-1"></i>product to store</button>
+           
+            <button type="button" class="btn  btn-outline-dark" data-toggle="modal" data-target="#productQuantityInStoreModal"
+            id="#productQuantityInStoreModal"><i class="fas fa-edit p-1"></i> product quantity in store</button>
+          </div>
+          {% if get_all_products_received %}
+          <div class="table-responsive pl-2">
+           
+            <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+              <thead class="" style="background-color: #808080;color:#fff;">
+                <tr>
+                  <th>PRODUCT</th>
+                  <th>SALES PRICE</th>
+                  <th>AVAILABLE</th>
+                  <th>SKU OR CODE</th>
+                 <th>UNIT CODE</th>
+                  <th>BRAND</th>
+                  <th>MODEL</th>
+                  <!-- <th>Shop</th>
+                  <th>Receiver</th>
+                  <th>phone no</th> -->
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for product in get_all_products_received %}
+                <tr style="background-color: #808080;color:#fff;">
+                  <td><a href="#" style="background-color: #808080;color:#fff;">{{product.product_name}}</a></td>
+                  <td style="background-color: #808080;color:#fff;">{{product.sales_price}}</td>
+                  <td>{{product.available}}</td>
+                  <td>{{product.sku_code}}</td>
+                  <!-- <td>{{product.supplier_full_name.supplier_phone_number}}</td> -->
+                  <td>{{product.unit_code}}</td>
+                  <td>{{product.brand}}</td>
+                  <td>{{product.product_model}}</td>
+                  {% comment %} <td>{{product.product_receiver}}</td>
+                  <td>{{product.product_receiver.employee_phone_number1}}</td> --> {% endcomment %}
+                  <td>
+                    <a data-toggle="modal" data-target="#productInStoredDetailViewModal{{product.id}}" class="btn btn-sm btn-outline-primary text-primary"><i class="fas fas fa-eye"></i></a>
+                    <!-- update button is here  -->
+                    <a  data-toggle="modal" data-target="#updateproductInStoreModal{{product.id}}"
+                    class="btn btn-sm btn-outline-warning"  ><i class="fas fas fas fa-pen"></i></a>
+                    <a  data-toggle="modal" data-target="#deletestoreProductModal" class="btn btn-sm btn-outline-danger"><i class="fas fas fas far fa-trash-alt"></i></a>
+                  </td>
+                </tr>
+                {% include './deletestoreProductModal.html' %}
+                {% include './productInStoredDetailViewModal.html' %}
+                {% include './updateproductInStoreModal.html' %}
+               {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% endif %}
+          <div class="card-footer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% include './productQuantityInStoreModal.html' %}
+{% include './employeeModal.html' %}
+{% include './shopModal.html' %}
+{% include './productModal.html' %}

@@ -1,0 +1,93 @@
+<div class="container-fluid" id="container-wrapper">
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <h1 class="h3 mb-0 text-gray-800">Employees</h1>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="./">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Employees</li>
+  </ol>
+</div>
+
+<div class="row mb-3">
+  <!-- Earnings (Monthly) Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card h-100">
+      <div class="card-body" style="background-color: #808080;color:#fff;">
+        <div class="row align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-uppercase mb-1">Total Employees</div>
+            <div class="h5 mb-0 font-weight-bold text-white-800">{{get_number__of_all_employee}}</div>
+            <div class="mt-2 mb-0 text-muted text-xs">
+              <!-- <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span> -->
+              <!-- <span>Since last month</span> -->
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fas fa-users fa-2x text-white"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Earnings (Annual) Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card h-100">
+      <div class="card-body" style="background-color: #808080;color:#fff;">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-uppercase mb-1">Employee with active account</div>
+            <div class="h5 mb-0 font-weight-bold text-white-800">{{get_number__of_all_employee_with_account}}</div>
+            <div class="mt-2 mb-0 text-muted text-xs">
+              <!-- <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+              <span>Since last years</span> -->
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fas fa-user-shield fa-2x text-white"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- New User Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card h-100">
+      <div class="card-body" style="background-color: #808080;color:#fff;">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-uppercase mb-1">USERS WITH NO ACCOUNT</div>
+            <div class="h5 mb-0 mr-3 font-weight-bold text-white-800">{{get_number__of_all_employee_with_no_account}}</div>
+            <div class="mt-2 mb-0 text-muted text-xs">
+              <!-- <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 20.4%</span>
+              <span>Since last month</span> -->
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fas fa-users fa-2x text-white"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Pending Requests Card Example -->
+  <div class="col-xl-3 col-md-6 mb-4">
+    <div class="card h-100">
+      <div class="card-body" style="background-color: #808080;color:#fff;">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <div class="text-xs font-weight-bold text-uppercase mb-1">PENDING EMPLOYEE ACCOUTS</div>
+            <div class="h5 mb-0 font-weight-bold text-white-800">0</div>
+            <div class="mt-2 mb-0 text-muted text-xs">
+              <!-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+              <span>Since yesterday</span> -->
+            </div>
+          </div>
+          <div class="col-auto">
+            <i class="fas fas fa-user-lock fa-2x text-white"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,101 @@
+<div class="container-fluid" id="container-wrapper">
+
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Products or Service offered </h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="./">Home</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Products or Service offered </li>
+    </ol>
+  </div>
+<!--   
+  <div class="row mb-3">
+   
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">Today Cash sales</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{today_sales_sum}} Tsh/=</div>
+              <div class="mt-2 mb-0 text-muted text-xs">
+                {% if get_all_product_sold_today %}
+   
+               
+                <span><i class="fas fas far fa-calendar-check fa-1x"></i> {{get_all_product_sold_today.date_product_sold}}</span>
+           
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fas fas fa-money-check fa-2x text-primary"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">emergence cost</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{today_emergence_cost_sum}}Tsh/=</div>
+              <div class="mt-2 mb-0 text-muted text-xs">
+                {% if get_emergence_info %}
+                {% for emergence in get_emergence_info %}
+                <span class="text-success mr-2"><i class="fas fas fa-exclamation-triangle"></i> {{emergence.what_emergence}}</span>
+                
+                <span>, <i class="fas fas far fa-calendar-check fa-1x"></i> {{emergence.spending_date}}</span> <br>
+                {% endfor %}
+                {% endif %}
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fas fas fa-money-bill-alt fa-2x text-warning"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">Amount of money remains </div>
+              <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{amount_remain_after_deducting_emergence_cost}} Tsh/=</div>
+              <div class="mt-2 mb-0 text-muted text-xs">
+                <span><i class="fas fas far fa-calendar-check fa-1x"></i> {{get_all_product_sold_today.date_product_sold}}</span>
+
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fas fas fa-money-check-alt fa-2x text-success"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="row no-gutters align-items-center">
+            <div class="col mr-2">
+              <div class="text-xs font-weight-bold text-uppercase mb-1">PENDING ORDERS</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">{{number_of_order_received_tody}}</div>
+              <div class="mt-2 mb-0 text-muted text-xs">
+               
+              </div>
+            </div>
+            <div class="col-auto">
+              <i class="fas fas fas fa-cart-arrow-down fa-2x text-info"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  </div>

@@ -1,0 +1,74 @@
+<div class="table_section">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 mb-4">
+        <div class="card">
+          <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <!-- <h6 class="m-0 font-weight-bold text-primary">My Emloyees</h6> -->
+            <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#employeeModal"
+            id="#employeeModal"><i class="fas fa-plus p-1"></i>employee</button>
+
+            <button type="button" class="btn btn-outline-dark" data-toggle="modal" data-target="#employeeAccountModal"
+            id="#employeeAccountModal"><i class="fas fa-plus p-1"></i>employee account</button>
+          </div>
+          {% if get_number__of_all_employee%}
+          <div class="table-responsive pl-2">
+            <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+              <thead class="" style="background-color: #808080;color:#fff;">
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Gender</th>
+                  <th>Email</th>
+                  <!-- <th>Since</th> -->
+                  <th>Phonumber1</th>
+                  <!-- <th>Phonumber2</th> -->
+                  <th>Residence</th>
+                  <th>Username</th>
+                  <!-- <th>Password</th> -->
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for employee in get_all_employee %}
+                <tr style="background-color: #808080;color:#fff;">
+                  <td>{{forloop.counter}}</td>
+                  <td><a href="#" style="background-color: #808080;color:#fff;">{{ employee.employee_Full_name}}</a></td>
+                  <td>{{employee.employee_gender}}</td>
+                  <td>{{employee.employee_email_address}}</td>
+                  <!-- <td>{{employee.employee_start_date}}</td> -->
+                  <td>{{employee.employee_phone_number1}}</td>
+                  <!-- <td>{{employee.employee_phone_number2}}</td> -->
+                  <td>{{employee.employee_residence_area}}</td>
+                  <td>{{employee.employee_username}}</td>
+                  <!-- <td>{{employee.employee_password}}</td> -->
+                  <td>
+                    <a data-toggle="modal" data-target="#employeeDetailViewModal{{employee.id}}" class="btn btn-sm btn-outline-primary text-primary"><i class="fas fas fa-eye"></i></a>
+                    <!-- <a  data-toggle="modal" data-target="#updateEmployeeModal{{employee.id}}"
+                    class="btn btn-sm btn-outline-warning"  ><i class="fas fas fas fa-pen"></i></a> -->
+                    <a  data-toggle="modal" data-target="#deleteUserModal" class="btn btn-sm btn-outline-danger"><i class="fas fas fas far fa-trash-alt"></i></a>
+                  </td>
+                </tr>
+                {% include './deleteUserModal.html' %}
+               {% include './employeeDetailViewModal.html' %}
+               {% include './updateEmployeeModal.html' %}
+              {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          {% else %}
+          <div class="table-responsive pl-2">
+            <div class="empty_content">
+              <p> No employee added yet! </p>
+            </div>
+          </div>
+          {% endif %}
+          <div class="card-footer"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include './employeeModal.html' %}
+{% include './employeeAccountModal.html' %}

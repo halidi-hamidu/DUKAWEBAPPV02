@@ -1,0 +1,75 @@
+<!-- The Modal -->
+<div class="modal  fade w3-animate-zoom" id="updateShopModal{{shops.id}}">
+  <div class="modal-dialog  modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title"><strong>update <code>{{shops.shop_name}}</code></strong></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="card mb-4">
+          <!-- <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h6 class="m-0 font-weight-bold text-primary">Form Basic</h6>
+          </div> -->
+          <div class="card-body">
+            <form method="post" action="">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input type="text"  name="shop_id" value="{{shops.id}}"  style="display:None;">
+                    <label for="ProductName">Shop name</label>
+                    <input type="text" name= "shop_name" value ="{{shops.shop_name}}" class="form-control">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                 
+                 <div class="form-group">
+                   <label for="quantity" >Street</label>
+                   <input type="text" name="shop_street" value="{{shops.shop_street}}" class="form-control">
+                 </div>
+                 <div class="form-group">
+                   <div class="custom-file">
+                     <label  for="costOfEachProudct">District</label>
+                     <input type="text" name="shop_district" value="{{shops.shop_district}}" class="form-control">
+                   </div>
+                 </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="Supplier" >Region</label>
+                    <input type="text" name="shop_region" value = "{{shops.shop_region}}" class="form-control">
+                  </div>
+                 
+                 {% if get_all_employee %}
+              <div class="form-group">
+                <label for="select2SinglePlaceholder" class="d-block"> select supervisor</label>
+                <select class="select2-single-placeholder-duka form-control" name="shop_supervisor"id="select2SinglePlaceholderShopSupervisors" style="width: 100%;padding:10px">
+                  <option selected value="{{shops.shop_supervisor.id}}">{{shops.shop_supervisor}}</option>
+                  {% for employee in get_all_employee %}
+                  <option value="{{employee.id}}">{{employee}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              {% endif %}
+               </div>
+               <button type="submit" class="btn btn-outline-primary ml-3" name="update_shop" value="update_shop">update shop</button>
+            
+              </div>
+             </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>

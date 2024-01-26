@@ -1,0 +1,39 @@
+<div class="modal  fade w3-animate-zoom" id="productSoldDetailViewModal{{product_sold.id}}">
+  <div class="modal-dialog  modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h5 class="modal-title"><strong> information about  <code>{{product_sold.product_name}}</code> </strong></h5>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="card mb-4">
+          <div class="card-body">
+            <!-- <h5><span>shop id</span> : <code>{{shops.id}} </code></h5> -->
+            <h5><span>product</span> : <code>{{product_sold.product_name}} </code></h5>
+            <h5><span>@ cost  </span> : <code>{{product_sold.product_name.sales_price}} </code></h5>
+            <h5><span>quantity sold  </span> : <code>{{product_sold.number_of_product_nedeed}} </code></h5>
+            <h5><span>total product cost  </span> : <code>{{product_sold.total_product_cost}} </code></h5>
+            <!-- <h5><span>product was supplied by  </span> : <code>{{product_sold.supplier_full_name}} </code></h5> -->
+            <h5><span>product  sold from shop  </span> : <code>{{product_sold.shop_name}} </code></h5>
+            <h5><span>product  sold  by   </span> : <code>{{product_sold.supervisor}} </code></h5>
+            <!-- <h5><span>product  sold from shop  </span> : <code>{{product_sold.shop_info}} </code></h5> -->
+            <h5><span>product  sold  since  </span> : <code>{{product_sold.date_product_sold}} </code></h5>
+            <h5><span>store remain   </span> : <code>{{product_sold.store_remain}} </code></h5>   
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,85 @@
+{% extends '../store/base.html' %}
+{% load static %}
+{% block title %} All Invoice {% endblock %}
+{% block content %}
+
+<div class="all_invoices_status_bar">
+    <div class="container">
+        <div class="row">
+            <div class="col-md">
+                <div class="inner_section">
+                    <h1>Invoices </h1>
+                   <ol class="breadcrumb">
+                   <li class="breadcrumb-item"><a href="./">Home</a></li>
+                   <li class="breadcrumb-item active" aria-current="page">Invoices List</li>
+                 </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% if get_all_invoices %}
+<div class="tabe_section">
+    <div class="container-fluid">
+        <div class="row">
+            <div class='col-xl-12 col-lg-12 mb-4'>
+                <div class="table-responsive pl-2">
+            <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+              <thead class="" style="background-color: #808080;color:#fff;">
+                <tr>
+                
+                  <th>Customer </th>
+                  <th>Product </th>
+                  <th>@ </th>
+                  <th>QTY</th>
+                  <th>Total </th>
+                  <th>Invoice </th>
+                  <th>RMN</th>
+                  <th>Status</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {% for profoma in get_all_invoices %}
+                <tr style="background-color: #808080;color:#fff;">
+                  
+                  <td><a href="#" style="background-color: #808080;color:#fff;">{{profoma.customer_full_name}}</a></td>
+                  <td><a href="#" style="background-color: #808080;color:#fff;">{{profoma.product_name}}</a></td>
+                  
+                  <td>{{profoma.product_name.sales_price}}</td>
+
+                
+                  
+                  <td>{{profoma.number_of_product_nedeed}}</td>
+                  <td>{{profoma.total_product_cost}}</td>
+                  <td>{{profoma.invoice_number}}</td>
+                  <td>{{profoma.amount_remain_to_be_paid}}</td>
+                  <td>
+                    <code style="color:#000;background:#fff;padding:5px">{{profoma.invoice_status}} </code>  
+                  </td>
+                
+                  
+                 
+                  
+                </tr>
+                {% include './addAmountToItemFromInvoice.html' %}
+                {% include './cancelprofomaInvoiceModal.html' %}
+                {% include './askToPrintprofoma.html' %}
+                
+               {% endfor %}
+          
+              </tbody>
+            </table>
+          </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% else %}
+
+
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends './base.html' %}
+{% load static %}
+{% block title %} user Authorizations {% endblock %}
+{% block content %}
+<div class="container-fluid" id="container-wrapper">
+
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">User Authorizations </h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="./">User-Authorizations</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Authorization </li>
+    </ol>
+  </div>
+  </div>
+  <div class="user_authorizations_sections">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-body">
+              {% if update == True %}
+              <form action="" method="post">
+                {% csrf_token %}
+              {{form.as_p}}
+              <div class="button_section">
+                <button type="submit" class="btn btn-primary pl-4 pr-4" name="update_user_auth" value="update_user_auth">update user Authorizations</button>
+              </div>
+              </form>
+              {% endif %}
+              {% if update == False %}
+              <form action="" method="post">
+                {% csrf_token %}
+              {{form.as_p}}
+              <div class="button_section">
+                <button type="submit" class="btn btn-primary pl-4 pr-4" name="add_user_auth" value="update_user_auth">Authorize user</button>
+              </div>
+              </form>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% if get_all_user_authorizations_who_can %}
+        <div class="col-md-6">
+          {% for authorized in get_all_user_authorizations_who_can %}
+          <div class="card mt-4">
+            <div class="card-body" id="userdataTable">
+              <h6>user : {{ authorized.select_user}}</h6>
+              
+              {% if authorized.view_dashboard %}
+              <h6>can View dashboard details </h6>
+              {% else %}
+              <h6><code> can not View dashboard details</code></h6>
+              {% endif %}
+
+              {% if authorized.manage_employees %}
+              <h6>can manage employees details </h6>
+              {% else %}
+              <h6><code> can not manage employees details</code> </h6>
+              {% endif %}
+              
+              {% if authorized.manage_shop %}
+              <h6>can manage shop details </h6>
+              {% else %}
+              <h6><code> can not manage shop details</code> </h6>
+              {% endif %}
+              
+              {% if authorized.manage_product %}
+              <h6>can manage product details </h6>
+              {% else %}
+              <h6><code> can not manage product details</code> </h6>
+              {% endif %}
+              
+              {% if authorized.manage_supplier %}
+              <h6>can manage supplier details </h6>
+              {% else %}
+              <h6><code> can not manage supplier details </code></h6>
+              {% endif %}
+              
+              
+              {% if authorized.manage_store %}
+              <h6>can manage store details </h6>
+              {% else %}
+              <h6><code> can not manage store details </code></h6>
+              {% endif %}
+              
+              
+              {% if authorized.manage_sales %}
+              <h6>can manage sales details </h6>
+              {% else %}
+              <h6><code> can not manage sales details </code></h6>
+              {% endif %}
+              
+              {% if authorized.manage_orders %}
+              <h6>can manage customer orders  </h6>
+              {% else %}
+              <h6><code> can not manage  customer orders</code>  </h6>
+              {% endif %}
+              
+              {% if authorized.manage_emergence %}
+              <h6>can manage shop emergence  </h6>
+              {% else %}
+              <h6><code> can not manage shop emergence </code>  </h6>
+              {% endif %}
+
+              {% if authorized.manage_company_stock_or_assets %}
+              <h6>can manage company stock </h6>
+              {% else %}
+              <h6><code> can not manage company stock</code>  </h6>
+              {% endif %}
+              
+              
+              {% if authorized.manage_authorizations %}
+              <h6>can manage other user Authorization  </h6>
+              {% else %}
+              <h6><code> can not manage other user Authorization </code>  </h6>
+              {% endif %}
+              <div class="button_section mt-4">
+                <a href="{% url 'storeApp:updateUserAuthorizations' authorized.id %}" class="update">Update</a>
+                <a href="{% url 'storeApp:deleteUserAuthorizations' authorized.id %}" class="delete">Delete</a>
+                {% if authorized.view_dashboard == False and authorized.manage_sales == False %}
+                 <a  data-toggle="modal" data-target="#activateUserAuthorizations" class="update">Activate {{authorized.select_user}} Acount</a>
+                {% else %}
+                <a  data-toggle="modal" data-target="#deactivateUserAuthorizations"    class="delete">Deactivate {{authorized.select_user}} account</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+          {% include './activateUserAuthorizations.html' %}
+          {% include './deactivateUserAuthorizations.html' %}
+
+          {% endfor %}
+        </div>
+        {% else  %}
+        <div class="col-md-6">
+          <div class="empty_content">
+            <!-- =========== no orders yet ============ -->
+            <p>NO USER AUTHORIZED YET </p>
+          </div>
+         </div>
+        {% endif %}
+        
+      </div>
+    </div>
+  </div>
+{% endblock %}

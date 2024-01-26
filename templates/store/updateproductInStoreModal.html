@@ -1,0 +1,98 @@
+<div class="modal fade" id="updateproductInStoreModal{{product.id}}" tabindex="-1" role="dialog"
+aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalCenterTitle">update information of : <code>{{product.product_name}}</code></h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="card mb-4">
+        <!-- <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Form Basic</h6>
+        </div> -->
+        <div class="card-body">
+          <form action ="" method="POST">
+            {% csrf_token %}
+           <div class="row">
+             <div class="col-md-12">
+          
+              {% if get_all_products %}
+              <div class="form-group">
+                <input type="text" name="store_id" value="{{product.id}}" style="display: none;">
+                <label for="select2SinglePlaceholder" class="d-block"> select product</label>
+                <select class="select2-single-placeholder-product form-control" name="product_name" id="select2SinglePlaceholderproduct1" style="width: 100%;padding:10px">
+                  <option value="{{product.product_name.id}}">{{product.product_name}}</option>
+                  {% for products in get_all_products %}
+                  <option value="{{ products.id }}">{{products}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              {% endif %}
+              <div class="form-group">
+                <label for="validationServer01">how much @</label>
+                <input type="number" class="form-control " name="product_cost" value="{{product.product_cost}}"
+                  placeholder="Tsh/="  required>
+                
+              </div>
+              <div class="form-group">
+                <label for="validationServer01">Quantity</label>
+                <input type="number" class="form-control " 
+                  placeholder="number of products" name="product_quantity" value="{{product.product_quantity}}" required>
+              </div>
+              <div class="form-group">
+                <label for="validationServer01">Amount to sell</label>
+                <input type="number" class="form-control " 
+                  placeholder="number of products" name="amount_to_sold" value="{{product.amount_to_sold}}" required>
+              </div>
+              {% if get_all_suppliers %}
+              <div class="form-group">
+                <label for="select2SinglePlaceholder" class="d-block"> select Supplier</label>
+                <select class="select2-single-placeholder-supplier form-control" name="supplier_full_name"  id="select2SinglePlaceholder" style="width: 100%;padding:10px">
+                  <option value="{{product.supplier_full_name.id}}">{{product.supplier_full_name}}</option>
+                  {% for suppliers in get_all_suppliers %}
+                  <option value="{{suppliers.id}}">{{suppliers}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              {% endif %}
+              {% if get_all_shops %}
+              <div class="form-group">
+                <label for="select2SinglePlaceholder" class="d-block"> select Shop</label>
+                <select class="select2-single-placeholder-duka form-control" name="shop_info"  id="select2SinglePlaceholderduka" style="width: 100%;padding:10px">
+                  <option value="{{product.shop_info.id}}">{{product.shop_info}}</option>
+                  {% for shop in get_all_shops %}
+                  <option value="{{shop.id}}">{{shop}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              {% endif %}
+              {% if get_all_employee %}
+              <div class="form-group">
+                <label for="select2SinglePlaceholder" class="d-block"> select receiver</label>
+                <select class="select2-single-placeholder-duka form-control" name="product_receiver" id="select2SinglePlaceholderReceiver" style="width: 100%;padding:10px">
+                  <option value="{{product.product_receiver.id}}">{{product.product_receiver}}</option>
+                  {% for user in get_all_employee %}
+                  <option value="{{user.id}}">{{user}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              {% endif %}
+           
+            <button type="submit" class="btn btn-outline-primary ml-1" name="update_store_product_record" value="update_store_product_record">update store product records</button>
+          
+           </div>
+          </form>   
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+   
+    </div>
+  </div>
+</div>
+</div>
+</div>

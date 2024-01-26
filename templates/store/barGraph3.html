@@ -1,0 +1,83 @@
+<div class="bar_graph">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div style="width:100%;">
+          <canvas id="chart3"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+// var chart = new Chart(ctx).Line(data, options);
+var canvas = document.getElementById('chart3');
+new Chart(canvas, {
+  type: 'bar',
+  data: {
+    labels: ['sembe', 'unga wa ngano', 'biscuti nice g10', 'azam juice ml-100', 'maji ya uhai lita 10', 'sembe kg50', 'unga wa ngano kg 50', 'biscuti nice g50', 'azam juice ml-300', 'maji ya uhai lita 20'],
+    datasets: [{
+      label: 'product in',
+      yAxisID: 'A',
+      data: [10, 96, 84, 76, 69,200, 56, 84, 86, 70]
+    }, {
+      label: 'product out',
+      yAxisID: 'B',
+      data: [100, 50, 20, 0, 40, 200, 50, 10, 20, 40]
+    }]
+  },
+  options: {
+    scaleUse2Y: true,
+    scales: {
+      yAxes: [{
+        id: 'A',
+        type: 'linear',
+        position: 'left',
+       
+      }, 
+      {
+        id: 'B',
+        type: 'linear',
+        position: 'right',
+        // ticks: {
+        //   max: 1,
+        //   min: 0
+        // }
+      }],
+      xAxes: [{
+                ticks: {
+                    autoSkip: false,
+                    maxRotation: 80,
+                    minRotation: 20
+                }
+            }]
+
+      
+    }
+  }
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
