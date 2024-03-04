@@ -40,3 +40,25 @@ class ProductSoldInCashSerializer(serializers.ModelSerializer):
     class  Meta:
         model = productSoldInCash
         fields = '__all__'
+
+class AuthorizeUsersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AuthorizeUsers
+        fields = '__all__'
+
+
+class CompanyStockOrAssetsSerilizer(serializers.ModelSerializer):
+    class Meta:
+        model = CompanyStockOrAssets
+        fields  = '__all__'
+
+
+class ManageInvoiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ManageInvoice
+        fields = '__all__'
+
+class InvoiceNumbersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = InvoiceNumbers
+        fields = '__all__'

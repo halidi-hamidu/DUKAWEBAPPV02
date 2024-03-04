@@ -1961,8 +1961,13 @@ class ProductTableListView(generics.ListCreateAPIView):
   queryset = ProductTable.objects.all()
   serializer_class = ProductTableSerializer
 
-
+#EmployeeDetailInformations api  for 1.List and 2.Post data
 class EmployeeDetailInformationsListView(generics.ListCreateAPIView):
+  queryset = EmployeeDetailInformations.objects.all()
+  serializer_class = EmployeeDetailInformationsSerializer
+
+# EmployeeDetailInformations api for 3.Update and 4.Delete
+class EmployeeDetailInformationsAPIView(generics.RetrieveUpdateDestroyAPIView):
   queryset = EmployeeDetailInformations.objects.all()
   serializer_class = EmployeeDetailInformationsSerializer
 
@@ -1981,3 +1986,21 @@ class ProductAndSupplierAndReceiverTableListView(generics.ListCreateAPIView):
 class ProductSoldInCashSerializerListView(generics.ListCreateAPIView):
   queryset = productSoldInCash.objects.all()
   serializer_class = ProductSoldInCashSerializer
+
+# AuthorizeUsersSerializer
+class AuthorizeUsersSerializerListView(generics.ListCreateAPIView):
+  queryset = AuthorizeUsers.objects.all()
+  serializer_class = AuthorizeUsersSerializer
+
+class CompanyStockOrAssetsSerilizerListView(generics.ListCreateAPIView):
+  queryset = CompanyStockOrAssets.objects.all()
+  serializer_class = CompanyStockOrAssetsSerilizer
+
+class ManageInvoiceSerializerListView(generics.ListCreateAPIView):
+  queryset = ManageInvoice.objects.all()
+  serializer_class = ManageInvoiceSerializer
+
+class InvoiceNumbersSerializerListView(generics.ListCreateAPIView):
+  queryset = InvoiceNumbers.objects.all()
+  serializer_class =  InvoiceNumbersSerializer
+  

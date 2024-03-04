@@ -5,9 +5,14 @@ from .views import CustomerDetailsListCreateView
 from .views import ShopBrandMainLogoListView
 from .views import ProductTableListView
 from .views import EmployeeDetailInformationsListView
+from .views import EmployeeDetailInformationsAPIView
 from .views import ShopsTableListView
 from .views import ProductAndSupplierAndReceiverTableListView
 from .views import ProductSoldInCashSerializerListView
+from .views import AuthorizeUsersSerializerListView
+from .views import CompanyStockOrAssetsSerilizerListView
+from .views import ManageInvoiceSerializerListView
+from .views import InvoiceNumbersSerializerListView
 # from .views import GeneratePdf
 
 app_name = 'storeApp'
@@ -54,14 +59,19 @@ urlpatterns = [
     path('full-paid-invoices', views.fullPaidinvoices, name="fullPaidinvoices"),
     path('all-invoices', views.allInvoicesList, name='allInvoicesList'),
 
-    # api urls hizi ndo endpoint zanguu baadhii
-    path('api/customers-details/', CustomerDetailsListCreateView.as_view(), name='customer-details-list-create'),
-    path('api/shops-logo/', ShopBrandMainLogoListView.as_view(), name='shopLogo'),
-    path('api/products-list', ProductTableListView.as_view(), name='productList'),
-    path('api/employee-list/', EmployeeDetailInformationsListView.as_view(), name='employee-list'),
-    path('api/shops-list/', ShopsTableListView.as_view(), name='shopsList'),
-    path('api/products-recived-store-direct/', ProductAndSupplierAndReceiverTableListView.as_view(), name='productAndSupplierAndReceiver'),
-    path('api/product-solid-in-cash', ProductSoldInCashSerializerListView.as_view(), name='productSolidIncash')
+    # api urls endpoint.
+    path('api/customer/', CustomerDetailsListCreateView.as_view(), name='customer-details-list-create'),
+    # path('api/shops-logo/', ShopBrandMainLogoListView.as_view(), name='shopLogo'),
+    path('api/product', ProductTableListView.as_view(), name='productList'),
+    path('api/employee/', EmployeeDetailInformationsListView.as_view(), name='employeeList'),
+    path('api/employee/<uuid:pk>/', EmployeeDetailInformationsAPIView.as_view(), name='employeeUpadteOrDelete'),
+    path('api/shop/', ShopsTableListView.as_view(), name='shopsList'),
+    path('api/product-recived-store-direct/', ProductAndSupplierAndReceiverTableListView.as_view(), name='productAndSupplierAndReceiver'),
+    path('api/product-solid-in-cash', ProductSoldInCashSerializerListView.as_view(), name='productSolidIncash'),
+    path('api/user-auth', AuthorizeUsersSerializerListView.as_view(), name = 'userAuth'),
+    path('api/assets', CompanyStockOrAssetsSerilizerListView.as_view(), name = 'assets'),
+    path('api/invoices', ManageInvoiceSerializerListView.as_view(), name='invoices'),
+    path("api/invoice-numbers", InvoiceNumbersSerializerListView.as_view(), name = 'invoicesNumbers')
 
 
     
