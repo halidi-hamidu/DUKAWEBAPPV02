@@ -8,6 +8,21 @@ class CustomerDetailsSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+    def validate_customer_phone_number(self, value):
+        if not value.isdigit():
+            raise serializers.ValidationError("Invalid phone number. Must contain only digits.")
+        return value
+
+        
+    def validate_customer_full_name(self, value):
+        if not value.isspace():
+            raise serializers.ValidationError("Invalid characters in customer_full_name. Use only spaces.")
+        return value
+
+    def validate(self, data):
+        return data
+
+
 
 class ShopBrandMainLogoSerializer(serializers.ModelSerializer):
     class Meta:
