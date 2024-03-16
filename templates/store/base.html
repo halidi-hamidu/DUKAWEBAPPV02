@@ -521,8 +521,19 @@
     {% endif %}
     {% endfor %}
   
+<script>
+    // Disable back and forward buttons
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
+</script>
+  <script>
+    // Disable caching
+    window.onunload = function() {};
+    window.history.replaceState(null, null, window.location.href);
+</script>
 
-  
   
   </body>
 

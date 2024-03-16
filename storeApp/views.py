@@ -35,12 +35,21 @@ from .resources import ProductTableResource
 from django.views.generic.edit import FormView
 from django.http import JsonResponse
 import json
+from django.views.decorators.cache import cache_control
 # from .forms import Formset 
 #  Create your views here.
 #Creating a class based view
 from rest_framework import generics
 from .serializers import *
 
+
+# views.py
+from django.shortcuts import render
+
+def custom_404(request, exception=None):
+    return render(request, 'store/errors/404.html', status=404)
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def generatePdf(request, id ):
   try:
     get_logo = ShopBrandMainLogo.objects.all()[:1]
@@ -102,7 +111,7 @@ def generatePdf(request, id ):
 
 
       
-      
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)     
 def customerDetails(request):
   if request.method == "POST" and request.POST.get('customer_info'):
      form = customerDetailsForm(request.POST)
@@ -119,7 +128,7 @@ def customerDetails(request):
     return render (request, template_name , context)
        
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def importExcelFile (request):
   if request.method == "POST":
     product_resource = ProductTableResource()
@@ -157,8 +166,11 @@ def importExcelFile (request):
     }
     return render (request, template_name, context)   
 # storePage
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def testPage(request):
   ResourceLoader.create_module()
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def loginPage(request):
   if request.method == "POST":
     # login(request, request.user)
@@ -193,13 +205,11 @@ def loginPage(request):
     context = {}
     return render(request, template_name, context)
 
-@cache_control(no_cache=True, must_revalidate=True, no_store=True)
-@login_required(login_url=LOGIN_URL)
 def logoutPage(request):
   logout(request)
   return redirect("storeApp:loginPage")
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url=LOGIN_URL)
 def homepage(request):
   try:
@@ -1118,7 +1128,8 @@ def salesPage(request):
     }
     return render (request, template_name, context)
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def productPage(request):
   if request.method == "POST" and request.POST.get('add_product'):
     product_resource = ProductTableResource()
@@ -1180,7 +1191,8 @@ def productPage(request):
   }
   return render(request, template_name, context)
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def ordersPage(request):
   if request.method == "POST" and request.POST.get("add_order"):
     form = CustomersOrdersForm(request.POST)
@@ -1212,6 +1224,8 @@ def ordersPage(request):
   return render(request, template_name, context)
 
 # changeOrderStatus
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def changeOrderStatus(request, id):
   get_order_to_change = CustomersOrders.objects.filter(id = id).update(order_status = "Completed")
   get_order = CustomersOrders.objects.get(id = id)
@@ -1219,6 +1233,8 @@ def changeOrderStatus(request, id):
   return redirect("storeApp:ordersPage")
 
 # updateOrder
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def updateOrder(request, id):
   get_order = get_object_or_404(CustomersOrders, id=id)
   if request.method == "POST" and request.POST.get("update_order"):
@@ -1254,6 +1270,8 @@ def updateOrder(request, id):
 
 
 # deleteOrder
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def deleteOrder(request, id):
   get_order = get_object_or_404(CustomersOrders, id =id)
   get_order.delete()
@@ -1261,6 +1279,8 @@ def deleteOrder(request, id):
   return redirect ("storeApp:ordersPage")
 
 # emergencePage
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def emergencePage(request):
   if request.method == "POST" and request.POST.get("add_emergence"):
     form = EmergenceInformationsForm(request.POST)
@@ -1284,6 +1304,8 @@ def emergencePage(request):
   return render (request, template_name, context)
 
 # updateEmergence
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def updateEmergence(request, id):
   get_emeregnce = get_object_or_404(EmergenceInformations, id = id)
   if request.method == "POST" and request.POST.get("update_emergence"):
@@ -1309,6 +1331,8 @@ def updateEmergence(request, id):
   return render (request, template_name, context)
 
 # deleteEmergence
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def deleteEmergence(request, id):
   get_order = get_object_or_404(EmergenceInformations, id =id)
   get_order.delete()
@@ -1316,6 +1340,8 @@ def deleteEmergence(request, id):
   return redirect ("storeApp:emergencePage")
 
 # authorizationPage
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def authorizationPage(request):
   if request.method == "POST" and request.POST.get('add_user_auth'):
     form = AuthorizeUsersForm (request.POST )
@@ -1340,6 +1366,8 @@ def authorizationPage(request):
   return render (request, template_name, context) 
 
 # updateUserAuthorizaitions
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def updateUserAuthorizations(request, id):
   get_user_auth = get_object_or_404(AuthorizeUsers , id = id )
   if request.method == "POST"  and request.POST.get('update_user_auth'):
@@ -1365,6 +1393,8 @@ def updateUserAuthorizations(request, id):
   return render (request, template_name, context) 
 
 # updateUserAuthorizaitions
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def deleteUserAuthorizations(request, id):
   get_user_auth = get_object_or_404(AuthorizeUsers, id =id)
   get_user_auth.delete()
@@ -1372,6 +1402,8 @@ def deleteUserAuthorizations(request, id):
   return redirect ("storeApp:authorizationPage")
 
 # updateEmployee
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def updateEmployeePage(request, id):
   get_employee_info_from_database = get_object_or_404(EmployeeDetailInformations, id= id)
   form1 = EmployeeDetailInformationsForm(instance= get_employee_info_from_database)
@@ -1388,7 +1420,8 @@ def updateEmployeePage(request, id):
   return redirect('storeApp:employeePage')
  
 # deleteUser
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def deleteUser(request, id):
   get_user = get_object_or_404(EmployeeDetailInformations, id = id)
   get_user.delete()
@@ -1396,6 +1429,8 @@ def deleteUser(request, id):
   return redirect('storeApp:employeePage')
 
   # deleteShop
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def deleteShop(request, id):
   try:
     get_shop = get_object_or_404(ShopsTable, id = id)
@@ -1426,7 +1461,8 @@ def deleteSupplier(request, id):
   # except:
   #   messages.success(request, "supplier not deleted")
   #   return redirect('storeApp:suppliersPage')
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def deleteProductSold(request, id):
   try:
     get_product_id =  get_object_or_404(productSoldInCash, id = id)
@@ -1447,7 +1483,9 @@ def deleteProductInStore(request, id):
     messages.success(request, "product not  deleted")
     return redirect('storeApp:salesPage')
 
-# companyStockPage
+# 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def companyStockPage(request):
   if request.method == "POST" and request.POST.get("add_stock_info"):
     form = CompanyStockOrAssetsForm(request.POST, request.FILES)
@@ -1470,6 +1508,9 @@ def companyStockPage(request):
   }
   return render (request, template_name, context)
 
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def activateUserAuthorizations(request, id):
   get_user_auth = get_object_or_404(AuthorizeUsers, id =id)
   deactivate_user_account = AuthorizeUsers.objects.filter(id = get_user_auth.id).update(
@@ -1488,6 +1529,9 @@ def activateUserAuthorizations(request, id):
   messages.success(request, f"{get_user_auth.select_user} account Activated")
   return redirect('storeApp:authorizationPage')
 
+
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def deactivateUserAuthorizations(request, id):
   get_user_auth = get_object_or_404(AuthorizeUsers, id =id)
   deactivate_user_account = AuthorizeUsers.objects.filter(id = get_user_auth.id).update(
@@ -1507,7 +1551,8 @@ def deactivateUserAuthorizations(request, id):
   return redirect('storeApp:authorizationPage')
 
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def increment_invoice_number():
     last_invoice = InvoiceNumbers.objects.all().order_by('id').last()
     if not last_invoice:
@@ -1521,8 +1566,9 @@ def increment_invoice_number():
     InvoiceNumbers.objects.create(invoice_no = new_invoice_no)
     return new_invoice_no 
 
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def manageInvoice(request):
-  
   get_all_employee = EmployeeDetailInformations.objects.all()
   get_all_products = ProductTable.objects.all().order_by('-id')
   get_all_shops = ShopsTable.objects.all().order_by('-updated_at')
@@ -1585,7 +1631,8 @@ def manageInvoice(request):
     
     
 
-
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def profomaInvoice(request):
   
   if request.method == "POST" and  request.POST.getlist('number_of_product_nedeed[]') or request.POST.get('formData'):
@@ -1788,7 +1835,8 @@ def profomaInvoice(request):
     return render(request, template_name, context)
   
   
-  
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL) 
 def generatePdfForInvoice(request, id ):
 
   try:
@@ -1849,6 +1897,8 @@ def generatePdfForInvoice(request, id ):
 
 
 # cancelProfomaInvoice
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def cancelProfomaInvoice(request, id):
   get_profoma_to_cancel = ManageInvoice.objects.filter(id = id).update(
     invoice_status = 'Cancelled'
@@ -1857,6 +1907,9 @@ def cancelProfomaInvoice(request, id):
   messages.success(request, 'Item Cancelled From Invoice ')
   return redirect('storeApp:profomaInvoice')
 
+#cancelledInvoice
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def cancelledInvoice(request):
   get_profoma_to_cancel = ManageInvoice.objects.filter(invoice_status = 'Cancelled')
   get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
@@ -1868,6 +1921,8 @@ def cancelledInvoice(request):
   return render(request, template_name, context)
 
 # partialPaidInvoices
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def partialPaidInvoices(request):
   get_partial_paid_invoices = ManageInvoice.objects.filter(invoice_status = 'PartialPaid')
   get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
@@ -1880,6 +1935,8 @@ def partialPaidInvoices(request):
 
 
 # fullPaidinvoices
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def fullPaidinvoices(request):
   get_full_paid_invoices = ManageInvoice.objects.filter(invoice_status = 'FullPaid')
   get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)
@@ -1890,6 +1947,9 @@ def fullPaidinvoices(request):
   }
   return render(request, template_name, context)
 
+# addAmountToItemFromInvoice
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def addAmountToItemFromInvoice(request,id ):
   if request.method == "POST" and request.POST.get('advance_paid'):
     
@@ -1933,6 +1993,9 @@ def addAmountToItemFromInvoice(request,id ):
     }
     return render(request, template_name, context)
 
+# allInvoicesList
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url=LOGIN_URL)
 def allInvoicesList(request):
   template_name = 'manageInvoice/allInvoicesList.html'
   get_all_user_authorizations = AuthorizeUsers.objects.get(select_user = request.user)

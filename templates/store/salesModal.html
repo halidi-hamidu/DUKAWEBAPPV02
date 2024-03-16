@@ -273,7 +273,7 @@ $(document).ready( function (){
           '<select id ="'+x+'"  class="select2-single-placeholder-product form-control" name="product_name" id="product_name" style="width: 100%;padding:10px">' +
             '<option id ="'+x+'"  value="not selected">Select</option>' +
             '{% for products in get_all_products %}' +
-            '<option id ="'+x+'"  value="{{ products.id }}">{{products}}</option>' +
+            '<option id ="'+x+'"  value="{{ products.id }}">{{products}} -{{products.sku_code}} -{{products.product_model}} @ {{products.sales_price}}</option>' +
             '{% endfor %}' +
           '</select id ="'+x+'" >' +
          

@@ -13,10 +13,13 @@ from .views import AuthorizeUsersSerializerListView
 from .views import CompanyStockOrAssetsSerilizerListView
 from .views import ManageInvoiceSerializerListView
 from .views import InvoiceNumbersSerializerListView
+from .views import custom_404
+
+
 # from .views import GeneratePdf
 
 app_name = 'storeApp'
-
+# handler404 = custom_404
 urlpatterns = [
     path('', views.loginPage, name="loginPage"),
     path('homepage', views.homepage, name="homepage"),
